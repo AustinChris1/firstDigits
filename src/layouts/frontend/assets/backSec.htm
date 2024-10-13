@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<!--[if lte IE 8]>              <html class="ie8 no-js" dir="ltr" lang="en-US" prefix="og: https://ogp.me/ns#">     <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="not-ie no-js" dir="ltr" lang="en-US" prefix="og: https://ogp.me/ns#">  <!--<![endif]-->
+<head><meta charset="UTF-8" /><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+
+	<!-- Basic Page Needs
+    ==================================================== -->
+	
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="pingback" href="https://crosstech.com.ng/xmlrpc.php" />
+
+	<!-- Favicon
+	==================================================== -->
+
+	
+			<link rel="shortcut icon" href="http://velikorodnov.com/wordpress/flatastic/classic/wp-content/themes/flatastic/images/favicon.png">
+	
+	<!-- Mobile Specific Metas
+	==================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+					<script type="rocketlazyloadscript">document.documentElement.className = document.documentElement.className + ' yes-js js_active js'</script>
+				<title>DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid WizSense DVR - Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C700%2C900%2C500%2C300italic&#038;subset=latin%2Clatin-ext&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C700%2C900%2C500%2C300italic&#038;subset=latin%2Clatin-ext&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A300%2C700%2C900%2C500%2C300italic&#038;subset=latin%2Clatin-ext&#038;display=swap" /></noscript>
+
+		<!-- All in One SEO Pro 4.7.1.1 - aioseo.com -->
+		<meta name="description" content="H.265+/H.265 dual-stream video compression Supports HDCVI/AHD/TVI/CVBS/IP video inputs Max 6 channels IP camera inputs, each channel up to 6MP; Max 32 Mbps incoming bandwidth Up to 2 channels video stream ( analog channel ) Perimeter Protection Up to 4 channels video stream ( analog channel ) SMD Plus Up to 1 channel video stream (analog channel ) human face recognition IoT &amp; POS functionalities" />
+		<meta name="robots" content="max-image-preview:large" />
+		<link rel="canonical" href="https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/" />
+		<meta name="generator" content="All in One SEO Pro (AIOSEO) 4.7.1.1" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:site_name" content="Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos - Crosstech Nigeria" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid WizSense DVR - Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos" />
+		<meta property="og:description" content="H.265+/H.265 dual-stream video compression Supports HDCVI/AHD/TVI/CVBS/IP video inputs Max 6 channels IP camera inputs, each channel up to 6MP; Max 32 Mbps incoming bandwidth Up to 2 channels video stream ( analog channel ) Perimeter Protection Up to 4 channels video stream ( analog channel ) SMD Plus Up to 1 channel video stream (analog channel ) human face recognition IoT &amp; POS functionalities" />
+		<meta property="og:url" content="https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/" />
+		<meta property="og:image" content="https://crosstech.com.ng/wp-content/uploads/2024/02/Crosstech-Hikvision-Dahua-Dealers-in-Nigeria.jpg" />
+		<meta property="og:image:secure_url" content="https://crosstech.com.ng/wp-content/uploads/2024/02/Crosstech-Hikvision-Dahua-Dealers-in-Nigeria.jpg" />
+		<meta property="og:image:width" content="225" />
+		<meta property="og:image:height" content="225" />
+		<meta property="article:published_time" content="2021-06-22T10:09:40+00:00" />
+		<meta property="article:modified_time" content="2023-08-15T11:33:18+00:00" />
+		<meta property="article:publisher" content="https://www.facebook.com/crosstechng" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@crosstechng" />
+		<meta name="twitter:title" content="DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid WizSense DVR - Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos" />
+		<meta name="twitter:description" content="H.265+/H.265 dual-stream video compression Supports HDCVI/AHD/TVI/CVBS/IP video inputs Max 6 channels IP camera inputs, each channel up to 6MP; Max 32 Mbps incoming bandwidth Up to 2 channels video stream ( analog channel ) Perimeter Protection Up to 4 channels video stream ( analog channel ) SMD Plus Up to 1 channel video stream (analog channel ) human face recognition IoT &amp; POS functionalities" />
+		<meta name="twitter:creator" content="@crosstechng" />
+		<meta name="twitter:image" content="https://crosstech.com.ng/wp-content/uploads/2024/02/Crosstech-Hikvision-Dahua-Dealers-in-Nigeria.jpg" />
+		<script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/crosstech.com.ng\/#listItem","position":1,"name":"Home","item":"https:\/\/crosstech.com.ng\/","nextItem":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#listItem"},{"@type":"ListItem","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#listItem","position":2,"name":"DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR","previousItem":"https:\/\/crosstech.com.ng\/#listItem"}]},{"@type":"ItemPage","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#itempage","url":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/","name":"DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid WizSense DVR - Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos","description":"H.265+\/H.265 dual-stream video compression Supports HDCVI\/AHD\/TVI\/CVBS\/IP video inputs Max 6 channels IP camera inputs, each channel up to 6MP; Max 32 Mbps incoming bandwidth Up to 2 channels video stream ( analog channel ) Perimeter Protection Up to 4 channels video stream ( analog channel ) SMD Plus Up to 1 channel video stream (analog channel ) human face recognition IoT & POS functionalities","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/crosstech.com.ng\/#website"},"breadcrumb":{"@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#breadcrumblist"},"image":{"@type":"ImageObject","url":"https:\/\/crosstech.com.ng\/wp-content\/uploads\/2021\/06\/DH-XVR5104HS-I2.png","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#mainImage","width":400,"height":400,"caption":"DH-XVR5108HS-I2 Dahua 8 Channel Penta-brid  WizSense DVR"},"primaryImageOfPage":{"@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#mainImage"},"datePublished":"2021-06-22T10:09:40+00:00","dateModified":"2023-08-15T11:33:18+00:00"},{"@type":"Organization","@id":"https:\/\/crosstech.com.ng\/#organization","name":"Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos","description":"Crosstech Nigeria","url":"https:\/\/crosstech.com.ng\/","telephone":"+2348188730330","logo":{"@type":"ImageObject","url":"https:\/\/crosstech.com.ng\/wp-content\/uploads\/2024\/02\/Crosstech-Hikvision-Dahua-Dealers-in-Nigeria.jpg","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#organizationLogo","width":225,"height":225,"caption":"Crosstech - Hikvision Dahua Dealers in Nigeria"},"image":{"@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#organizationLogo"},"sameAs":["https:\/\/www.facebook.com\/crosstechng","https:\/\/twitter.com\/crosstechng","https:\/\/www.instagram.com\/crosstechng\/"]},{"@type":"WebPage","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#webpage","url":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/","name":"DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid WizSense DVR - Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos","description":"H.265+\/H.265 dual-stream video compression Supports HDCVI\/AHD\/TVI\/CVBS\/IP video inputs Max 6 channels IP camera inputs, each channel up to 6MP; Max 32 Mbps incoming bandwidth Up to 2 channels video stream ( analog channel ) Perimeter Protection Up to 4 channels video stream ( analog channel ) SMD Plus Up to 1 channel video stream (analog channel ) human face recognition IoT & POS functionalities","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/crosstech.com.ng\/#website"},"breadcrumb":{"@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#breadcrumblist"},"image":{"@type":"ImageObject","url":"https:\/\/crosstech.com.ng\/wp-content\/uploads\/2021\/06\/DH-XVR5104HS-I2.png","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#mainImage","width":400,"height":400,"caption":"DH-XVR5108HS-I2 Dahua 8 Channel Penta-brid  WizSense DVR"},"primaryImageOfPage":{"@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#mainImage"},"datePublished":"2021-06-22T10:09:40+00:00","dateModified":"2023-08-15T11:33:18+00:00"},{"@type":"WebSite","@id":"https:\/\/crosstech.com.ng\/#website","url":"https:\/\/crosstech.com.ng\/","name":"Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos","description":"Crosstech Nigeria","inLanguage":"en-US","publisher":{"@id":"https:\/\/crosstech.com.ng\/#organization"}}]}
+		</script>
+		<!-- All in One SEO Pro -->
+
+<link rel='dns-prefetch' href='//maps.google.com' />
+<link rel='dns-prefetch' href='//js.hs-scripts.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos &raquo; Feed" href="https://crosstech.com.ng/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos &raquo; Comments Feed" href="https://crosstech.com.ng/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos &raquo; DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR Comments Feed" href="https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/feed/" />
+		<!-- This site uses the Google Analytics by MonsterInsights plugin v9.0.1 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+		<!-- Note: MonsterInsights is not currently configured on this site. The site owner needs to authenticate with Google Analytics in the MonsterInsights settings panel. -->
+					<!-- No tracking code set -->
+				<!-- / Google Analytics by MonsterInsights -->
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='login-with-ajax-css'  href='https://crosstech.com.ng/wp-content/plugins/login-with-ajax/widget/widget.css?ver=3.1.11' type='text/css' media='all' />
+<link rel='stylesheet' id='pw_css_lightslider-css'  href='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/css/lightslider/lightslider.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='public-style-css'  href='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/css/public-style.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-style-css'  href='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/css/fonts/font-awesome.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flipclock-master-css-css'  href='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/css/flipclock.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='fl-slider-style-css'  href='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/css/bx-slider/jquery.bxslider.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='fl-grid-style-css'  href='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/css/grid/style.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='fl-layouts-style-css'  href='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/css/layouts/style.css?ver=5.9.10' type='text/css' media='all' />
+
+<link rel='stylesheet' id='yith_wcas_frontend-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/config-plugins/plugins/ajax_search/css/yith_wcas_ajax_search.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='layerslider-css'  href='https://crosstech.com.ng/wp-content/plugins/LayerSlider/assets/static/layerslider/css/layerslider.css?ver=6.11.2' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-style-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/style.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-css_composer_front-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/config-composer/assets/css/css_composer_front.css?ver=6.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-ui-style-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/config-composer/assets/css/jquery-ui.css?ver=6.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://crosstech.com.ng/wp-includes/css/dist/block-library/style.min.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-blocks-vendors-style-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style.css?ver=6.9.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-blocks-style-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style.css?ver=6.9.0' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel='stylesheet' id='contact-form-7-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/config-contact-form-7/assets/css/style.css?ver=5.5.4' type='text/css' media='all' />
+<link rel='stylesheet' id='isp_owl_transitions_css-css'  href='https://crosstech.com.ng/wp-content/plugins/indeed-smart-popup/assets/css/owl-carousel/owl.transitions.css' type='text/css' media='all' />
+<link rel='stylesheet' id='rs-plugin-settings-css'  href='https://crosstech.com.ng/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=6.2.3' type='text/css' media='all' />
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+#rs-demo-id {}
+</style>
+<link rel='stylesheet' id='woof-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/css/front.css?ver=2.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='chosen-drop-down-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/chosen/chosen.min.css?ver=2.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='photoswipe-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/css/photoswipe/photoswipe.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='photoswipe-default-skin-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/css/photoswipe/default-skin/default-skin.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='woocommerce-inline-inline-css' type='text/css'>
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link rel='stylesheet' id='jquery-selectBox-css'  href='https://crosstech.com.ng/wp-content/plugins/yith-woocommerce-wishlist/assets/css/jquery.selectBox.css?ver=1.2.0' type='text/css' media='all' />
+<link rel='stylesheet' id='yith-wcwl-font-awesome-css'  href='https://crosstech.com.ng/wp-content/plugins/yith-woocommerce-wishlist/assets/css/font-awesome.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce_prettyPhoto_css-css'  href='//crosstech.com.ng/wp-content/plugins/woocommerce/assets/css/prettyPhoto.css?ver=3.1.6' type='text/css' media='all' />
+<link rel='stylesheet' id='yith-wcwl-user-main-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/woocommerce/wishlist.css?ver=3.5.0' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-woocommerce-mod-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/config-woocommerce/assets/css/woocommerce-mod.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='post-ratings-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/inc/plugins/post-ratings/post-ratings.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='bsf-Defaults-css'  href='https://crosstech.com.ng/wp-content/uploads/smile_fonts/Defaults/Defaults.css?ver=3.19.7' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-bootstrap-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/css/bootstrap.min.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-layout-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/css/layout.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-camera-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/css/camera.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-owlcarousel-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/js/owl-carousel/owl.carousel.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-owltheme-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/js/owl-carousel/owl.theme.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-owltransitions-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/js/owl-carousel/owl.transitions.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-scrollbar-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/css/jquery.custom-scrollbar.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-jackbox-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/js/jackbox/css/jackbox.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-magnific-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/js/magnific-popup/magnific-popup.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-heapbox-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/js/heapbox/heapbox.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-font_awesome-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/css/font-awesome.min.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-scheme-style-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/css/schemes/scheme_default.css?ver=5.9.10' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-dynamic-styles-css'  href='https://crosstech.com.ng/wp-content/uploads/dynamic_mad_dir/flatastic.css?ver=60866db8a17c7' type='text/css' media='all' />
+<script type="text/template" id="tmpl-variation-template">
+	<div class="woocommerce-variation-description">{{{ data.variation.variation_description }}}</div>
+	<div class="woocommerce-variation-price">{{{ data.variation.price_html }}}</div>
+	<div class="woocommerce-variation-availability">{{{ data.variation.availability_html }}}</div>
+</script>
+<script type="text/template" id="tmpl-unavailable-variation-template">
+	<p>Sorry, this product is unavailable. Please choose a different combination.</p>
+</script>
+<script type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' id='login-with-ajax-js-extra'>
+/* <![CDATA[ */
+var LWA = {"ajaxurl":"https:\/\/crosstech.com.ng\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/login-with-ajax/widget/login-with-ajax.js?ver=3.1.11' id='login-with-ajax-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/js/lightslider/lightslider.js?ver=5.9.10' id='pw_jquery_lightslider-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/js/flipclock.js?ver=5.9.10' id='flipclock-master-jsaa-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/js/jquery.countdown.min.js?ver=5.9.10' id='flipclocksdsd-master-jsaaaa-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woo-sale-revolution-flashsale/js/bx-slider/jquery.bxslider.js?ver=5.9.10' id='fl-slider-jquery-js'></script>
+<script type='text/javascript' id='layerslider-utils-js-extra'>
+/* <![CDATA[ */
+var LS_Meta = {"v":"6.11.2","fixGSAP":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.utils.js?ver=6.11.2' id='layerslider-utils-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.kreaturamedia.jquery.js?ver=6.11.2' id='layerslider-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.transitions.js?ver=6.11.2' id='layerslider-transitions-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/indeed-smart-popup/assets/js/jquery-ui-1.10.4.custom.min.js' id='isp_jquery_ui_js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/indeed-smart-popup/assets/js/owl-carousel/owl.carousel.js' id='isp_owl_carousel_js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/indeed-smart-popup/assets/js/owl-carousel/owl.carousel.min.js' id='isp_owl_carousel_min_js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/indeed-smart-popup/assets/js/front-end_functions.js' id='isp_front_end_js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=false' id='isp_googlemaps-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.0' id='tp-tools-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.2.3' id='revmin-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.6.3.1' id='jquery-blockui-js'></script>
+<script type='text/javascript' id='wc-add-to-cart-js-extra'>
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/crosstech.com.ng\/grid-view-page\/cart-2\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=6.3.1' id='wc-add-to-cart-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/js_composer/assets/js/vendors/woocommerce-add-to-cart.js?ver=6.4.1' id='vc_woocommerce-add-to-cart-js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/modernizr.min.js?ver=5.9.10' id='flatastic-modernizr-js'></script>
+<meta name="generator" content="Powered by LayerSlider 6.11.2 - Multi-Purpose, Responsive, Parallax, Mobile-Friendly Slider Plugin for WordPress." />
+<!-- LayerSlider updates and docs at: https://layerslider.kreaturamedia.com -->
+<link rel="https://api.w.org/" href="https://crosstech.com.ng/wp-json/" /><link rel="alternate" type="application/json" href="https://crosstech.com.ng/wp-json/wp/v2/product/3810" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://crosstech.com.ng/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://crosstech.com.ng/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9.10" />
+<meta name="generator" content="WooCommerce 6.3.1" />
+<link rel='shortlink' href='https://crosstech.com.ng/?p=3810' />
+<link rel="alternate" type="application/json+oembed" href="https://crosstech.com.ng/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcrosstech.com.ng%2Fproduct%2Fdh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://crosstech.com.ng/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcrosstech.com.ng%2Fproduct%2Fdh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr%2F&#038;format=xml" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=G-DVPJTXYB0X"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DVPJTXYB0X');
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=UA-157611414-1"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-157611414-1');
+</script>
+
+<meta name="google-site-verification" content="I_hx2BWrm2qKeEKEUhTL9z_XcPdUXF65LO8wjxiMVH0" />			<!-- DO NOT COPY THIS SNIPPET! Start of Page Analytics Tracking for HubSpot WordPress plugin v8.7.7-->
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+				var _hsq = _hsq || [];
+				_hsq.push(["setContentType", "blog-post"]);
+			</script>
+			<!-- DO NOT COPY THIS SNIPPET! End of Page Analytics Tracking for HubSpot WordPress plugin -->
+						<script type="rocketlazyloadscript">
+				(function() {
+					var hbspt = window.hbspt = window.hbspt || {};
+					hbspt.forms = hbspt.forms || {};
+					hbspt._wpFormsQueue = [];
+					hbspt.enqueueForm = function(formDef) {
+						if (hbspt.forms && hbspt.forms.create) {
+							hbspt.forms.create(formDef);
+						} else {
+							hbspt._wpFormsQueue.push(formDef);
+						}
+					};
+					if (!window.hbspt.forms.create) {
+						Object.defineProperty(window.hbspt.forms, 'create', {
+							configurable: true,
+							get: function() {
+								return hbspt._wpCreateForm;
+							},
+							set: function(value) {
+								hbspt._wpCreateForm = value;
+								while (hbspt._wpFormsQueue.length) {
+									var formDef = hbspt._wpFormsQueue.shift();
+									if (!document.currentScript) {
+										var formScriptId = 'leadin-forms-v2-js';
+										hubspot.utils.currentScript = document.getElementById(formScriptId);
+									}
+									hbspt._wpCreateForm.call(hbspt.forms, formDef);
+								}
+							},
+						});
+					}
+				})();
+			</script>
+		<style type="text/css">
+
+
+
+
+
+
+
+</style><style>
+        	ul.fl-countdown-pub.fl-style1 li span , ul.fl-countdown-pub.fl-style1 li p , ul.fl-countdown-pub.fl-style1 li.seperator,
+			ul.fl-countdown-pub.fl-style2 li span , ul.fl-countdown-pub.fl-style2 li p , ul.fl-countdown-pub.fl-style2 li.seperator,
+			ul.fl-countdown-pub.fl-style3 li span , ul.fl-countdown-pub.fl-style3 li p , ul.fl-countdown-pub.fl-style3 li.seperator,
+			ul.fl-countdown-pub.fl-style4 li span , ul.fl-countdown-pub.fl-style4 li p , ul.fl-countdown-pub.fl-style4 li.seperator,
+			ul.fl-countdown-pub.fl-style5 li span , ul.fl-countdown-pub.fl-style5 li p , ul.fl-countdown-pub.fl-style5 li.seperator,
+			ul.fl-countdown-pub.fl-style6 li span , ul.fl-countdown-pub.fl-style6 li p , ul.fl-countdown-pub.fl-style6 li.seperator{ 
+				color:S;
+			}
+					
+			ul.fl-countdown-pub.fl-style2 li ,ul.fl-countdown-pub.fl-style3 li span, ul.fl-countdown-pub.fl-style4 li span  ,ul.fl-countdown-pub.fl-style5 li  ,ul.fl-countdown-pub.fl-style6 li
+			 { 
+			 	background:S;
+			 }
+		</style>	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>
+<meta name="generator" content="Powered by Slider Revolution 6.2.3 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<link rel="icon" href="https://crosstech.com.ng/wp-content/uploads/2021/12/cropped-Screen-Shot-2021-12-31-at-7.43.27-AM-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://crosstech.com.ng/wp-content/uploads/2021/12/cropped-Screen-Shot-2021-12-31-at-7.43.27-AM-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://crosstech.com.ng/wp-content/uploads/2021/12/cropped-Screen-Shot-2021-12-31-at-7.43.27-AM-180x180.png" />
+<meta name="msapplication-TileImage" content="https://crosstech.com.ng/wp-content/uploads/2021/12/cropped-Screen-Shot-2021-12-31-at-7.43.27-AM-270x270.png" />
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {				 
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;	
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;	
+				try {								
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);		
+					if(e.layout==="fullscreen" || e.l==="fullscreen") 						
+						newh = Math.max(e.mh,window.RSIH);					
+					else{					
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];					
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,						
+							sl;					
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;					
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];									
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}															
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);					
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}				
+					if(window.rs_init_css===undefined) window.rs_init_css = document.head.appendChild(document.createElement("style"));					
+					document.getElementById(e.c).height = newh+"px";
+					window.rs_init_css.innerHTML += "#"+e.c+"_wrapper { height: "+newh+"px }";				
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}					   
+			//});
+		  };</script>
+        <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+            var woof_is_permalink =1;
+
+            var woof_shop_page = "";
+        
+            var woof_really_curr_tax = {};
+            var woof_current_page_link = location.protocol + '//' + location.host + location.pathname;
+            //***lets remove pagination from woof_current_page_link
+            woof_current_page_link = woof_current_page_link.replace(/\page\/[0-9]+/, "");
+                            woof_current_page_link = "https://crosstech.com.ng/grid-view-page/shop/";
+                            var woof_link = 'https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/';
+
+                </script>
+
+                <script type="rocketlazyloadscript">
+
+            var woof_ajaxurl = "https://crosstech.com.ng/wp-admin/admin-ajax.php";
+
+            var woof_lang = {
+                'orderby': "orderby",
+                'date': "date",
+                'perpage': "per page",
+                'pricerange': "price range",
+                'menu_order': "menu order",
+                'popularity': "popularity",
+                'rating': "rating",
+                'price': "price low to high",
+                'price-desc': "price high to low"
+            };
+
+            if (typeof woof_lang_custom == 'undefined') {
+                var woof_lang_custom = {};/*!!important*/
+            }
+
+            //***
+
+            var woof_is_mobile = 0;
+        
+
+
+            var woof_show_price_search_button = 0;
+            var woof_show_price_search_type = 0;
+        
+            var woof_show_price_search_type = 0;
+
+            var swoof_search_slug = "swoof";
+
+        
+            var icheck_skin = {};
+                        icheck_skin = 'none';
+        
+            var is_woof_use_chosen =1;
+
+        
+
+            var woof_current_values = '[]';
+            //+++
+            var woof_lang_loading = "Loading ...";
+
+        
+            var woof_lang_show_products_filter = "show products filter";
+            var woof_lang_hide_products_filter = "hide products filter";
+            var woof_lang_pricerange = "price range";
+
+            //+++
+
+            var woof_use_beauty_scroll =0;
+            //+++
+            var woof_autosubmit =1;
+            var woof_ajaxurl = "https://crosstech.com.ng/wp-admin/admin-ajax.php";
+            /*var woof_submit_link = "";*/
+            var woof_is_ajax = 0;
+            var woof_ajax_redraw = 0;
+            var woof_ajax_page_num =1;
+            var woof_ajax_first_done = false;
+            var woof_checkboxes_slide_flag = true;
+
+
+            //toggles
+            var woof_toggle_type = "text";
+
+            var woof_toggle_closed_text = "-";
+            var woof_toggle_opened_text = "+";
+
+            var woof_toggle_closed_image = "https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/img/plus3.png";
+            var woof_toggle_opened_image = "https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/img/minus3.png";
+
+
+            //indexes which can be displayed in red buttons panel
+                    var woof_accept_array = ["min_price", "orderby", "perpage", "min_rating","product_visibility","product_cat","product_tag","pa_color","pa_manufacturers","pa_material","pa_occasion","pa_pattern","pa_size","pa_skirt-length","pa_style","pa_waist"];
+
+        
+
+
+            //***
+            //for extensions
+
+            var woof_ext_init_functions = null;
+        
+
+        
+            var woof_overlay_skin = "default";
+
+            jQuery(function () {
+                try
+                {
+                    woof_current_values = jQuery.parseJSON(woof_current_values);
+                } catch (e)
+                {
+                    woof_current_values = null;
+                }
+                if (woof_current_values == null || woof_current_values.length == 0) {
+                    woof_current_values = {};
+                }
+
+            });
+
+            function woof_js_after_ajax_done() {
+                jQuery(document).trigger('woof_ajax_done');
+                    }
+        </script>
+        <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+</head>
+
+
+<body data-spy="scroll" data-target="#navigation" class="product-template-default single single-product postid-3810 scheme_default theme-flatastic woocommerce woocommerce-page woocommerce-no-js animated compatible_with_mega_menu wpb-js-composer js-comp-ver-6.4.1 vc_responsive">
+
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+				(function ($) {
+
+					var cwmessageobj = {
+						'cwmessage' : "Please note this website requires cookies in order to function correctly, they do not store any specific information about you personally.",
+						'cwagree' : "Accept Cookies",
+						'cwmoreinfo' :  "Read more...",
+						'cwmoreinfohref' : "https://"
+					}
+
+					$(function () {
+
+													cwmessageobj['cwmessage'] = "Please note this website requires cookies in order to function correctly, they do not store any specific information about you personally.";
+						
+													cwmessageobj['cwmoreinfohref'] = "http://www.cookielaw.org/the-cookie-law";
+						
+						$('body').cwAllowCookies(cwmessageobj);
+
+					});
+
+				})(jQuery);
+			</script>
+		
+<!-- - - - - - - - - - - - - - Theme Wrapper - - - - - - - - - - - - - - - - -->
+
+<div id="theme-wrapper">
+
+	<!-- - - - - - - - - - - - - Mobile Menu - - - - - - - - - - - - - - -->
+
+	<nav id="mobile-advanced" class="mobile-advanced"></nav>
+
+	<!-- - - - - - - - - - - - / Mobile Menu - - - - - - - - - - - - - -->
+
+	<!-- - - - - - - - - - - - - - Layout - - - - - - - - - - - - - - - - -->
+
+	<div class="boxed_layout">
+
+		<!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->
+
+		<header id="header" data-shrink="1" class="type-1 ">
+
+			<!-- - - - - - - - - - - - Header Top Part- - - - - - - - - - - - - - -->
+
+
+	<div class="h_top_part">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-5 t_xs_align_c">
+
+					
+						
+							<div class="bar-login">
+
+								<span class="lwa"><a class="to-login lwa-links-modal" href="https://crosstech.com.ng/wp-login.php?redirect_to=https%3A%2F%2Fcrosstech.com.ng%2Fproduct%2Fdh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr%2F&#038;modal_login=true#login">Login</a></span>
+
+								
+							</div>
+
+						
+					
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
+											<p>Call us toll free: <b>+234 (0) 809 057 7000</b></p>
+									</div>
+				<div class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
+
+					
+						<ul class="users-nav">
+							<li>
+								<a href="https://crosstech.com.ng/grid-view-page/checkout/">
+									Checkout Page								</a>
+							</li>
+
+							
+								
+									<li>
+										<a href="https://crosstech.com.ng/grid-view-page/wishlist-2/">
+											Wishlist										</a>
+									</li>
+
+								
+							
+							<li>
+								<a href="https://crosstech.com.ng/grid-view-page/cart-2/">
+									Cart								</a>
+							</li>
+
+						</ul><!--/ .users-nav-->
+
+					
+				</div>
+			</div>
+		</div>
+	</div><!--/ .h_top_part-->
+
+	<!-- - - - - - - - - - - - Header Top Part- - - - - - - - - - - - - - -->
+
+
+			<div class="header-in">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-md-3 col-sm-3">
+
+	
+	
+					<a id="logo" class="logo ministorm" title="Crosstech Nigeria" href="https://crosstech.com.ng">
+						<img src="https://haelsoftproject.com.ng/crosstech/wp-content/uploads/2021/03/Crosstechlogo.png" alt="Crosstech Nigeria" />
+					</a>
+
+				
+</div><div class="col-md-4 col-sm-3">
+
+	
+		<!-- - - - - - - - - - - - - - Search form - - - - - - - - - - - - - - - - -->
+
+		
+<div class="yith-ajaxsearchform-container">
+    <form role="search" class="clearfix search_form" method="get" id="yith-ajaxsearchform" action="https://crosstech.com.ng/">
+
+        
+			<div class="ajax-search-container">
+				<input type="search"
+					   value=""
+					   name="s"
+					   id="yith-s"
+					   class="yith-s"
+					   placeholder="Search for products"
+					   data-loader-icon=""
+					   data-min-chars="3" />
+
+				<button type="submit" class="submit-search" id="yith-searchsubmit">Search</button>
+			</div>
+			<input type="hidden" name="post_type" value="product" />
+
+		
+    </form>
+</div>
+		<!-- - - - - - - - - - - - - - End search form - - - - - - - - - - - - - - - - -->
+
+	
+</div>
+						<div class="col-md-5 col-sm-6">
+			<div class="cart-holder clearfix">
+
+				<ul class="cart-set">
+
+					
+						
+						<li>
+							<a class="count-wishlist" href="https://crosstech.com.ng/grid-view-page/wishlist-2/">
+								<span class="count">0</span>
+							</a>
+						</li>
+
+						
+					
+					
+					
+					
+																							<li class="container3d">
+								
+			<a class="toggle-button" href="#">
+				&#8358; NGN			</a>
+
+										
+			
+				<form method="post" id="currency-switcher" action="#">
+
+					<ul class="currency-switcher">
+
+						
+																						
+							
+							<li>
+								<a class="default" href="#" data-currency-code="NGN">
+									&#8358; NGN								</a>
+							</li>
+
+						
+							
+							
+							<li>
+								<a class="" href="#" data-currency-code="USD">
+									&#36; USD								</a>
+							</li>
+
+						
+							
+							
+							<li>
+								<a class="" href="#" data-currency-code="EUR">
+									&euro; EUR								</a>
+							</li>
+
+						
+							
+							
+							<li>
+								<a class="" href="#" data-currency-code="GBP">
+									&pound; GBP								</a>
+							</li>
+
+						
+					</ul><!--/ .currency-switcher-->
+
+				</form><!--/ #currency-switcher-->
+
+			
+										</li>
+											
+					
+				</ul><!--/ .cart-set-->
+
+			</div><!--/ .cart-holder-->
+
+			</div>
+					</div><!--/ .row -->
+				</div><!--/ .container-->
+			</div><!--/ .header-in -->
+
+			
+			
+			
+				<div class="menu_wrap clearfix t_xs_align_c">
+
+					<div class="container">
+<!-- - - - - - - - - - - - Main Navigation - - - - - - - - - - - - - - -->
+
+<nav id="navigation" class="navigation">
+	<ul id="menu-primary-menu" class="menu"><li id="menu-item-4150" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-4150"><a href="https://crosstech.com.ng/">HOME</a></li>
+<li id="menu-item-4148" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4148"><a href="https://crosstech.com.ng/about-us/">About Us</a></li>
+<li id="menu-item-3604" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-3604"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/">HIKVISION</a>
+<ul class="sub-menu">
+	<li id="menu-item-3380" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3380"><a href="https://crosstech.com.ng/?product_cat=dvrs">DVRs</a></li>
+	<li id="menu-item-3381" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3381"><a href="https://crosstech.com.ng/?product_cat=hd-analog-cameras">HD Analog Cameras</a></li>
+	<li id="menu-item-3382" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3382"><a href="https://crosstech.com.ng/?product_cat=ip-cameras">IP Cameras</a></li>
+	<li id="menu-item-3383" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3383"><a href="https://crosstech.com.ng/?product_cat=nvrs">NVRs</a></li>
+	<li id="menu-item-3617" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-3617"><a href="https://crosstech.com.ng/product-category/surveillance-hard-drives/">Surveillance Hard Drives</a></li>
+	<li id="menu-item-3397" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3397"><a href="https://crosstech.com.ng/?product_cat=wireless-camera">Wireless Camera</a></li>
+</ul>
+</li>
+<li id="menu-item-3384" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3384"><a href="https://crosstech.com.ng/?product_cat=dahua-products">DAHUA</a>
+<ul class="sub-menu">
+	<li id="menu-item-3606" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent menu-item-3606"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-dvrs/">Dahua DVRs</a></li>
+	<li id="menu-item-3607" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-3607"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-hd-analog-cameras/">Dahua HD Analog Cameras</a></li>
+	<li id="menu-item-3609" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-3609"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-ip-cameras/">Dahua IP Cameras</a></li>
+	<li id="menu-item-3610" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-3610"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-nvrs/">Dahua NVRs</a></li>
+</ul>
+</li>
+<li id="menu-item-4151" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4151"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/">SMART HOME</a>
+<ul class="sub-menu">
+	<li id="menu-item-4353" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4353"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/pulmos-hotel-locks/">Hotel Locks</a></li>
+	<li id="menu-item-4354" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4354"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/pulmos-smart-lock/">Smart Door Locks</a></li>
+</ul>
+</li>
+<li id="menu-item-4152" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4152"><a href="https://crosstech.com.ng/product-category/poe-switch-media-converter/">GENATA</a></li>
+<li id="menu-item-3025" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-3025"><a href="https://crosstech.com.ng/">SOLAR &#038; INVERTER</a>
+<ul class="sub-menu">
+	<li id="menu-item-3369" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3369"><a href="https://crosstech.com.ng/?product_cat=solar-power-accessories">Solar &#038; Power Accessories</a></li>
+	<li id="menu-item-3393" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3393"><a href="https://crosstech.com.ng/crosstech/product-category/solar-power/in-home/">In-Home</a></li>
+	<li id="menu-item-3394" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3394"><a href="https://crosstech.com.ng/?product_cat=inverters">Inverters</a></li>
+	<li id="menu-item-3392" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3392"><a href="https://crosstech.com.ng/crosstech/product-category/solar-power/batteries/">Batteries</a></li>
+	<li id="menu-item-3616" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-3616"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/racks/">Racks</a></li>
+	<li id="menu-item-3395" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3395"><a href="https://crosstech.com.ng/?product_cat=solar-panels">Solar Panels</a></li>
+</ul>
+</li>
+<li id="menu-item-4149" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4149"><a href="https://crosstech.com.ng/contact-us-dahua-hikvision-office-in-lekki-lagos/">Contact Us</a></li>
+</ul><div class="clear"></div></nav><!--/ #navigation-->
+
+<!-- - - - - - - - - - - - / Main Navigation - - - - - - - - - - - - - - -->
+
+	<a href="javascript: void(0);" class="search-button"></a>
+</div>
+	<div class="searchform-wrap">
+		<div class="container">
+			<div class="col-sm-12">
+				<div class="search-outer">
+					
+<div class="yith-ajaxsearchform-container">
+    <form role="search" class="clearfix search_form" method="get" id="yith-ajaxsearchform" action="https://crosstech.com.ng/">
+
+        
+			<div class="ajax-search-container">
+				<input type="search"
+					   value=""
+					   name="s"
+					   id="yith-s"
+					   class="yith-s"
+					   placeholder="Search for products"
+					   data-loader-icon=""
+					   data-min-chars="3" />
+
+				<button type="submit" class="submit-search" id="yith-searchsubmit">Search</button>
+			</div>
+			<input type="hidden" name="post_type" value="product" />
+
+		
+    </form>
+</div>					<button class="close-search-form"></button>
+				</div><!--/ .search-outer-->
+			</div>
+		</div>
+</div><!--/ .searchform-wrap -->
+
+
+				</div><!--/ .menu_wrap -->
+
+			
+			
+<!-- - - - - - - - - - - - - Breadcrumbs - - - - - - - - - - - - - -->
+
+
+	
+		
+			
+			
+				<div class="breadcrumbs">
+					<div class="container">
+						<div class="mad-breadcrumbs">
+							
+
+	<nav class="woocommerce-breadcrumb">
+	
+		
+					<a href="https://crosstech.com.ng">Home</a>		
+		
+					<i class="fa fa-angle-right"></i>		
+	
+		
+					<a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/">Dahua CCTV Camera</a>		
+		
+					<i class="fa fa-angle-right"></i>		
+	
+		
+					<a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-dvrs/">Dahua DVRs</a>		
+		
+					<i class="fa fa-angle-right"></i>		
+	
+		
+					DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR		
+		
+		
+	
+	</nav>
+						</div>
+					</div><!--/ .container-->
+				</div><!--/ .breadcrumbs-->
+
+			
+		
+	
+
+<!-- - - - - - - - - - - - - / Breadcrumbs - - - - - - - - - - - - -->
+		</header><!--/ #header -->
+
+		<!-- - - - - - - - - - - - - - / Header - - - - - - - - - - - - - - -->
+
+		<!-- - - - - - - - - - - - Slider for Portfolio Single - - - - - - - - - - - -->
+
+
+
+
+<!-- - - - - - - - - - - - / Slider for Portfolio Single - - - - - - - - - - - -->
+
+		<!-- - - - - - - - - - - - - Page Content - - - - - - - - - - - - - -->
+
+		
+		<div id="content" class="page_content_offset sbr ">
+
+			
+				<div class="container">
+
+					<div class="row">
+
+						
+							<aside id="sidebar" class="col-sm-4 col-md-3">
+	<div id="yith_woocommerce_ajax_search-5" class="widget woocommerce widget_product_search yith_woocommerce_ajax_search"><div class="widget-head"><h3 class="widget-title">Product Search</h3></div>
+<div class="yith-ajaxsearchform-container">
+    <form role="search" class="clearfix search_form" method="get" id="yith-ajaxsearchform" action="https://crosstech.com.ng/">
+
+        
+			<div class="ajax-search-container">
+				<input type="search"
+					   value=""
+					   name="s"
+					   id="yith-s"
+					   class="yith-s"
+					   placeholder="Search for products"
+					   data-loader-icon=""
+					   data-min-chars="3" />
+
+				<button type="submit" class="submit-search" id="yith-searchsubmit">Search</button>
+			</div>
+			<input type="hidden" name="post_type" value="product" />
+
+		
+    </form>
+</div></div><div id="woocommerce_product_categories-22" class="widget woocommerce widget_product_categories"><div class="widget-head"><h3 class="widget-title">Product Categories</h3></div><ul class="product-categories"><li class="cat-item cat-item-16 cat-parent"><a href="https://crosstech.com.ng/product-category/access-control/">Access Control</a><ul class='children'>
+<li class="cat-item cat-item-128"><a href="https://crosstech.com.ng/product-category/access-control/card-reader/">Card Reader</a></li>
+<li class="cat-item cat-item-133"><a href="https://crosstech.com.ng/product-category/access-control/download-system-software/">Download System Software</a></li>
+<li class="cat-item cat-item-130"><a href="https://crosstech.com.ng/product-category/access-control/exit-button-access-control/">Exit Button</a></li>
+<li class="cat-item cat-item-129"><a href="https://crosstech.com.ng/product-category/access-control/hikvision-network-access-controller/">Hikvision Network Access Controller</a></li>
+<li class="cat-item cat-item-131"><a href="https://crosstech.com.ng/product-category/access-control/stand-alone-access-control/">Stand-Alone Access Control</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-118 cat-parent"><a href="https://crosstech.com.ng/product-category/accessories/">Accessories</a><ul class='children'>
+<li class="cat-item cat-item-155"><a href="https://crosstech.com.ng/product-category/accessories/access-control-accessories/">Access Control Accessories</a></li>
+<li class="cat-item cat-item-156"><a href="https://crosstech.com.ng/product-category/accessories/cctv-accessories/">CCTv Accessories</a></li>
+<li class="cat-item cat-item-157"><a href="https://crosstech.com.ng/product-category/accessories/fire-alarm-accessories/">Fire Alarm Accessories</a></li>
+<li class="cat-item cat-item-158"><a href="https://crosstech.com.ng/product-category/accessories/solar-power-accessories/">Solar &amp; Power Accessories</a></li>
+<li class="cat-item cat-item-159"><a href="https://crosstech.com.ng/product-category/accessories/time-attendance-accessories/">Time &amp; Attendance Accessories</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-122 cat-parent"><a href="https://crosstech.com.ng/product-category/cables-cords-connectors/">Cables, Cords &amp; Connectors</a><ul class='children'>
+<li class="cat-item cat-item-209"><a href="https://crosstech.com.ng/product-category/cables-cords-connectors/cat-6/">Cat 6</a></li>
+<li class="cat-item cat-item-134"><a href="https://crosstech.com.ng/product-category/cables-cords-connectors/coaxial-video-cable/">Coaxial / Video Cable</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-125 cat-parent current-cat-parent"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/">Dahua CCTV Camera</a><ul class='children'>
+<li class="cat-item cat-item-165 current-cat"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-dvrs/">Dahua DVRs</a></li>
+<li class="cat-item cat-item-163"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-hd-analog-cameras/">Dahua HD Analog Cameras</a></li>
+<li class="cat-item cat-item-164"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-ip-cameras/">Dahua IP Cameras</a></li>
+<li class="cat-item cat-item-166"><a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-nvrs/">Dahua NVRs</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-121 cat-parent"><a href="https://crosstech.com.ng/product-category/fingerprint-time-attendance/">Fingerprint Time Attendance Machine</a><ul class='children'>
+<li class="cat-item cat-item-154"><a href="https://crosstech.com.ng/product-category/fingerprint-time-attendance/time-attendance-time-attendance/">Time &amp; Attendance</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-115 cat-parent"><a href="https://crosstech.com.ng/product-category/fire-alarm/">Fire Alarm</a><ul class='children'>
+<li class="cat-item cat-item-145"><a href="https://crosstech.com.ng/product-category/fire-alarm/bells-strobes/">Bells &amp; Strobes</a></li>
+<li class="cat-item cat-item-146"><a href="https://crosstech.com.ng/product-category/fire-alarm/call-points/">Call Points</a></li>
+<li class="cat-item cat-item-148"><a href="https://crosstech.com.ng/product-category/fire-alarm/control-panels/">Control Panels</a></li>
+<li class="cat-item cat-item-147"><a href="https://crosstech.com.ng/product-category/fire-alarm/detectors/">Detectors</a></li>
+<li class="cat-item cat-item-149"><a href="https://crosstech.com.ng/product-category/fire-alarm/fire-alarm-solutions/">Fire Alarm Solutions</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-177"><a href="https://crosstech.com.ng/product-category/poe-switch-media-converter/">Genata Networking Products</a></li>
+<li class="cat-item cat-item-117 cat-parent"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/">Hikvision CCTV Camera</a><ul class='children'>
+<li class="cat-item cat-item-162"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/convert-camera/">Convert Camera</a></li>
+<li class="cat-item cat-item-141"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/dvrs/">DVRs</a></li>
+<li class="cat-item cat-item-139"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/hd-analog-cameras/">HD Analog Cameras</a></li>
+<li class="cat-item cat-item-143"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/hdds/">HDDs</a></li>
+<li class="cat-item cat-item-140"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/ip-cameras/">IP Cameras</a></li>
+<li class="cat-item cat-item-142"><a href="https://crosstech.com.ng/product-category/hikvision-cctv-camera/nvrs/">NVRs</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-169"><a href="https://crosstech.com.ng/product-category/intrusion-alarm-products/">Intrusion Alarm Products</a></li>
+<li class="cat-item cat-item-186 cat-parent"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/">Smart Home Appliances</a><ul class='children'>
+<li class="cat-item cat-item-222"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/amplifier/">Amplifier</a></li>
+<li class="cat-item cat-item-210"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/lifesmart/">LifeSmart</a></li>
+<li class="cat-item cat-item-193"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/orvibo-gang-smart-switch/">Orvibo Gang Switch - Zigbee Smart Home Switch</a></li>
+<li class="cat-item cat-item-187"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/orvibo-smart-lock/">Orvibo Smart Lock</a></li>
+<li class="cat-item cat-item-189"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/orvibo-smart-panels/">Orvibo Smart Panels</a></li>
+<li class="cat-item cat-item-227"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/pulmos-hotel-locks/">Pulmos Hotel Locks</a></li>
+<li class="cat-item cat-item-207"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/pulmos-smart-lock/">Pulmos Smart Lock</a></li>
+<li class="cat-item cat-item-224"><a href="https://crosstech.com.ng/product-category/smart-home-appliances/speaker/">Speaker</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-116 cat-parent"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/">Solar Power &amp; Inverters</a><ul class='children'>
+<li class="cat-item cat-item-202"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/charge-controllers/">Charge Controllers</a></li>
+<li class="cat-item cat-item-152"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/in-home/">In-Home</a></li>
+<li class="cat-item cat-item-153"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/inverter-battery/">Inverter Battery</a></li>
+<li class="cat-item cat-item-151"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/inverters/">Inverters</a></li>
+<li class="cat-item cat-item-171"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/racks/">Racks</a></li>
+<li class="cat-item cat-item-150"><a href="https://crosstech.com.ng/product-category/solar-power-inverter/solar-panels/">Solar Panels</a></li>
+</ul>
+</li>
+<li class="cat-item cat-item-170"><a href="https://crosstech.com.ng/product-category/surveillance-hard-drives/">Surveillance Hard Drives</a></li>
+<li class="cat-item cat-item-132"><a href="https://crosstech.com.ng/product-category/video-door-phone/">Video Door Phone</a></li>
+<li class="cat-item cat-item-126 cat-parent"><a href="https://crosstech.com.ng/product-category/wireless-camera/">Wireless Camera</a><ul class='children'>
+<li class="cat-item cat-item-127"><a href="https://crosstech.com.ng/product-category/wireless-camera/spy-camera/">Spy Camera</a></li>
+</ul>
+</li>
+</ul></div><div id="categories-5" class="widget widget_categories"><div class="widget-head"><h3 class="widget-title">Categories</h3></div>
+			<ul>
+					<li class="cat-item cat-item-200"><a href="https://crosstech.com.ng/category/cctv/">CCTV</a>
+</li>
+	<li class="cat-item cat-item-199"><a href="https://crosstech.com.ng/category/smart-homes/">Smart homes</a>
+</li>
+	<li class="cat-item cat-item-198"><a href="https://crosstech.com.ng/category/solar/">Solar and power</a>
+</li>
+			</ul>
+
+			</div><div id="popular-widget-5" class="widget widget_popular_posts">
+<div class="widget-head"><h3 class="widget-title">Popular Articles</h3></div>
+<div class="entry-list-holder"><article class="thumbnails-entry"><a class="entry-thumb-image" href="https://crosstech.com.ng/everything-you-need-to-know-about-home-automation/" title="Everything you need to know about Home Automation"><img width=60 height=60 src="https://crosstech.com.ng/wp-content/uploads/2021/12/home-automation-60x60.jpeg"  title='Everything you need to know about Home Automation'  alt='Everything you need to know about Home Automation'  /></a><div class="entry-post-holder"><a href="https://crosstech.com.ng/everything-you-need-to-know-about-home-automation/"><h6 class="entry-post-title">Everything you need to know about Home Automation</h6></a><span class="entry-post-date">December 31, 2021</span><span class="entry-post-count"> (442)</span></div></article><article class="thumbnails-entry"><a class="entry-thumb-image" href="https://crosstech.com.ng/why-inverters-are-taking-the-lead-in-nigerias/" title="Why Inverters are taking the Lead in Nigeria’s Search for Alternative Energy Sources"><img width=60 height=60 src="https://crosstech.com.ng/wp-content/uploads/2021/12/home-automation-60x60.jpeg"  title='Everything you need to know about Home Automation'  alt='Everything you need to know about Home Automation'  /></a><div class="entry-post-holder"><a href="https://crosstech.com.ng/why-inverters-are-taking-the-lead-in-nigerias/"><h6 class="entry-post-title">Why Inverters are taking the Lead in Nigeria’s Search for Alternative Energy Sources</h6></a><span class="entry-post-date">April 30, 2021</span><span class="entry-post-count"> (379)</span></div></article><article class="thumbnails-entry"><a class="entry-thumb-image" href="https://crosstech.com.ng/smart-home-devices-and-systems/" title="Smart Home Devices And Systems"><img width=60 height=60 src="https://crosstech.com.ng/wp-content/uploads/2021/12/home-automation-60x60.jpeg"  title='Everything you need to know about Home Automation'  alt='Everything you need to know about Home Automation'  /></a><div class="entry-post-holder"><a href="https://crosstech.com.ng/smart-home-devices-and-systems/"><h6 class="entry-post-title">Smart Home Devices And Systems</h6></a><span class="entry-post-date">March 5, 2022</span><span class="entry-post-count"> (273)</span></div></article></div></div>
+<div id="woocommerce_products-17" class="widget woocommerce widget_products"><div class="widget-head"><h3 class="widget-title">Bestsellers</h3></div><ul class="product_list_widget"><li>
+
+	
+	<div class="entry-thumb-image">
+		<a href="https://crosstech.com.ng/product/dhi-nvr4216-16p-4ks2-l-16ch-16poe-4kh-265-lite-nvr/" title="DHI-NVR4216-16P-4KS2/L 16CH 16PoE 4K&amp;H.265 Lite NVR">
+			<img width="60" height="60" src="https://crosstech.com.ng/wp-content/uploads/2021/03/DHI-NVR4216-16P-4KS2-L-16CH-16PoE-4KH.265-Lite-NVR-100x100.png" class="attachment-60x60 size-60x60" alt="DHI-NVR4216-16P-4KS2 L 16CH 16PoE 4K&amp;H.265 Lite NVR" loading="lazy" />		</a>
+	</div>
+	<div class="entry-post-holder">
+		<a href="https://crosstech.com.ng/product/dhi-nvr4216-16p-4ks2-l-16ch-16poe-4kh-265-lite-nvr/" title="DHI-NVR4216-16P-4KS2/L 16CH 16PoE 4K&amp;H.265 Lite NVR">
+			<h6 class="entry-post-title">DHI-NVR4216-16P-4KS2/L 16CH 16PoE 4K&amp;H.265 Lite NVR</h6>
+		</a>
+							
+		<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>196,000.00</bdi></span>	</div>
+
+	
+	<div class="clear"></div>
+</li><li>
+
+	
+	<div class="entry-thumb-image">
+		<a href="https://crosstech.com.ng/product/luminous-ecovolt-inverter-1500va-24v-eco-volt-1650/" title="Luminous EcoVolt Inverter 1500VA/24V Eco Volt 1650">
+			<img width="60" height="60" src="https://crosstech.com.ng/wp-content/uploads/2021/03/Luminous-EcoVolt-Inverter-1500VA-24V-Eco-Volt-1650-100x100.jpg" class="attachment-60x60 size-60x60" alt="Luminous EcoVolt Inverter 1500VA 24V Eco Volt 1650" loading="lazy" />		</a>
+	</div>
+	<div class="entry-post-holder">
+		<a href="https://crosstech.com.ng/product/luminous-ecovolt-inverter-1500va-24v-eco-volt-1650/" title="Luminous EcoVolt Inverter 1500VA/24V Eco Volt 1650">
+			<h6 class="entry-post-title">Luminous EcoVolt Inverter 1500VA/24V Eco Volt 1650</h6>
+		</a>
+							
+		<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>150,000.00</bdi></span>	</div>
+
+	
+	<div class="clear"></div>
+</li><li>
+
+	
+	<div class="entry-thumb-image">
+		<a href="https://crosstech.com.ng/product/hikvision-ds-1005ki-usb-keyboard/" title="Hikvision DS-1005KI USB Keyboard">
+			<img width="60" height="60" src="https://crosstech.com.ng/wp-content/uploads/2021/03/Hikvision-DS-1005KI-USB-Keyboard-100x100.jpg" class="attachment-60x60 size-60x60" alt="Hikvision DS-1005KI USB Keyboard" loading="lazy" />		</a>
+	</div>
+	<div class="entry-post-holder">
+		<a href="https://crosstech.com.ng/product/hikvision-ds-1005ki-usb-keyboard/" title="Hikvision DS-1005KI USB Keyboard">
+			<h6 class="entry-post-title">Hikvision DS-1005KI USB Keyboard</h6>
+		</a>
+							
+		<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>130,000.00</bdi></span>	</div>
+
+	
+	<div class="clear"></div>
+</li></ul></div><div id="woocommerce_products_specials-5" class="widget woocommerce widget_products_specials"><div class="widget-head"><h3 class="widget-title">Specials</h3></div><ul class='specials-carousel products view-grid'><li class="first product type-product post-4346 status-publish instock product_cat-pulmos-smart-lock product_cat-smart-home-appliances product_tag-door-locks has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+			<span class="onsale"><span>Sale</span></span>
+			<div class="thumbnail-container ">
+
+				
+				<a href="https://crosstech.com.ng/product/pls-df03-pulmos-high-fingerprint-smart-door-lock/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-300x300.png" class=" wp-post-image" alt="Pulmos PLS-DF03 High Fingerprint smart door lock" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-300x300.png 300w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-150x150.png 150w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-500x500.png 500w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-100x100.png 100w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03.png 600w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+									</a>
+
+									<span  data-id='4346'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/pls-df03-pulmos-high-fingerprint-smart-door-lock/">PLS-DF03 Pulmos High Fingerprint smart door...</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<ul>
+<li>Fingerprint unlock</li>
+<li>Pin Unlock</li>
+<li>MIFI CARD Access</li>
+<li>One time password for guest</li>
+<li>Key Unlock</li>
+<li>Door Bell</li>
+<li>Remote Access Unlock</li>
+</ul>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>185,000.00</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>160,000.00</bdi></span></ins></div>
+<a href="?add-to-cart=4346" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="4346" data-product_sku="" aria-label="Add &ldquo;PLS-DF03 Pulmos High Fingerprint smart door lock&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li><li class="last product type-product post-4342 status-publish first instock product_cat-pulmos-smart-lock product_cat-smart-home-appliances product_tag-door-locks has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+			<span class="onsale"><span>Sale</span></span>
+			<div class="thumbnail-container ">
+
+				
+				<a href="https://crosstech.com.ng/product/pls-df03-pulmos-fingerprint-smart-door-lock/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-300x300.png" class=" wp-post-image" alt="Pulmos PLS-DF03 High Fingerprint smart door lock" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-300x300.png 300w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-150x150.png 150w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-500x500.png 500w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03-100x100.png 100w, https://crosstech.com.ng/wp-content/uploads/2022/04/PLS-DF03.png 600w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+									</a>
+
+									<span  data-id='4342'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/pls-df03-pulmos-fingerprint-smart-door-lock/">PLS-DF03 Pulmos Fingerprint smart door l...</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<ul>
+<li>Fingerprint unlock</li>
+<li>Pin Unlock</li>
+<li>MIFI CARD Access</li>
+<li>One time password for guest</li>
+<li>Key Unlock</li>
+<li>Door Bell</li>
+<li>Remote Access Unlock</li>
+</ul>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>175,000.00</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>160,000.00</bdi></span></ins></div>
+<a href="?add-to-cart=4342" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="4342" data-product_sku="" aria-label="Add &ldquo;PLS-DF03 Pulmos Fingerprint smart door lock&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li><li class="product type-product post-4142 status-publish last instock product_cat-pulmos-smart-lock product_cat-smart-home-appliances product_tag-pulmos-smart-locks has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+			<span class="onsale"><span>Sale</span></span>
+			<div class="thumbnail-container ">
+
+				
+				<a href="https://crosstech.com.ng/product/pls-2248-pulmos-smart-door-lock/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2022/03/PULMOS-PLS-2248-300x300.png" class=" wp-post-image" alt="Pulmos Smart Lock - PLS 2248-Crosstech Limited" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2022/03/PULMOS-PLS-2248-300x300.png 300w, https://crosstech.com.ng/wp-content/uploads/2022/03/PULMOS-PLS-2248-150x150.png 150w, https://crosstech.com.ng/wp-content/uploads/2022/03/PULMOS-PLS-2248-500x500.png 500w, https://crosstech.com.ng/wp-content/uploads/2022/03/PULMOS-PLS-2248-100x100.png 100w, https://crosstech.com.ng/wp-content/uploads/2022/03/PULMOS-PLS-2248.png 600w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+									</a>
+
+									<span  data-id='4142'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/pls-2248-pulmos-smart-door-lock/">PLS-2248 Pulmos Smart Door Lock</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<ul>
+<li>PIN unlock</li>
+<li>MIFI Card Access</li>
+<li>One time password for guests</li>
+<li>Key Unlock</li>
+<li>Door Bell</li>
+<li>Remote access unlock</li>
+</ul>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>172,000.00</bdi></span></del> <ins><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>160,000.00</bdi></span></ins></div>
+<a href="?add-to-cart=4142" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="4142" data-product_sku="" aria-label="Add &ldquo;PLS-2248 Pulmos Smart Door Lock&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li></ul></div>
+</aside>
+
+
+
+						
+						<main id="main" class="col-sm-8 col-md-9">
+
+			
+	
+<div class="products-container shop-columns-3 ">
+		
+			<div class="woocommerce-notices-wrapper"></div>
+<div id="product-3810" class="product type-product post-3810 status-publish first instock product_cat-dahua-dvrs product_tag-dahua-acusense-dvrs has-post-thumbnail shipping-taxable purchasable product-type-simple">
+
+					
+	<div class="col-sm-6 single-product-main-image">
+
+		
+<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 0; transition: opacity .25s ease-in-out;">
+	<figure class="woocommerce-product-gallery__wrapper">
+		<div data-thumb="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-100x100.png" data-thumb-alt="DH-XVR5108HS-I2 Dahua 8 Channel" class="woocommerce-product-gallery__image"><a href="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png"><img width="400" height="400" src="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png" class="wp-post-image" alt="DH-XVR5108HS-I2 Dahua 8 Channel" loading="lazy" title="DH-XVR5108HS-I2 Dahua 8 Channel Penta-brid  WizSense DVR" data-caption="DH-XVR5108HS-I2 Dahua 8 Channel Penta-brid  WizSense DVR" data-src="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png" data-large_image="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png" data-large_image_width="400" data-large_image_height="400" srcset="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png 400w, https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-300x300.png 300w, https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-100x100.png 100w, https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-150x150.png 150w" sizes="(max-width: 400px) 100vw, 400px" /></a></div><div data-thumb="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back-100x100.png" data-thumb-alt="Dahua Acusense 4 Channel DVr" class="woocommerce-product-gallery__image"><a href="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back.png"><img width="400" height="400" src="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back.png" class="" alt="Dahua Acusense 4 Channel DVr" loading="lazy" title="XVR5104HS-I2-back" data-caption="" data-src="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back.png" data-large_image="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back.png" data-large_image_width="400" data-large_image_height="400" srcset="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back.png 400w, https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back-300x300.png 300w, https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back-100x100.png 100w, https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5104HS-I2-back-150x150.png 150w" sizes="(max-width: 400px) 100vw, 400px" /></a></div>	</figure>
+</div>
+
+<div class="share-links-wrapper v_centered">
+
+	<span class="title">Share this:</span>
+
+	<div class="share-links">
+
+					<a href="http://www.facebook.com/sharer.php?m2w&amp;s=100&amp;p&#091;url&#093;=https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/&amp;p&#091;images&#093;&#091;0&#093;=https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png&amp;p&#091;title&#093;=DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR" target="_blank"  title="Facebook" class="share-facebook share-link">Facebook</a>
+		
+					<a href="https://twitter.com/intent/tweet?text=DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR&amp;url=https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/" target="_blank"  title="Twitter" class="share-twitter">Twitter</a>
+		
+					<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/&amp;title=DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR" target="_blank"  title="LinkedIn" class="share-linkedin">LinkedIn</a>
+		
+					<a href="https://plus.google.com/share?url=https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/" target="_blank"  title="Google +" class="share-googleplus">Google +</a>
+		
+					<a href="https://pinterest.com/pin/create/link/?url=https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/&amp;media=https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png" target="_blank"  title="Pinterest" class="share-pinterest">Pinterest</a>
+		
+		
+					<a href="http://www.tumblr.com/share/link?url=https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/&amp;name=DH-XVR5104HS-I2+Dahua+4+Channel+Penta-brid++WizSense+DVR&amp;description=%3Cul%3E%0D%0A+%09%3Cli%3E%C2%A0H.265%2B%2FH.265+dual-stream+video+compression%3C%2Fli%3E%0D%0A+%09%3Cli%3ESupports+HDCVI%2FAHD%2FTVI%2FCVBS%2FIP+video+inputs%3C%2Fli%3E%0D%0A+%09%3Cli%3EMax+6+channels+IP+camera+inputs%2C+each+channel+up+to+6MP%3B+Max+32+Mbps+incoming+bandwidth%3C%2Fli%3E%0D%0A+%09%3Cli%3EUp+to+2+channels+video+stream+%28+analog+channel+%29+Perimeter+Protection%3C%2Fli%3E%0D%0A+%09%3Cli%3EUp+to+4+channels+video+stream+%28+analog+channel+%29+SMD+Plus%3C%2Fli%3E%0D%0A+%09%3Cli%3EUp+to+1+channel+video+stream+%28analog+channel+%29+human+face+recognition%3C%2Fli%3E%0D%0A+%09%3Cli%3EIoT+%26amp%3B+POS+functionalities%3C%2Fli%3E%0D%0A%3C%2Ful%3E" target="_blank"  title="Tumblr" class="share-tumblr">Tumblr</a>
+		
+		
+	</div><!--/ .share-links-->
+
+</div><!--/ .share-links-wrapper-->
+
+
+	</div><!--/ .single-product-main-image-->
+
+	<div class="col-sm-6 single-product-summary">
+
+		<div class="summary entry-summary">
+
+			
+
+	<h1 itemprop="name" class="product_title entry-title">DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR</h1>
+
+
+			
+			<section class="product-section">
+
+				<div class="product_meta">
+
+					
+					
+						
+						<span class="stock_wrapper">
+							<span class="meta-title">Availability:</span>
+													</span>
+
+					
+					
+					
+				</div><!--/ .product_meta-->
+
+			</section><!--/ .product-section-->
+
+							<section class="product-section">
+					<div class="woocommerce-product-details__short-description">
+	<ul>
+<li> H.265+/H.265 dual-stream video compression</li>
+<li>Supports HDCVI/AHD/TVI/CVBS/IP video inputs</li>
+<li>Max 6 channels IP camera inputs, each channel up to 6MP; Max 32 Mbps incoming bandwidth</li>
+<li>Up to 2 channels video stream ( analog channel ) Perimeter Protection</li>
+<li>Up to 4 channels video stream ( analog channel ) SMD Plus</li>
+<li>Up to 1 channel video stream (analog channel ) human face recognition</li>
+<li>IoT &amp; POS functionalities</li>
+</ul>
+</div>				</section><!--/ .product-section-->
+			
+			<p class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>37,000.00</bdi></span></p>
+
+
+	
+	<form class="cart" action="https://crosstech.com.ng/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/" method="post" enctype='multipart/form-data'>
+
+		
+		
+	<table class="description-table">
+		<tbody>
+		<tr>
+			<td>Quantity:</td>
+			<td class="product-quantity">
+								<div class="quantity">
+					<input
+							type="number"
+							id="quantity_66e7fd7c437d6"
+							class="input-text qty text"
+							step="1"
+							min="1"
+							max=""
+							name="quantity"
+							value="1"
+							title="Qty"
+							size="4"
+							placeholder=""
+							inputmode="numeric" />
+				</div>
+							</td>
+		</tr>
+		</tbody>
+	</table><!--/ .description-table-->
+
+	
+		
+		<button type="submit" name="add-to-cart" value="3810" class="single_add_to_cart_button button alt">Add to cart</button>
+
+					<div class="product-actions">
+											</div><!--/ .product-actions-->
+			
+	</form>
+
+	
+<div class="product_meta">
+
+	
+	<span class="posted_in">Category: <a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-dvrs/" rel="tag">Dahua DVRs</a></span>
+	<span class="tagged_as">Tag: <a href="https://crosstech.com.ng/product-tag/dahua-acusense-dvrs/" rel="tag">Dahua Acusense DVRs</a></span>
+	
+</div>
+		</div><!-- .summary -->
+
+	</div><!--/ .single-product-summary-->
+
+	<div class="clear"></div>
+	<div class="woocommerce-tabs">
+		<ul class="tabs">
+			
+				<li class="description_tab">
+					<a href="#tab-description">
+						Description					</a>
+				</li>
+
+			
+				<li class="reviews_tab">
+					<a href="#tab-reviews">
+						Reviews (0)					</a>
+				</li>
+
+					</ul>
+		
+			<div class="panel entry-content" id="tab-description">
+					<h2>Product Description</h2>
+
+<div id="div_left">
+<div class="div-drop">
+<div class="div-drop">
+<h1 class="title"><strong>DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid WizSense Digital Video Recorder</strong></h1>
+</div>
+<h2><strong>Specifications of the DH-XVR5104HS-I2 Dahua 4 Channel Channel Penta-brid WizSense DVR</strong></h2>
+<table id="table001" class="NEW-TABLE TableOverride-1 tab-drag">
+<tbody>
+<tr>
+<td colspan="60">
+<h3><strong>System</strong></h3>
+</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Main Processor</strong></td>
+<td colspan="42"><strong>Embedded Processor</strong></td>
+</tr>
+<tr>
+<td colspan="18"><strong>Operating System</strong></td>
+<td colspan="42"><strong>Embedded LINUX</strong></td>
+</tr>
+<tr>
+<td colspan="60">
+<h3><strong>Perimeter Protection</strong></h3>
+</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Performance</strong></td>
+<td colspan="42">2 channels, 10 IVS for each channel</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Object classification</strong></td>
+<td colspan="42">Human/Vehicle secondary recognition for tripwire and intrusion</td>
+</tr>
+<tr>
+<td colspan="18"><strong>AI Search</strong></td>
+<td colspan="42">Search by target classification (Human, Vehicle)</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3><strong>Face Recognition</strong></h3>
+</td>
+</tr>
+<tr>
+<td colspan="18" rowspan="2"><strong>Performance</strong></td>
+<td colspan="42">Max 8 face pictures/sec processing</td>
+</tr>
+<tr>
+<td colspan="42">1 channel video stream face recognition, only support analogue camera</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Stranger Mode</strong></td>
+<td colspan="42">Detect strangers&#8217; faces (not in device&#8217;s face database). The similarity threshold can be set manually.</td>
+</tr>
+<tr>
+<td colspan="18"><strong>AI Search</strong></td>
+<td colspan="42">Up to 8 target face images search at the same time, similarity threshold can be set for each target face image.</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Database Management</strong></td>
+<td colspan="42">Up to 10 face databases with 10,000 face images in total. Name, gender, birthday, address, certificate type, cerificate No., countries®ions and state can be added to each face picture.</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Database Application</strong></td>
+<td colspan="42">Each database can be applied to video channels independently.</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Trigger Events</strong></td>
+<td colspan="42">Buzzer, Voice Prompts, Email, Snapshot, Recording, Alarm Out, PTZ Activation, etc.</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3><strong>SMD Plus</strong></h3>
+</td>
+</tr>
+<tr>
+<td colspan="18"><strong>Performance</strong></td>
+<td colspan="42">4 channels</td>
+</tr>
+<tr>
+<td colspan="18"><strong>AI Search</strong></td>
+<td colspan="42">Search by target classification (Human, Vehicle)</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3><strong>Video and Audio</strong></h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Analog Camera Input</td>
+<td colspan="42">4 channels, BNC</td>
+</tr>
+<tr>
+<td colspan="18">HDCVI Camera Input</td>
+<td colspan="42">5MP, 4MP, 1080P@25/30fps, 720P@50/60fps, 720P@25/30fps</td>
+</tr>
+<tr>
+<td colspan="18">AHD Camera Input</td>
+<td colspan="42">5MP, 4MP, 1080P@25/30, 720P@25/30fps</td>
+</tr>
+<tr>
+<td colspan="18">TVI Camera Input</td>
+<td colspan="42">5MP, 4MP, 1080P@25/30, 720P@25/30fps</td>
+</tr>
+<tr>
+<td colspan="18">CVBS Camera Input</td>
+<td colspan="42">PAL/NTSC</td>
+</tr>
+<tr>
+<td colspan="18">IP Camera Input</td>
+<td colspan="42">4+2 channels, each channel up to 6MP</td>
+</tr>
+<tr>
+<td colspan="18">Audio In/Out</td>
+<td colspan="42">1/1, RCA</td>
+</tr>
+<tr>
+<td colspan="18">Two-way Talk</td>
+<td colspan="42">Reuse audio in/out, RCA</td>
+</tr>
+<tr>
+<td colspan="60">Recording</td>
+</tr>
+<tr>
+<td colspan="18">Compression</td>
+<td colspan="42">AI Coding/H.265+/H.265/H.264+/H.264</td>
+</tr>
+<tr>
+<td colspan="18">Resolution</td>
+<td colspan="42">5M-N, 4M-N, 1080P, 1080N, 720P, 960H, D1, CIF</td>
+</tr>
+<tr>
+<td colspan="18">Record Rate</td>
+<td colspan="42">Main stream: All channel 5M-N (1fps–10fps); 4M-N/1080P (1fps–15fps); 1080N/720P/960H/</p>
+<p>D1/CIF (1fps–25/30fps)</p>
+<p>Sub stream: D1/CIF (1fps–15fps)</td>
+</tr>
+<tr>
+<td colspan="18">Bit Rate</td>
+<td colspan="42">32 Kbps–6144 Kbps Per Channel</td>
+</tr>
+<tr>
+<td colspan="18">Record Mode</td>
+<td colspan="42">Manual, Schedule (General, Continuous), MD (Video detection: Motion Detection, Video Loss, Tampering), Alarm, Stop</td>
+</tr>
+<tr>
+<td colspan="18">Record Interval</td>
+<td colspan="42">1 – 60 min (default: 60 min), Pre-record: 1 s–30 s, Post-record: 10 s–300 s</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="div_left">
+<div class="div-drop">
+<table id="table002" class="NEW-TABLE TableOverride-1 tab-drag">
+<tbody>
+<tr>
+<td colspan="18">Audio Compression</td>
+<td colspan="42">G.711A, G.711U, PCM</td>
+</tr>
+<tr>
+<td colspan="18">Audio Sample Rate</td>
+<td colspan="42">8 KHz, 16 bit Per Channel</td>
+</tr>
+<tr>
+<td colspan="18">Audio Bit Rate</td>
+<td colspan="42">64 Kbps Per Channel</td>
+</tr>
+<tr>
+<td colspan="60">
+<h4>Display</h4>
+</td>
+</tr>
+<tr>
+<td colspan="18">Interface</td>
+<td colspan="42">1 HDMI ,1 VGA</td>
+</tr>
+<tr>
+<td colspan="18">Resolution</td>
+<td colspan="42">1920 × 1080, 1280 × 1024, 1280 × 720</td>
+</tr>
+<tr>
+<td colspan="18">Multi-screen Display</td>
+<td colspan="42">When IP extension mode not enabled<span lang="zh-CN">:</span> 1/4</p>
+<p>When IP extension mode enabled<span lang="zh-CN">:</span> 1/4/6</td>
+</tr>
+<tr>
+<td colspan="18">OSD</td>
+<td colspan="42">Camera title, Time, Video loss, Camera lock, Motion detection, Recording</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Network</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Interface</td>
+<td colspan="42">1 RJ-45 Port (100 MB)</td>
+</tr>
+<tr>
+<td colspan="18">Network Function</td>
+<td colspan="42">HTTP, HTTPS, TCP/IP, IPv4/IPv6, Wi-Fi, 3G/4G, SNMP, UPnP, RTSP, UDP, SMTP, NTP, DHCP, DNS, IP Filter, PPPoE,DDNS, FTP, Alarm Server, P2P,IP Search (Supports Dahua IP camera, DVR, NVS, etc.)</td>
+</tr>
+<tr>
+<td colspan="18">Max. User Access</td>
+<td colspan="42">128 users</td>
+</tr>
+<tr>
+<td colspan="18">Smart Phone</td>
+<td colspan="42">iPhone, iPad, Android</td>
+</tr>
+<tr>
+<td colspan="18">Interoperability</td>
+<td colspan="42">ONVIF 16.12, CGI Conformant</td>
+</tr>
+<tr>
+<td colspan="60">Video Detection and Alarm</td>
+</tr>
+<tr>
+<td colspan="18">Trigger Events</td>
+<td colspan="42">Recording, PTZ, Tour, Video Push, Email, FTP, Snapshot, Buzzer and Screen Tips</td>
+</tr>
+<tr>
+<td colspan="18">Video Detection</td>
+<td colspan="42">Motion Detection, MD Zones: 396 (22 × 18), Video Loss, Tampering and Diagnosis</td>
+</tr>
+<tr>
+<td colspan="18">Alarm input</td>
+<td colspan="42">N/A</td>
+</tr>
+<tr>
+<td colspan="18">Relay Output</td>
+<td colspan="42">N/A</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Playback and Backup</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Playback</td>
+<td colspan="42">1/4</td>
+</tr>
+<tr>
+<td colspan="18">Search Mode</td>
+<td colspan="42">Time /Date, Alarm, MD and Exact Search (accurate to second)</td>
+</tr>
+<tr>
+<td colspan="18">Playback Function</td>
+<td colspan="42">Play, Pause, Stop, Rewind, Fast play, Slow Play, Next File, Previous File, Next Camera, Previous Camera, Full Screen, Repeat, Shuffle, Backup Selection, Digital Zoom</td>
+</tr>
+<tr>
+<td colspan="18">Backup Mode</td>
+<td colspan="42">USB Device/Network</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Storage</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Internal HDD</td>
+<td colspan="42">1 SATA Port, up to 6TB capacity</td>
+</tr>
+<tr>
+<td colspan="18">eSATA</td>
+<td colspan="42">N/A</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Auxiliary Interface</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">USB</td>
+<td colspan="42">2 USB Ports (USB 2.0)</td>
+</tr>
+<tr>
+<td colspan="18">RS485</td>
+<td colspan="42">1 Port, for PTZ Control</td>
+</tr>
+<tr>
+<td colspan="18">RS232</td>
+<td colspan="42">N/A</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Electrical</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Power Supply</td>
+<td colspan="42">DC 12V/1.5A</td>
+</tr>
+<tr>
+<td colspan="18">Power Consumption</p>
+<p>(Without HDD)</td>
+<td colspan="42">&lt;4W</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Construction</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Dimensions</td>
+<td colspan="42">Compact 1U, 260 mm × 238 mm × 48 mm</p>
+<p>(10.24&#8221; × 9.34&#8221; × 1.87&#8221;)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="div_left">
+<div class="div-drop">
+<table id="table004" class="NEW-TABLE TableOverride-1 tab-drag">
+<tbody>
+<tr>
+<td colspan="18">Net Weight</p>
+<p>(without HDD)</td>
+<td colspan="42">1.0 kg (2.2 lb)</td>
+</tr>
+<tr>
+<td colspan="18">Gross Weight</td>
+<td colspan="42"><span lang="zh-CN">1.4 kg (3.1 lb)</span></td>
+</tr>
+<tr>
+<td colspan="18">Installation</td>
+<td colspan="42">Desktop installation</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Environmental</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Operating Conditions</td>
+<td colspan="42">-10°C to +55°C (+14°F to +131°F), 0–90% RH</td>
+</tr>
+<tr>
+<td colspan="18">Storage Conditions</td>
+<td colspan="42">-20°C to +70°C (-4°F to +158°F), 0–90% RH</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Third-party Support</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18">Third-party Support</td>
+<td colspan="42">Dahua, Arecont Vision, AXIS, Bosch, Brickcom, Canon, CP Plus, Dynacolor, Honeywell, Panasonic, Pelco, Samsung, Sanyo, Sony, Videotec, Vivotek, and more</td>
+</tr>
+<tr>
+<td colspan="60">
+<h3>Certifications</h3>
+</td>
+</tr>
+<tr>
+<td colspan="18" rowspan="2">Certifications</td>
+<td colspan="42">FCC: Part 15 Subpart B</td>
+</tr>
+<tr>
+<td colspan="42">CE: CE-LVD: EN 60950-1/IEC 60950-1</p>
+<p>CE-EMC: EN 61000-3-2, EN 61000-3-3, EN 55032, EN 50130, EN 55024</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.dahuasecurity.com/products/All-Products/HDCVI-Recorders/WizSense-Series/I2-Series/5M-N/1080P-Series/XVR5104HS-I2">Click here to download the datasheet for this DVR</a></p>
+<p>You can also checkout the <a href="https://crosstech.com.ng/product/dh-xvr5108hs-i2-dahua-8-channel-penta-brid-wizsense-dvr/">8 Channel DVR</a> for a larger option</p>
+</div>
+</div>
+
+<div class="product-single-meta">
+
+	<span class="posted_in">Category: <a href="https://crosstech.com.ng/product-category/dahua-cctv-camera/dahua-dvrs/" rel="tag">Dahua DVRs</a></span>
+	<span class="tagged_as">Tag: <a href="https://crosstech.com.ng/product-tag/dahua-acusense-dvrs/" rel="tag">Dahua Acusense DVRs</a></span>
+</div>
+
+
+
+			</div>
+
+		
+			<div class="panel entry-content" id="tab-reviews">
+				<div id="reviews" class="woocommerce-Reviews">
+
+	<div class="row clearfix">
+
+		<div class="col-sm-6">
+
+			<div id="comments">
+
+				<h5>
+				Reviews				</h5>
+
+				
+					<p class="woocommerce-noreviews">There are no reviews yet.</p>
+
+				
+			</div><!--/ #comments-->
+
+		</div><!--/ .col-sm-6-->
+
+		<div class="col-sm-6">
+
+			
+				<div id="review_form_wrapper">
+
+					<div id="review_form">
+							<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Be the first to review &ldquo;DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr/#respond" style="display:none;"> - Cancel quote</a></small></h3><form action="https://crosstech.com.ng/wp-comments-post.php" method="post" id="commentform" class="comment-form"><div class="comment-form-rating"><label for="rating">Your rating</label><select name="rating" id="rating" required>
+								<option value="">Rate&hellip;</option>
+								<option value="5">Perfect</option>
+								<option value="4">Good</option>
+								<option value="3">Average</option>
+								<option value="2">Not that bad</option>
+								<option value="1">Very poor</option>
+							</select></div><p class="comment-form-comment"><label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p><p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="author" type="text" value="" size="30" required /></p>
+<p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" value="" size="30" required /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit" /> <input type='hidden' name='comment_post_ID' value='3810' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+						</div><!--/ #review_form-->
+
+				</div><!--/ #review_form_wrapper-->
+
+			
+		</div><!--/ .col-sm-6-->
+
+	</div><!--/ .row-->
+
+</div>			</div>
+
+		
+		
+	</div>
+
+
+
+
+	<div class="product-link-pages">
+
+		<div class="product-nav-left">
+							<a class="product-prev-button" href="https://crosstech.com.ng/product/305-meters-reel-rg59-coaxial-cable-with-power/" title="">
+					Previous Product				</a>
+				<span>305 meters Reel RG59 Coaxial Cable with Power</span>
+					</div><!--/ .product-nav-left-->
+
+		<div class="product-nav-right">
+							<a class="product-next-button" href="https://crosstech.com.ng/product/dh-xvr5108hs-i2-dahua-8-channel-penta-brid-wizsense-dvr/" title="">
+					Next Product				</a>
+				<span>DH-XVR5108HS-I2 Dahua 8 Channel Penta-brid  WizSense DVR</span>
+					</div><!--/ .product-nav-right-->
+
+	</div><!--/ .product-link-pages-->
+
+
+		
+			<div class="products-container view-grid" data-columns="3">
+				
+	<div class="related products" data-sidebar="sbr">
+
+					<h2>Related products</h2>
+		
+		<ul class="products clearfix">
+		
+			<li class="first product type-product post-3813 status-publish instock product_cat-dahua-dvrs product_tag-dahua-acusense-dvrs has-post-thumbnail shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+		
+			<div class="thumbnail-container has-second-thumb">
+
+				
+				<a href="https://crosstech.com.ng/product/dh-xvr5108hs-i2-dahua-8-channel-penta-brid-wizsense-dvr/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-300x300.png" class=" wp-post-image" alt="DH-XVR5108HS-I2 Dahua 8 Channel" srcset="https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-300x300.png 300w, https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-100x100.png 100w, https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2-150x150.png 150w, https://crosstech.com.ng/wp-content/uploads/2021/06/DH-XVR5104HS-I2.png 400w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+											<div class="back"><img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5108HS-I2-back-300x300.png" class="attachment-shop_catalog product-hover" alt="Dahua 8 Channel Wizsense DVR" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5108HS-I2-back-300x300.png 300w, https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5108HS-I2-back-100x100.png 100w, https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5108HS-I2-back-150x150.png 150w, https://crosstech.com.ng/wp-content/uploads/2021/06/XVR5108HS-I2-back.png 400w" sizes="(max-width: 300px) 100vw, 300px" /></div>
+									</a>
+
+									<span  data-id='3813'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/dh-xvr5108hs-i2-dahua-8-channel-penta-brid-wizsense-dvr/">DH-XVR5108HS-I2 Dahua 8 Channel Penta-brid...</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<ul>
+<li>H.265+/H.265 dual-stream video compression</li>
+<li>Supports HDCVI/AHD/TVI/CVBS/IP video inputs</li>
+<li>Max 12 channels IP camera inputs, each channel up to 6MP; Max 64 Mbps incoming bandwidth</li>
+<li>Up to 2 channels video stream ( analog channel ) Perimeter Protection</li>
+<li>Up to 8 channels video stream ( analog channel ) SMD Plus</li>
+<li>Up to 2 channels video stream (analog channel ) human face recognition</li>
+<li>IoT &amp; POS functionalities</li>
+</ul>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>55,000.00</bdi></span></div>
+<a href="?add-to-cart=3813" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="3813" data-product_sku="" aria-label="Add &ldquo;DH-XVR5108HS-I2 Dahua 8 Channel Penta-brid  WizSense DVR&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li>
+		
+			<li class="last product type-product post-3807 status-publish first instock product_cat-dahua-cctv-camera product_cat-dahua-dvrs product_tag-dahua-xvrs has-post-thumbnail shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+		
+			<div class="thumbnail-container ">
+
+				
+				<a href="https://crosstech.com.ng/product/dh-xvr1a08-dahua-8-channel-1080n-720p-dvr/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-300x300.jpg" class=" wp-post-image" alt="DH-XVR1B04H Dahua 4CH Penta-brid 4M-N1080P Cooper XVR" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-300x300.jpg 300w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-100x100.jpg 100w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-600x600.jpg 600w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-150x150.jpg 150w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-768x768.jpg 768w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-500x500.jpg 500w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR.jpg 800w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+									</a>
+
+									<span  data-id='3807'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/dh-xvr1a08-dahua-8-channel-1080n-720p-dvr/">DH-XVR1B08 Dahua 8 Channel 1080N/720P DV...</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<p>· H.264 video compression<br />
+· Supports HDCVI/AHD/TVI/CVBS/IP video inputs<br />
+· Max 5/10 channels IP camera inputs, each channel up to<br />
+2MP/5MP; Max 20/40Mbps Incoming Bandwidth<br />
+· Long transmission distance over coax cable<br />
+· Supports 1 SATA HDD, up to 6TB</p>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>30,000.00</bdi></span></div>
+<a href="?add-to-cart=3807" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="3807" data-product_sku="" aria-label="Add &ldquo;DH-XVR1B08 Dahua 8 Channel 1080N/720P DVR&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li>
+		
+			<li class="product type-product post-3190 status-publish last instock product_cat-dahua-dvrs has-post-thumbnail shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+		
+			<div class="thumbnail-container ">
+
+				
+				<a href="https://crosstech.com.ng/product/dh-xvr1b04h-dahua-4ch-penta-brid-4m-n-1080p-cooper-xvr/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-300x300.jpg" class=" wp-post-image" alt="DH-XVR1B04H Dahua 4CH Penta-brid 4M-N1080P Cooper XVR" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-300x300.jpg 300w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-100x100.jpg 100w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-600x600.jpg 600w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-150x150.jpg 150w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-768x768.jpg 768w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-500x500.jpg 500w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR.jpg 800w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+									</a>
+
+									<span  data-id='3190'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/dh-xvr1b04h-dahua-4ch-penta-brid-4m-n-1080p-cooper-xvr/">DH-XVR1B04H Dahua 4CH Penta-brid 4M-N/1080P...</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<p>Designed as a full compatibility product, this XVR is able to provide end user the simplicity of analog system, namely lower system cost, simple installation and use of existing cable. And with the adoption<br />
+of Smart H.265+/H.265, the series improves encoding efficiency, saving on bandwidth/storage costs. It is ideal for a wide range of civil applications such as retail store, home protection and so on</p>
+<p><strong>Functions</strong><br />
+<strong>Smart H.265+</strong>: Smart Codec, H.265+ can reduce up to 90% bit rate and storage<br />
+requirements compared with H.264 without having to invest in new<br />
+cameras.<br />
+<strong>HDCVI/AHD/TVI/CVBS/IP Auto-detect:</strong> The XVR can auto recognize the signal of front-camera without any setting. It makes operation more friendly and convenient.</p>
+<p><strong>High Definition Camera Input</strong>: The XVR supports up to 5MP HDCVI camera and 6MP IP camera input.</p>
+<p><strong>Coaxial Audio/Upgrade/Alarm</strong> :The integrated design can reduce wiring troubles which makes it much more<br />
+cost-effective and convenient for installation.</p>
+<p><strong>Video and Audio functions: </strong><br />
+Analog Camera Input : 4/8 Channel, BNC<br />
+HDCVI Camera :5MP, 4MP, 1080P@25/30fps, 720P@50/60fps, 720P@25/30fps<br />
+AHD Camera: 5MP, 4MP, 1080P@25/30, 720P@25/30fps<br />
+TVI Camera: 5MP, 4MP, 1080P@25/30, 720P@25/30fps<br />
+CVBS Camera :PAL/NTSC<br />
+IP Camera Input:  4+2/8+4CH, each channel up to 6MP<br />
+Audio In/Out 1/1, RCA<br />
+Two-way Talk Reuse audio in/out, RCA</p>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>40,000.00</bdi></span></div>
+<a href="?add-to-cart=3190" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="3190" data-product_sku="" aria-label="Add &ldquo;DH-XVR1B04H Dahua 4CH Penta-brid 4M-N/1080P Cooper XVR&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li>
+		
+			<li class="first product type-product post-3787 status-publish instock product_cat-dahua-dvrs has-post-thumbnail shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+		
+			<div class="thumbnail-container ">
+
+				
+				<a href="https://crosstech.com.ng/product/dh-xvr1a04-dahua-4ch-penta-brid-1080n-720p-cooper-1u-digital-video-recorder/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-300x300.jpg" class=" wp-post-image" alt="DH-XVR1B04H Dahua 4CH Penta-brid 4M-N1080P Cooper XVR" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-300x300.jpg 300w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-100x100.jpg 100w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-600x600.jpg 600w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-150x150.jpg 150w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-768x768.jpg 768w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR-500x500.jpg 500w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B04H-Dahua-4CH-Penta-brid-4M-N1080P-Cooper-XVR.jpg 800w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+									</a>
+
+									<span  data-id='3787'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/dh-xvr1a04-dahua-4ch-penta-brid-1080n-720p-cooper-1u-digital-video-recorder/">DH-XVR1B04 Dahua 4CH Penta-brid 1080N/720P...</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<ul>
+<li>H.264 video compression</li>
+<li>Supports HDCVI/AHD/TVI/CVBS/IP video inputs</li>
+<li>Max 2 channels IP camera inputs, each channel up to 2MP/5MP; Max 20/40Mbps Incoming Bandwidth</li>
+<li>Long transmission distance over coax cable</li>
+<li>Supports 1 SATA HDD, up to 6TB</li>
+</ul>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>23,000.00</bdi></span></div>
+<a href="?add-to-cart=3787" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="3787" data-product_sku="" aria-label="Add &ldquo;DH-XVR1B04 Dahua 4CH Penta-brid 1080N/720P Cooper 1U Digital Video Recorder&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li>
+		
+			<li class="last product type-product post-3197 status-publish first instock product_cat-dahua-dvrs has-post-thumbnail shipping-taxable purchasable product-type-simple">
+
+	<div class="product-frame ">
+
+		
+			<div class="thumbnail-container has-second-thumb">
+
+				
+				<a href="https://crosstech.com.ng/product/dh-xvr1b16-dahua-16ch-penta-brid-1080n-720p-dvr/">
+					<div class="front">
+						<img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-300x300.jpg" class=" wp-post-image" alt="DH-XVR1B16 Dahua 16CH Penta-brid 1080N - 720P DVR" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-300x300.jpg 300w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-100x100.jpg 100w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-150x150.jpg 150w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR.jpg 500w" sizes="(max-width: 300px) 100vw, 300px" />					</div>
+											<div class="back"><img width="300" height="300" src="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-300x300.jpg" class="attachment-shop_catalog product-hover" alt="DH-XVR1B16 Dahua 16CH Penta-brid 1080N - 720P DVR" loading="lazy" srcset="https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-300x300.jpg 300w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-100x100.jpg 100w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR-150x150.jpg 150w, https://crosstech.com.ng/wp-content/uploads/2021/03/DH-XVR1B16-Dahua-16CH-Penta-brid-1080N-720P-DVR.jpg 500w" sizes="(max-width: 300px) 100vw, 300px" /></div>
+									</a>
+
+									<span  data-id='3197'  class='quick-view'>Quick View</span>
+				
+				
+			</div><!--/ .thumbnail-container-->
+			<div class="content-description"><div class="product-section"><h3><a href="https://crosstech.com.ng/product/dh-xvr1b16-dahua-16ch-penta-brid-1080n-720p-dvr/">DH-XVR1B16 Dahua 16CH Penta-brid 1080N/720P...</a></h3><div class="rating-box">
+	<div class="rating readonly-rating" data-score="0"></div>
+		<span><a class="to-rating" href="#reviews">0 Review(s)</a></span>
+</div>
+<div class="clear"></div>
+</div>			<div class="shop-desc">
+				<div class="woocommerce-product-details__short-description">
+					<h1>DH-XVR1B16 Dahua 16CH Penta-brid 1080N/720P DVR</h1>
+<ul>
+<li>H.265+/H.265 dual-stream video compression</li>
+<li>Supports HDCVI/AHD/TVI/CVBS/IP video inputs</li>
+<li>Max 18 channels IP camera inputs, each channel up to 6MP; Max 72Mbps Incoming Bandwidth</li>
+<li>Long transmission distance over coax cable</li>
+<li>Supports 1 SATA HDD, up to 6TB</li>
+</ul>
+				</div>
+			</div>
+			 </div><div class="process-section">
+	<div class="price"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>53,000.00</bdi></span></div>
+<a href="?add-to-cart=3197" data-quantity="1" class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="3197" data-product_sku="" aria-label="Add &ldquo;DH-XVR1B16 Dahua 16CH Penta-brid 1080N/720P DVR&rdquo; to your cart" rel="nofollow">Add to cart</a>			<div class="product-actions">
+											</div><!--/ .product-actions-->
+			</div><div class="clear"></div>
+	</div><!--/ .product-frame-->
+
+</li>
+		
+		</ul>
+	</div>
+
+			</div><!--/ .products-container-->
+
+		
+</div><!-- #product-3810 -->
+
+
+		
+	
+	</div><!--/ .products-container-->
+	
+		
+			
+				</main><!--/ #main-->
+
+				
+					</div><!--/ .row-->
+				</div><!--/ .container-->
+
+			
+		</div><!--/ .page_content_offset -->
+
+
+		<!-- - - - - - - - - - - -/ Page Content - - - - - - - - - - - - - - -->
+
+
+		<!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
+
+		<footer id="footer" class="">
+
+			
+
+	<div class="footer_top_part">
+
+		
+			<div class="footer-row-top">
+
+				<div class="container">
+
+					<div class="row">
+
+						
+							
+								<div class="col-sm-3">
+									<div id="text-8" class="widget widget_text"><div class="widget-head"><h3 class="widget-title">Contact</h3></div>			<div class="textwidget"><p><strong>Got Questions?<br />
+</strong>Call Us: 08090577000</p>
+<p><strong>Lekki Office<br />
+</strong>Shop B3-4, Trulyours Plaza, No 6 Agungi/Ajiran Road Off Lekki Epe Express Way, Lagos..</p>
+<p>&nbsp;</p>
+<p><strong>Ikeja Office<br />
+</strong>Crosstech Distribution Ltd Suit 9 #14, Francis Oremeji Street opposite UBA Computer Village, Ikeja</p>
+</div>
+		</div>
+<div id="mad_widget_social_links-7" class="widget mad_widget_social_links">
+			<div class="widget-head"><h3 class="widget-title">Social Links</h3></div>	
+	<div class="social_icons_holder">
+
+		<ul class="social_icons clearfix">
+
+							<li class="facebook">
+					<span class="tool-tip">Facebook</span>
+					<a target="_blank" href="https://web.facebook.com/crosstechng/">
+						<i class="fa fa-facebook"></i>
+					</a>
+				</li>
+			
+							<li class="twitter">
+					<span class="tool-tip">Twitter</span>
+					<a target="_blank" href="https://twitter.com/crosstechng">
+						<i class="fa fa-twitter"></i>
+					</a>
+				</li>
+			
+			
+			
+			
+							<li class="instagram">
+					<span class="tool-tip">Instagram</span>
+					<a target="_blank" href="http://instagram.com/crosstechng">
+						<i class="fa fa-instagram"></i>
+					</a>
+				</li>
+			
+							<li class="linkedin">
+					<span class="tool-tip">LinkedIn</span>
+					<a target="_blank" href="http://linkedin.com/crosstechng">
+						<i class="fa fa-linkedin"></i>
+					</a>
+				</li>
+			
+			
+							<li class="youtube">
+					<span class="tool-tip">Youtube</span>
+					<a target="_blank" href="https://youtube.com/">
+						<i class="fa fa-youtube-play"></i>
+					</a>
+				</li>
+			
+			
+			
+							<li class="envelope">
+					<span class="tool-tip">Contact Us</span>
+					<a target="_blank" href="mailto:support@crosstech.com.ng">
+						<i class="fa fa-envelope-o"></i>
+					</a>
+				</li>
+			
+		</ul><!--/ .social-icons-->
+
+	</div><!--/ .social_icons_holder-->
+
+</div>								</div>
+
+							
+								<div class="col-sm-3">
+									<div id="nav_menu-3" class="widget widget_nav_menu"><div class="widget-head"><h3 class="widget-title">Who We Are</h3></div><div class="menu-footer-second-menu-container"><ul id="menu-footer-second-menu" class="menu"><li id="menu-item-3625" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3625"><a href="https://crosstech.com.ng/about-us/">About Us</a></li>
+<li id="menu-item-4063" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4063"><a href="https://crosstech.com.ng/blog/">Blog</a></li>
+<li id="menu-item-3626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3626"><a href="https://crosstech.com.ng/contact-us-dahua-hikvision-office-in-lekki-lagos/">Contact Us</a></li>
+<li id="menu-item-3632" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3632"><a href="https://crosstech.com.ng/faq/">FAQ</a></li>
+<li id="menu-item-3636" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3636"><a href="https://crosstech.com.ng/track-your-order/">Track your Order</a></li>
+<li id="menu-item-3643" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3643"><a href="https://crosstech.com.ng/terms-and-conditions-2/">Terms and Conditions</a></li>
+<li id="menu-item-3644" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3644"><a href="https://crosstech.com.ng/privacy-policy-2/">Privacy Policy</a></li>
+<li id="menu-item-3648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3648"><a href="https://crosstech.com.ng/industries-services-we-offer/">Industries &#038; Services We Offer</a></li>
+</ul></div></div>								</div>
+
+							
+								<div class="col-sm-3">
+									<div id="woocommerce_products-26" class="widget woocommerce widget_products"><div class="widget-head"><h3 class="widget-title">Products</h3></div><ul class="product_list_widget"><li>
+
+	
+	<div class="entry-thumb-image">
+		<a href="https://crosstech.com.ng/product/dahua-standalone-access-control/" title="Dahua Standalone Access Control">
+			<img width="60" height="60" src="https://crosstech.com.ng/wp-content/uploads/2023/09/ASI2212J-100x100.png" class="attachment-60x60 size-60x60" alt="Dahua Access Control" loading="lazy" />		</a>
+	</div>
+	<div class="entry-post-holder">
+		<a href="https://crosstech.com.ng/product/dahua-standalone-access-control/" title="Dahua Standalone Access Control">
+			<h6 class="entry-post-title">Dahua Standalone Access Control</h6>
+		</a>
+							
+		<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>57,000.00</bdi></span>	</div>
+
+	
+	<div class="clear"></div>
+</li><li>
+
+	
+	<div class="entry-thumb-image">
+		<a href="https://crosstech.com.ng/product/dahua-time-attendance-terminal/" title="Dahua Time &amp; Attendance Terminal DHI-ASA1222G">
+			<img width="60" height="60" src="https://crosstech.com.ng/wp-content/uploads/2023/09/ASA1222G-100x100.png" class="attachment-60x60 size-60x60" alt="Dahua Time and Attendance Terminal" loading="lazy" />		</a>
+	</div>
+	<div class="entry-post-holder">
+		<a href="https://crosstech.com.ng/product/dahua-time-attendance-terminal/" title="Dahua Time &amp; Attendance Terminal DHI-ASA1222G">
+			<h6 class="entry-post-title">Dahua Time &amp; Attendance Terminal DHI-ASA1222G</h6>
+		</a>
+							
+		<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>65,000.00</bdi></span>	</div>
+
+	
+	<div class="clear"></div>
+</li><li>
+
+	
+	<div class="entry-thumb-image">
+		<a href="https://crosstech.com.ng/product/ds-2fa1225-c4-hikvision-4ch-power-supply-box/" title="DS-2FA1225-C4 Hikvision 4CH Power Supply Box">
+			<img width="60" height="60" src="https://crosstech.com.ng/wp-content/uploads/2023/05/DS-2FA1225-C4-100x100.jpg" class="attachment-60x60 size-60x60" alt="4CH Power Supply Unit" loading="lazy" />		</a>
+	</div>
+	<div class="entry-post-holder">
+		<a href="https://crosstech.com.ng/product/ds-2fa1225-c4-hikvision-4ch-power-supply-box/" title="DS-2FA1225-C4 Hikvision 4CH Power Supply Box">
+			<h6 class="entry-post-title">DS-2FA1225-C4 Hikvision 4CH Power Supply Box</h6>
+		</a>
+							
+		<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8358;</span>9,000.00</bdi></span>	</div>
+
+	
+	<div class="clear"></div>
+</li></ul></div>								</div>
+
+							
+								<div class="col-sm-3">
+																	</div>
+
+							
+						
+					</div><!--/ .row-->
+
+				</div><!--/ .container-->
+
+			</div><!--/ .footer-row-top-->
+
+		
+		
+	</div><!--/ .footer_top_part-->
+
+
+			<div class="footer_bottom_part">
+				<div class="container clearfix t_mxs_align_c">
+					<div class="row">
+
+						
+
+	<div class="col-sm-6">
+
+		<p class="copyright">
+
+			
+				© 2021 <span>Crosstech </span>. All Rights Reserved.
+			
+		</p>
+
+	</div>
+
+	<div class="col-sm-6">
+
+		<ul class="payment-images">
+							<li>
+					<img src="http://velikorodnov.com/wordpress/flatastic/classic/wp-content/themes/flatastic/images/payment_img_1.png" alt=""/>
+				</li>
+										<li>
+					<img src="http://velikorodnov.com/wordpress/flatastic/classic/wp-content/themes/flatastic/images/payment_img_2.png" alt=""/>
+				</li>
+										<li>
+					<img src="http://velikorodnov.com/wordpress/flatastic/classic/wp-content/themes/flatastic/images/payment_img_3.png" alt=""/>
+				</li>
+										<li>
+					<img src="http://velikorodnov.com/wordpress/flatastic/classic/wp-content/themes/flatastic/images/payment_img_4.png" alt=""/>
+				</li>
+										<li>
+					<img src="http://velikorodnov.com/wordpress/flatastic/classic/wp-content/themes/flatastic/images/payment_img_5.png" alt=""/>
+				</li>
+					</ul><!--/ .payment-images-->
+
+	</div>
+
+
+					</div><!--/ .row-->
+				</div><!--/ .container-->
+			</div><!--/ .footer_bottom_part -->
+
+		</footer><!--/ #footer-->
+
+		<!-- - - - - - - - - - - - - -/ Footer - - - - - - - - - - - - - - - - -->
+
+	</div>
+
+</div><!--/ #theme-wrapper-->
+
+<div id="flatastic-lwa-modal-holder"><div class="lwa lwa-template-modal">
+
+	<div class="lwa-modal" style="display: none;">
+
+		<div class="lwa-modal-holder">
+
+			<form name="lwa-form" class="lwa-form js-lwa-login flatastic-form-visible" action="https://crosstech.com.ng/wp-login.php" method="post">
+
+				<h3>Login</h3>
+
+				<span class="lwa-status"></span>
+
+				<p class="username_input">
+					<label>Username</label>
+					<input type="text" name="log" id="lwa_user_login" class="input" />
+				</p>
+
+				<p class="password_input">
+					<label>Password <span class="kw-required"></span></label>
+					<input type="password" name="pwd" id="lwa_user_pass" class="input" value="" />
+				</p>
+
+				<p></p>
+
+				<div class="lwa-submit">
+
+					<div class="kw-sm-table-row row">
+
+						<div class="col-sm-6">
+
+							<div class="kw-input-wrapper">
+
+								<input name="rememberme" type="checkbox" class="kw-small" id="lwa_rememberme" value="forever" />
+								<label for="lwa_rememberme">Remember Me</label>
+
+							</div><!--/ .kw-input-wrapper -->
+
+						</div>
+
+						<div class="col-sm-6">
+
+							<div class="align-right">
+
+																	<small>
+										<a class="flatastic-lwa-links-remember js-lwa-open-remember-form" href="javascript:void(0)" title="Password Lost and Found">Lost your password?</a>
+									</small>
+								
+							</div><!--/ .align-right -->
+
+						</div>
+
+					</div>
+
+					<p class="lwa-submit-button form-row">
+						<input type="submit" name="wp-submit" class="lwa-wp-submit button" value="Login" tabindex="100" />
+						<input type="hidden" name="lwa_profile_link" value="0" />
+						<input type="hidden" name="login-with-ajax" value="login" />
+											</p>
+
+				</div>
+
+			</form>
+
+			
+			
+				<form name="lwa-remember" class="lwa-form js-lwa-remember" action="https://crosstech.com.ng/wp-login.php?action=lostpassword" method="post">
+
+					<span class="lwa-status"></span>
+
+					<p>
+						<label>Forgotten Password</label>
+												<input type="text" name="user_login" id="lwa_user_remember" value="Enter username or email" onfocus="if(this.value == 'Enter username or email'){this.value = '';}" onblur="if(this.value == ''){this.value = 'Enter username or email'}" />
+											</p>
+
+					<p class="form-row">
+						<input type="submit" class="button" value="Get New Password" />
+						<a href="javascript:void(0)" class="lwa-links-remember-cancel js-lwa-close-remember-form">Cancel</a>
+						<input type="hidden" name="login-with-ajax" value="remember" />
+					</p>
+
+				</form>
+
+			
+		</div>
+
+		
+	</div>
+
+	
+</div>
+</div>
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+			jQuery( document ).ready( function( $ ) {
+				$(window).load(function() {
+					var $the_lwa_login_modal = $('.lwa-modal').eq(0);
+					$('.to-login').each(function (i, e) {
+						$(e).parents('.lwa').data('modal', $the_lwa_login_modal);
+					});
+
+					var $the_lwa_register_modal = $('.lwa-modal').eq(1);
+					$('.to-register').each(function (i, e) {
+						$(e).parents('.lwa').data('modal', $the_lwa_register_modal);
+					});
+				});
+			});
+		</script>
+
+	<script type="application/ld+json">{"@context":"https:\/\/schema.org\/","@graph":[{"@context":"https:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"name":"Home","@id":"https:\/\/crosstech.com.ng"}},{"@type":"ListItem","position":2,"item":{"name":"Dahua CCTV Camera","@id":"https:\/\/crosstech.com.ng\/product-category\/dahua-cctv-camera\/"}},{"@type":"ListItem","position":3,"item":{"name":"Dahua DVRs","@id":"https:\/\/crosstech.com.ng\/product-category\/dahua-cctv-camera\/dahua-dvrs\/"}},{"@type":"ListItem","position":4,"item":{"name":"DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/"}}]},{"@context":"https:\/\/schema.org\/","@type":"Product","@id":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/#product","name":"DH-XVR5104HS-I2 Dahua 4 Channel Penta-brid  WizSense DVR","url":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/","description":"\u00a0H.265+\/H.265 dual-stream video compression\r\n \tSupports HDCVI\/AHD\/TVI\/CVBS\/IP video inputs\r\n \tMax 6 channels IP camera inputs, each channel up to 6MP; Max 32 Mbps incoming bandwidth\r\n \tUp to 2 channels video stream ( analog channel ) Perimeter Protection\r\n \tUp to 4 channels video stream ( analog channel ) SMD Plus\r\n \tUp to 1 channel video stream (analog channel ) human face recognition\r\n \tIoT &amp;amp; POS functionalities","image":"https:\/\/crosstech.com.ng\/wp-content\/uploads\/2021\/06\/DH-XVR5104HS-I2.png","sku":3810,"offers":[{"@type":"Offer","price":"37000.00","priceValidUntil":"2025-12-31","priceSpecification":{"price":"37000.00","priceCurrency":"NGN","valueAddedTaxIncluded":"false"},"priceCurrency":"NGN","availability":"http:\/\/schema.org\/InStock","url":"https:\/\/crosstech.com.ng\/product\/dh-xvr5104hs-i2-dahua-4-channel-penta-brid-wizsense-dvr\/","seller":{"@type":"Organization","name":"Hikvision Dahua Smart homes Trusted Distributor Dealer in Lekki Lagos","url":"https:\/\/crosstech.com.ng"}}]}]}</script>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="pswp__bg"></div>
+	<div class="pswp__scroll-wrap">
+		<div class="pswp__container">
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+		</div>
+		<div class="pswp__ui pswp__ui--hidden">
+			<div class="pswp__top-bar">
+				<div class="pswp__counter"></div>
+				<button class="pswp__button pswp__button--close" aria-label="Close (Esc)"></button>
+				<button class="pswp__button pswp__button--share" aria-label="Share"></button>
+				<button class="pswp__button pswp__button--fs" aria-label="Toggle fullscreen"></button>
+				<button class="pswp__button pswp__button--zoom" aria-label="Zoom in/out"></button>
+				<div class="pswp__preloader">
+					<div class="pswp__preloader__icn">
+						<div class="pswp__preloader__cut">
+							<div class="pswp__preloader__donut"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+				<div class="pswp__share-tooltip"></div>
+			</div>
+			<button class="pswp__button pswp__button--arrow--left" aria-label="Previous (arrow left)"></button>
+			<button class="pswp__button pswp__button--arrow--right" aria-label="Next (arrow right)"></button>
+			<div class="pswp__caption">
+				<div class="pswp__caption__center"></div>
+			</div>
+		</div>
+	</div>
+</div>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<link rel='stylesheet' id='woof_tooltip-css-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/tooltip/css/tooltipster.bundle.min.css?ver=2.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_tooltip-css-noir-css'  href='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/tooltip/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css?ver=2.2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='flatastic-chosen-drop-down-css'  href='https://crosstech.com.ng/wp-content/themes/flatastic/js/chosen/chosen.css?ver=5.9.10' type='text/css' media='all' />
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/config-plugins/plugins/wishlist/wishlist-mod.js?ver=1' id='flatastic-wishlist-mod-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/config-composer/assets/js/js_composer_front.min.js?ver=6.4.1' id='flatastic-wpb_composer_front_js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/yith-woocommerce-wishlist/assets/js/jquery.selectBox.min.js?ver=1.2.0' id='jquery-selectBox-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='//crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/prettyPhoto/jquery.prettyPhoto.min.js?ver=3.1.6' id='prettyPhoto-js'></script>
+<script type='text/javascript' id='jquery-yith-wcwl-js-extra'>
+/* <![CDATA[ */
+var yith_wcwl_l10n = {"ajax_url":"\/wp-admin\/admin-ajax.php","redirect_to_cart":"no","multi_wishlist":"","hide_add_button":"1","enable_ajax_loading":"","ajax_loader_url":"https:\/\/crosstech.com.ng\/wp-content\/plugins\/yith-woocommerce-wishlist\/assets\/images\/ajax-loader-alt.svg","remove_from_wishlist_after_add_to_cart":"1","is_wishlist_responsive":"1","time_to_close_prettyphoto":"3000","fragments_index_glue":".","reload_on_found_variation":"1","mobile_media_query":"768","labels":{"cookie_disabled":"We are sorry, but this feature is available only if cookies on your browser are enabled.","added_to_cart_message":"<div class=\"woocommerce-notices-wrapper\"><div class=\"woocommerce-message\" role=\"alert\">Product added to cart successfully<\/div><\/div>"},"actions":{"add_to_wishlist_action":"add_to_wishlist","remove_from_wishlist_action":"remove_from_wishlist","reload_wishlist_and_adding_elem_action":"reload_wishlist_and_adding_elem","load_mobile_action":"load_mobile","delete_item_action":"delete_item","save_title_action":"save_title","save_privacy_action":"save_privacy","load_fragments":"load_fragments"},"nonce":{"add_to_wishlist_nonce":"bee7505d7c","remove_from_wishlist_nonce":"0e27fe2b8f","reload_wishlist_and_adding_elem_nonce":"83eea531fa","load_mobile_nonce":"e6bca28cb8","delete_item_nonce":"5400fbd0bf","save_title_nonce":"ca90b0a8a7","save_privacy_nonce":"c39d648859","load_fragments_nonce":"e049ff1a11"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/yith-woocommerce-wishlist/assets/js/jquery.yith-wcwl.min.js?ver=3.5.0' id='jquery-yith-wcwl-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9' id='regenerator-runtime-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/crosstech.com.ng\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.5.4' id='contact-form-7-js'></script>
+<script type='text/javascript' id='leadin-script-loader-js-js-extra'>
+/* <![CDATA[ */
+var leadin_wordpress = {"userRole":"visitor","pageType":"post","leadinPluginVersion":"8.7.7"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://js.hs-scripts.com/7164747.js?integration=WordPress' async defer id='hs-script-loader'></script>
+<script type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/zoom/jquery.zoom.min.js?ver=1.7.21-wc.6.3.1' id='zoom-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/js_composer/assets/lib/bower/flexslider/jquery.flexslider-min.js?ver=6.4.1' id='flexslider-js'></script>
+<script type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe.min.js?ver=4.1.1-wc.6.3.1' id='photoswipe-js'></script>
+<script type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/photoswipe/photoswipe-ui-default.min.js?ver=4.1.1-wc.6.3.1' id='photoswipe-ui-default-js'></script>
+<script type='text/javascript' id='wc-single-product-js-extra'>
+/* <![CDATA[ */
+var wc_single_product_params = {"i18n_required_rating_text":"Please select a rating","review_rating_required":"yes","flexslider":{"rtl":false,"animation":"slide","smoothHeight":true,"directionNav":false,"controlNav":"thumbnails","slideshow":false,"animationSpeed":500,"animationLoop":false,"allowOneSlide":false},"zoom_enabled":"1","zoom_options":[],"photoswipe_enabled":"1","photoswipe_options":{"shareEl":false,"closeOnScroll":false,"history":false,"hideAnimationDuration":0,"showAnimationDuration":0},"flexslider_enabled":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js?ver=6.3.1' id='wc-single-product-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.6.3.1' id='js-cookie-js'></script>
+<script type='text/javascript' id='woocommerce-js-extra'>
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=6.3.1' id='woocommerce-js'></script>
+<script type='text/javascript' id='wc-cart-fragments-js-extra'>
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_c16071e52d2ff14b8209238b61f7aced","fragment_name":"wc_fragments_c16071e52d2ff14b8209238b61f7aced","request_timeout":"5000"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=6.3.1' id='wc-cart-fragments-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/grid-view-page\/checkout\/|\/grid-view-page\/cart-2\/|\/grid-view-page\/my-account\/|\/wc-api\/v(.*)|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/crosstech.com.ng","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/comment-reply.min.js?ver=5.9.10' id='comment-reply-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/jq-cookie.js?ver=5.9.10' id='flatastic-cookie-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/cookiealert.js?ver=5.9.10' id='flatastic-cookiealert-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/plugins.min.js?ver=5.9.10' id='flatastic-plugins-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/jquery.isotope.min.js?ver=5.9.10' id='flatastic-isotope-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/jackbox/js/libs/Jacked.js?ver=5.9.10' id='flatastic-jacked-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/jackbox/js/jackbox-swipe.js?ver=5.9.10' id='flatastic-jackbox-swipe-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/jackbox/js/jackbox.js?ver=5.9.10' id='flatastic-jackbox-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/magnific-popup/jquery.magnific-popup.min.js?ver=5.9.10' id='flatastic-magnific-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/jquery.raty.min.js?ver=5.9.10' id='flatastic-raty-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/heapbox/jquery.heapbox-0.9.4.min.js?ver=5.9.10' id='flatastic-heapbox-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/owl-carousel/owl.carousel.min.js?ver=5.9.10' id='flatastic-owlcarousel-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/jquery.custom-scrollbar.js?ver=5.9.10' id='flatastic-scrollbar-js'></script>
+<script type='text/javascript' id='flatastic-scripts-js-extra'>
+/* <![CDATA[ */
+var global = {"template_directory":"https:\/\/crosstech.com.ng\/wp-content\/themes\/flatastic\/","site_url":"https:\/\/crosstech.com.ng","ajax_nonce":"77a0f34bcc","ajaxurl":"https:\/\/crosstech.com.ng\/wp-admin\/admin-ajax.php","paththeme":"https:\/\/crosstech.com.ng\/wp-content\/themes\/flatastic","ajax_loader_url":"https:\/\/crosstech.com.ng\/wp-content\/themes\/flatastic\/images\/ajax-loader@2x.gif","smoothScroll":"1","rtl":"0","megaMenuConfig":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/scripts.min.js?ver=5.9.10' id='flatastic-scripts-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/underscore.min.js?ver=1.13.1' id='underscore-js'></script>
+<script type='text/javascript' id='wp-util-js-extra'>
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/wp-util.min.js?ver=5.9.10' id='wp-util-js'></script>
+<script type='text/javascript' id='wc-add-to-cart-variation-js-extra'>
+/* <![CDATA[ */
+var wc_add_to_cart_variation_params = {"wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_no_matching_variations_text":"Sorry, no products matched your selection. Please choose a different combination.","i18n_make_a_selection_text":"Please select some product options before adding this product to your cart.","i18n_unavailable_text":"Sorry, this product is unavailable. Please choose a different combination."};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js?ver=6.3.1' id='wc-add-to-cart-variation-js'></script>
+<script type='text/javascript' id='flatastic-woocommerce-mod-js-extra'>
+/* <![CDATA[ */
+var woocommerce_mod = {"ajaxurl":"\/?wc-ajax=%%endpoint%%","nonce_quick_view_popup":"c0e4968b27","nonce_login_popup":"5ff264e49f","action_quick_view":"mad_action_add_product_popup","action_login":"mad_action_login_popup"};
+var wc_currency_converter_params = {"current_currency":"","currencies":"{\"AED\":\"\u062f.\u0625\",\"AFN\":\"\u060b\",\"ALL\":\"L\",\"AMD\":\"AMD\",\"ANG\":\"\u0192\",\"AOA\":\"Kz\",\"ARS\":\"$\",\"AUD\":\"$\",\"AWG\":\"Afl.\",\"AZN\":\"AZN\",\"BAM\":\"KM\",\"BBD\":\"$\",\"BDT\":\"\u09f3\u00a0\",\"BGN\":\"\u043b\u0432.\",\"BHD\":\".\u062f.\u0628\",\"BIF\":\"Fr\",\"BMD\":\"$\",\"BND\":\"$\",\"BOB\":\"Bs.\",\"BRL\":\"R$\",\"BSD\":\"$\",\"BTC\":\"\u0e3f\",\"BTN\":\"Nu.\",\"BWP\":\"P\",\"BYR\":\"Br\",\"BYN\":\"Br\",\"BZD\":\"$\",\"CAD\":\"$\",\"CDF\":\"Fr\",\"CHF\":\"CHF\",\"CLP\":\"$\",\"CNY\":\"\u00a5\",\"COP\":\"$\",\"CRC\":\"\u20a1\",\"CUC\":\"$\",\"CUP\":\"$\",\"CVE\":\"$\",\"CZK\":\"K\u010d\",\"DJF\":\"Fr\",\"DKK\":\"DKK\",\"DOP\":\"RD$\",\"DZD\":\"\u062f.\u062c\",\"EGP\":\"EGP\",\"ERN\":\"Nfk\",\"ETB\":\"Br\",\"EUR\":\"\u20ac\",\"FJD\":\"$\",\"FKP\":\"\u00a3\",\"GBP\":\"\u00a3\",\"GEL\":\"\u20be\",\"GGP\":\"\u00a3\",\"GHS\":\"\u20b5\",\"GIP\":\"\u00a3\",\"GMD\":\"D\",\"GNF\":\"Fr\",\"GTQ\":\"Q\",\"GYD\":\"$\",\"HKD\":\"$\",\"HNL\":\"L\",\"HRK\":\"kn\",\"HTG\":\"G\",\"HUF\":\"Ft\",\"IDR\":\"Rp\",\"ILS\":\"\u20aa\",\"IMP\":\"\u00a3\",\"INR\":\"\u20b9\",\"IQD\":\"\u062f.\u0639\",\"IRR\":\"\ufdfc\",\"IRT\":\"\u062a\u0648\u0645\u0627\u0646\",\"ISK\":\"kr.\",\"JEP\":\"\u00a3\",\"JMD\":\"$\",\"JOD\":\"\u062f.\u0627\",\"JPY\":\"\u00a5\",\"KES\":\"KSh\",\"KGS\":\"\u0441\u043e\u043c\",\"KHR\":\"\u17db\",\"KMF\":\"Fr\",\"KPW\":\"\u20a9\",\"KRW\":\"\u20a9\",\"KWD\":\"\u062f.\u0643\",\"KYD\":\"$\",\"KZT\":\"\u20b8\",\"LAK\":\"\u20ad\",\"LBP\":\"\u0644.\u0644\",\"LKR\":\"\u0dbb\u0dd4\",\"LRD\":\"$\",\"LSL\":\"L\",\"LYD\":\"\u0644.\u062f\",\"MAD\":\"\u062f.\u0645.\",\"MDL\":\"MDL\",\"MGA\":\"Ar\",\"MKD\":\"\u0434\u0435\u043d\",\"MMK\":\"Ks\",\"MNT\":\"\u20ae\",\"MOP\":\"P\",\"MRU\":\"UM\",\"MUR\":\"\u20a8\",\"MVR\":\".\u0783\",\"MWK\":\"MK\",\"MXN\":\"$\",\"MYR\":\"RM\",\"MZN\":\"MT\",\"NAD\":\"N$\",\"NGN\":\"\u20a6\",\"NIO\":\"C$\",\"NOK\":\"kr\",\"NPR\":\"\u20a8\",\"NZD\":\"$\",\"OMR\":\"\u0631.\u0639.\",\"PAB\":\"B\\\/.\",\"PEN\":\"S\\\/\",\"PGK\":\"K\",\"PHP\":\"\u20b1\",\"PKR\":\"\u20a8\",\"PLN\":\"z\u0142\",\"PRB\":\"\u0440.\",\"PYG\":\"\u20b2\",\"QAR\":\"\u0631.\u0642\",\"RON\":\"lei\",\"RSD\":\"\u0440\u0441\u0434\",\"RUB\":\"\u20bd\",\"RWF\":\"Fr\",\"SAR\":\"\u0631.\u0633\",\"SBD\":\"$\",\"SCR\":\"\u20a8\",\"SDG\":\"\u062c.\u0633.\",\"SEK\":\"kr\",\"SGD\":\"$\",\"SHP\":\"\u00a3\",\"SLL\":\"Le\",\"SOS\":\"Sh\",\"SRD\":\"$\",\"SSP\":\"\u00a3\",\"STN\":\"Db\",\"SYP\":\"\u0644.\u0633\",\"SZL\":\"L\",\"THB\":\"\u0e3f\",\"TJS\":\"\u0405\u041c\",\"TMT\":\"m\",\"TND\":\"\u062f.\u062a\",\"TOP\":\"T$\",\"TRY\":\"\u20ba\",\"TTD\":\"$\",\"TWD\":\"NT$\",\"TZS\":\"Sh\",\"UAH\":\"\u20b4\",\"UGX\":\"UGX\",\"USD\":\"$\",\"UYU\":\"$\",\"UZS\":\"UZS\",\"VEF\":\"Bs F\",\"VES\":\"Bs.S\",\"VND\":\"\u20ab\",\"VUV\":\"Vt\",\"WST\":\"T\",\"XAF\":\"CFA\",\"XCD\":\"$\",\"XOF\":\"CFA\",\"XPF\":\"Fr\",\"YER\":\"\ufdfc\",\"ZAR\":\"R\",\"ZMW\":\"ZK\"}","rates":{"AED":3.672965,"AFN":69.498174,"ALL":89.661785,"AMD":387.032842,"ANG":1.802434,"AOA":927.390667,"ARS":959.2683,"AUD":1.48374,"AWG":1.8025,"AZN":1.7,"BAM":1.76365,"BBD":2,"BDT":119.518474,"BGN":1.7607,"BHD":0.376809,"BIF":2897.969541,"BMD":1,"BND":1.299067,"BOB":6.911042,"BRL":5.563402,"BSD":1,"BTC":1.696726e-5,"BTN":83.903687,"BWP":13.308144,"BYN":3.272945,"BZD":2.015889,"CAD":1.357619,"CDF":2840.280579,"CHF":0.844328,"CLF":0.033679,"CLP":925.925926,"CNH":7.091987,"CNY":7.0935,"COP":4199.162973,"CRC":517.697106,"CUC":1,"CUP":25.75,"CVE":99.431871,"CZK":22.604,"DJF":178.089025,"DKK":6.709966,"DOP":59.958162,"DZD":132.169412,"EGP":48.4407,"ERN":15,"ETB":117.176855,"EUR":0.899176,"FJD":2.2159,"FKP":0.758447,"GBP":0.758447,"GEL":2.7,"GGP":0.758447,"GHS":15.671581,"GIP":0.758447,"GMD":70.5,"GNF":8644.194537,"GTQ":7.736147,"GYD":209.233913,"HKD":7.793736,"HNL":24.789439,"HRK":6.774508,"HTG":131.908562,"HUF":354.247918,"IDR":15387.492946,"ILS":3.732767,"IMP":0.758447,"INR":83.884413,"IQD":1310.155728,"IRR":42092.5,"ISK":136.94,"JEP":0.758447,"JMD":157.12307,"JOD":0.7087,"JPY":139.827,"KES":129.01,"KGS":84.5498,"KHR":4056.980722,"KMF":445.225289,"KPW":900,"KRW":1318.000355,"KWD":0.304953,"KYD":0.833401,"KZT":479.922586,"LAK":22115.955979,"LBP":89562.241385,"LKR":301.303126,"LRD":200.018935,"LSL":17.786195,"LYD":4.773027,"MAD":9.753551,"MDL":17.374781,"MGA":4538.512422,"MKD":55.350638,"MMK":2098,"MNT":3398,"MOP":8.033094,"MRU":39.555436,"MUR":45.950003,"MVR":15.35,"MWK":1734.166213,"MXN":19.251696,"MYR":4.3015,"MZN":63.874992,"NAD":17.786195,"NGN":1647.23,"NIO":36.800578,"NOK":10.593694,"NPR":134.247125,"NZD":1.615509,"OMR":0.384947,"PAB":1,"PEN":3.771315,"PGK":3.965914,"PHP":55.820002,"PKR":278.201375,"PLN":3.844363,"PYG":7764.957144,"QAR":3.646062,"RON":4.4726,"RSD":105.249,"RUB":91.305772,"RWF":1357.598724,"SAR":3.753014,"SBD":8.36952,"SCR":13.620136,"SDG":601.5,"SEK":10.180305,"SGD":1.295326,"SHP":0.758447,"SLL":20969.5,"SOS":571.536859,"SRD":29.48,"SSP":130.26,"STD":22281.8,"STN":22.092971,"SVC":8.75062,"SYP":2512.53,"SZL":17.78898,"THB":33.2125,"TJS":10.640967,"TMT":3.51,"TND":3.036476,"TOP":2.35268,"TRY":33.9752,"TTD":6.78119,"TWD":31.882001,"TZS":2730.374765,"UAH":41.368417,"UGX":3715.258759,"USD":1,"UYU":41.082229,"UZS":12742.837469,"VES":36.729007,"VND":24542.897938,"VUV":118.722,"WST":2.8,"XAF":589.820866,"XAG":0.0323224,"XAU":0.00038642,"XCD":2.70255,"XDR":0.741245,"XOF":589.820866,"XPD":0.00093214,"XPF":107.300252,"XPT":0.00100756,"YER":250.300001,"ZAR":17.666606,"ZMW":26.277346,"ZWL":322},"base":"USD","currency":"NGN","currency_pos":"left","num_decimals":"2","trim_zeros":"","thousand_sep":",","decimal_sep":".","i18n_oprice":"Original price:","zero_replace":".00"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/config-woocommerce/assets/js/woocommerce-mod.min.js?ver=1' id='flatastic-woocommerce-mod-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/config-woocommerce/assets/js/money.min.js?ver=5.9.10' id='flatastic-money_js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/config-woocommerce/assets/js/accounting.min.js?ver=5.9.10' id='flatastic-accountingjs-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/config-woocommerce/assets/js/converter.js?ver=5.9.10' id='flatastic-converter_js-js'></script>
+<script type='text/javascript' id='popular-widget-js-extra'>
+/* <![CDATA[ */
+var popwid = {"postid":"3810"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/includes/widgets/popular-widget/js/pop-widget.js?ver=1.0.1' id='popular-widget-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-includes/js/jquery/jquery.form.min.js?ver=4.3.0' id='jquery-form-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/includes/widgets/mailchimp/js/newsletter.js?ver=1.0' id='newsletter-widget-js'></script>
+<script type='text/javascript' id='post-ratings-js-extra'>
+/* <![CDATA[ */
+var post_ratings = {"blog_url":"https:\/\/crosstech.com.ng\/","noRatedMsg":"Not rated yet!"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/inc/plugins/post-ratings/post-ratings.js?ver=2.4' id='post-ratings-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/yith-woocommerce-ajax-search/assets/js/yith-autocomplete.min.js?ver=1.28.0' id='yith_autocomplete-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/tooltip/js/tooltipster.bundle.min.js?ver=2.2.4' id='woof_tooltip-js-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/front.js?ver=2.2.4' id='woof_front-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/html_types/radio.js?ver=2.2.4' id='woof_radio_html_items-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/html_types/checkbox.js?ver=2.2.4' id='woof_checkbox_html_items-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/html_types/select.js?ver=2.2.4' id='woof_select_html_items-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/html_types/mselect.js?ver=2.2.4' id='woof_mselect_html_items-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/woocommerce-products-filter/js/chosen/chosen.jquery.min.js?ver=2.2.4' id='chosen-drop-down-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/themes/flatastic/js/chosen/chosen.jquery.min.js?ver=5.9.10' id='flatastic-chosen-drop-down-js'></script>
+<script type='text/javascript' id='yith_wcas_frontend-js-extra'>
+/* <![CDATA[ */
+var yith_wcas_params = {"loading":"https:\/\/crosstech.com.ng\/wp-content\/plugins\/yith-woocommerce-ajax-search\/assets\/images\/ajax-loader.gif","ajax_url":"https:\/\/crosstech.com.ng\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://crosstech.com.ng/wp-content/plugins/yith-woocommerce-ajax-search/assets/js/frontend.min.js?ver=1.28.0' id='yith_wcas_frontend-js'></script>
+
+                <style type="text/css">
+        
+        
+
+
+        
+
+
+
+                        .woof_edit_view{
+                    display: none;
+                }
+        
+        </style>
+        
+
+            <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+        jQuery(document).ready(function ($) {
+
+            for (let i = 0; i < document.forms.length; ++i) {
+                let form = document.forms[i];
+				if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="DWIgpbh_As" value="F]2gV4" />'); }
+if ($(form).attr("method") != "get") { $(form).append('<input type="hidden" name="ShdZxseIcwrNpO" value="v@a0p[z" />'); }
+            }
+
+            $(document).on('submit', 'form', function () {
+				if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="DWIgpbh_As" value="F]2gV4" />'); }
+if ($(this).attr("method") != "get") { $(this).append('<input type="hidden" name="ShdZxseIcwrNpO" value="v@a0p[z" />'); }
+                return true;
+            });
+
+            jQuery.ajaxSetup({
+                beforeSend: function (e, data) {
+
+                    if (data.type !== 'POST') return;
+
+                    if (typeof data.data === 'object' && data.data !== null) {
+						data.data.append("DWIgpbh_As", "F]2gV4");
+data.data.append("ShdZxseIcwrNpO", "v@a0p[z");
+                    }
+                    else {
+                        data.data = data.data + '&DWIgpbh_As=F]2gV4&ShdZxseIcwrNpO=v@a0p[z';
+                    }
+                }
+            });
+
+        });
+    </script>
+	
+</body>
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1726479740 -->
