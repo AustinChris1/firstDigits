@@ -122,7 +122,7 @@ const Products = () => {
                         >
                             <Link to={`/collections/${prod.category.link}/${prod.link}`}>
                             <motion.img
-                                src={`http://localhost:8000/${prod.image}`}  // Ensure image field in response is correct
+                                src={`${import.meta.env.VITE_API_URL}/${prod.image}`}  // Ensure image field in response is correct
                                 alt={prod.name}
                                 className="w-full h-32 object-cover rounded-t-lg" // Adjusted height for a smaller image size
                                 whileHover={{ scale: 1.1 }}

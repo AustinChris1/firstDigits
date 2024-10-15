@@ -35,7 +35,7 @@ class FrontendController extends Controller
     {
         $category = Category::where('link', $category_link)->where('status', '0')->first();
         if($category){
-            $product = Product::where('category_id', $category->id)->where('link', $product_link)->where('status', '0')->first();
+            $product = Product::where('category_id', $category->id)->where('link', $product_link)->first();
             if($product){
                 return response()->json([
                     'status' => 200,
@@ -61,6 +61,7 @@ class FrontendController extends Controller
     {
         // Start with a query to get only active products
         $query = Product::where('status', '0');
+        $categories = Category::all();
 
         // Filter by category if provided
         if ($request->has('category') && $request->input('category') !== 'All') {
@@ -113,7 +114,8 @@ class FrontendController extends Controller
 
         return response()->json([
             'status' => 200,
-            'products' => $products
+            'products' => $products,
+            'category' => $categories
         ]);
     }
 }

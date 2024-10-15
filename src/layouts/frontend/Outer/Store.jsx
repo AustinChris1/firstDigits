@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from '../Components/Loader';
 import swal from 'sweetalert';
@@ -123,7 +123,7 @@ const Store = () => {
             max="2000"
             value={priceRange[1]}
             onChange={handlePriceChange}
-            className="w-full"
+            className="w-full text-blue-900"
           />
           <div className="flex justify-between mt-2 text-gray-600">
             <span>$0</span>
@@ -162,21 +162,21 @@ const Store = () => {
         </div>
 
         {/* Products List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.length > 0 ? (
             products.map((product) => (
-              <div key={product.id} className="border p-4 rounded-lg shadow-md flex flex-col">
+              <Link key={product.id} className="border p-4 rounded-lg shadow-md flex flex-col" to={`/collections/${product.category?.link}/${product.link}`}>
                 <img
-                  src={`http://localhost:8000/${product.image}`}
+                  src={`${import.meta.env.VITE_API_URL}/${product.image}`}
                   alt={product.name}
                   className="w-full h-48 object-cover mb-4 rounded-md"
                 />
                 <h3 className="text-lg font-bold">{product.name}</h3>
                 <p className="text-gray-700">${product.selling_price}</p>
-                <button className="mt-auto bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+                <button className="mt-auto bg-blue-800 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
                   View Details
                 </button>
-              </div>
+              </Link>
             ))
           ) : (
             <p>No products found.</p>

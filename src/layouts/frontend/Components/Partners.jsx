@@ -6,9 +6,6 @@ import esp32 from "../assets/esp32.jpg";
 import rasp from "../assets/rasp.png";
 import tinkercad from "../assets/tinkercad.jpg";
 
-import c1 from "../assets/team/c1.jpg";
-import c2 from "../assets/team/c2.jpg";
-import c3 from "../assets/team/c3.jpg";
 import c4 from "../assets/team/c4.jpg";
 import c5 from "../assets/team/c5.jpg";
 import c6 from "../assets/team/c6.jpg";
@@ -25,14 +22,11 @@ const LOGOS = [
 ];
 
 const teams = [
-  { id: "team-1", name: "Herman Jensen", title: "Founder", img: c1 },
-  { id: "team-2", name: "Steve Mark", title: "Chief Technical Officer", img: c2 },
-  { id: "team-3", name: "Kenn Gallagher", title: "CEO", img: c3 },
-  { id: "team-4", name: "Kenn Gallagher", title: "Marketing Manager", img: c4 },
-  { id: "team-5", name: "Kenn Gallagher", title: "Founder & Leader", img: c5 },
-  { id: "team-6", name: "Kenn Gallagher", title: "Founder & Leader", img: c6 },
-  { id: "team-7", name: "Kenn Gallagher", title: "Founder & Leader", img: c7 },
-  { id: "team-8", name: "Kenn Gallagher", title: "Founder & Leader", img: c8 },
+  { id: "team-1", name: "Herman Jensen", title: "Founder", img: c8 },
+  { id: "team-2", name: "Steve Mark", title: "Chief Technical Officer", img: c7 },
+  { id: "team-3", name: "Kenn Gallagher", title: "CEO", img: c6 },
+  { id: "team-4", name: "Kenn Gallagher", title: "Marketing Manager", img: c5 },
+  { id: "team-5", name: "Kenn Gallagher", title: "Intern", img: c4 },
 ];
 
 const Partners = () => {

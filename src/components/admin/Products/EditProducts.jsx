@@ -241,13 +241,13 @@ const EditProducts = () => {
                         <div className="form-group mb-3">
                             <label htmlFor="image">Image</label>
                             <input onChange={handleImage} type="file" id="image" name="image" className="form-control" />
-                            <img src={`http://localhost:8000/${productsInput.image}`} width="50px"></img>
+                            <img src={`${import.meta.env.VITE_API_URL}/${productsInput.image}`} width="50px"></img>
                             <small className="text-danger">{error.image ? error.image[0] : ''}</small>
                         </div>
                         <div className="form-group mb-3">
                             <label htmlFor="image2">Image 2</label>
                             <input onChange={handleImage} type="file" id="image2" name="image2" className="form-control" />
-                            <img src={`http://localhost:8000/${productsInput.image2}`} width="50px"></img>
+                            <img src={`${import.meta.env.VITE_API_URL}/${productsInput.image2}`} width="50px"></img>
                             <small className="text-danger">{error.image2 ? error.image2[0] : ''}</small>
                         </div>
                         <div className="form-group mb-3">
