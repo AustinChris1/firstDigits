@@ -45,7 +45,7 @@ const ViewCategory = () => {
                     <td>{item.id}</td>
                     <td>{item.name}</td>
                     <td>{item.link}</td>
-                    <td>{item.status}</td>
+                    <td>{item.status === 0 ? "Active" : "Inactive"}</td>
                     <td>
                         <Link to={`/admin/category/edit/${item.id}`} className="btn btn-primary btn-sm">Edit</Link>
                     </td>

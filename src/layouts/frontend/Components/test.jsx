@@ -1,106 +1,115 @@
 import React, { useState } from 'react';
-import fdcLogo from '../assets/fdcLogo.png';
-import { Search, User, Earth, X, Menu } from "lucide-react";
-import { motion } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
+import productImage from '../assets/products/solar-camera.png'; // Replace with your product image
 
-const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
+// Breadcrumb Component
+const Breadcrumb = () => {
+    const location = useLocation();
+    const pathnames = location.pathname.split('/').filter((x) => x);
 
-  const item = {
-    exit: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        ease: "easeInOut",
-        duration: 0.3,
-        delay: 0.9,
-      },
-    },
-  };
+    return (
+        <nav className="flex items-center py-4 px-5 text-gray-600 bg-gray-100 rounded-md w-full mb-5">
+            <Link to="/" className="text-blue-600 hover:underline">
+                Home
+            </Link>
+            {pathnames.map((value, index) => {
+                const to = `/${pathnames.slice(0, index + 1).join('/')}`;
 
-  return (
-    <nav className="navbar fixed z-50 bg-slate-200 text-blue-800 dark:text-white w-full flex justify-between items-center px-6 py-4">
-      {/* Logo */}
-      <img src={fdcLogo} alt="First Digit" className="w-40 h-auto" />
-
-      {/* Desktop Menu */}
-      <ul className="hidden sm:flex justify-end items-center gap-10 flex-1 mr-10">
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600">Home</li>
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600">Products</li>
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600">Services</li>
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600">About Us</li>
-      </ul>
-
-      {/* Desktop Icons */}
-      <ul className="hidden sm:flex justify-end items-center gap-6">
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600"><Search aria-label="Search" /></li>
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600"><Earth aria-label="Language" /></li>
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600"><User aria-label="User" /></li>
-      </ul>
-
-      {/* Mobile Menu Toggle */}
-      <div className="sm:hidden flex items-center">
-        <button onClick={() => setToggle(!toggle)} aria-label="Toggle Menu">
-          {toggle ? (
-            <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
-          ) : (
-            <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
-          )}
-        </button>
-
-        {/* Mobile Menu */}
-        <motion.div
-          variants={item}
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: toggle ? "100vh" : 0, opacity: toggle ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-          className={`${
-            toggle ? "flex" : "hidden"
-          } absolute top-20 left-0 w-full bg-slate-200 flex-col items-center justify-center p-4 min-h-full`}
-        >
-          <ul className="flex flex-col justify-center items-center gap-6">
-            <motion.li
-              initial={{ y: 90, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="cursor-pointer text-blue-800 hover:text-blue-600"
-            >
-              Home
-            </motion.li>
-            <motion.li
-              initial={{ y: 90, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="cursor-pointer text-blue-800 hover:text-blue-600"
-            >
-              Products
-            </motion.li>
-            <motion.li
-              initial={{ y: 90, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="cursor-pointer text-blue-800 hover:text-blue-600"
-            >
-              Services
-            </motion.li>
-            <motion.li
-              initial={{ y: 90, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="cursor-pointer text-blue-800 hover:text-blue-600"
-            >
-              About Us
-            </motion.li>
-          </ul>
-          <ul className="flex justify-center items-center gap-6 mt-6">
-            <li className="cursor-pointer text-blue-800 hover:text-blue-600"><Search aria-label="Search" /></li>
-            <li className="cursor-pointer text-blue-800 hover:text-blue-600"><Earth aria-label="Language" /></li>
-            <li className="cursor-pointer text-blue-800 hover:text-blue-600"><User aria-label="User" /></li>
-          </ul>
-        </motion.div>
-      </div>
-    </nav>
-  );
+                return (
+                    <span key={to} className="flex items-center">
+                        <span className="mx-2">/</span>
+                        {index === pathnames.length - 1 ? (
+                            <span className="text-gray-500 capitalize">{value}</span>
+                        ) : (
+                            <Link to={to} className="text-blue-600 hover:underline capitalize">
+                                {value}
+                            </Link>
+                        )}
+                    </span>
+                );
+            })}
+        </nav>
+    );
 };
 
-export default Navbar;
+// Product Detail Component
+const ProductDetail = () => {
+    const [quantity, setQuantity] = useState(1);
+    const [reviews] = useState([
+        { id: 1, text: "Great product! Highly recommend.", rating: 5 },
+        { id: 2, text: "Good quality but a bit pricey.", rating: 4 },
+        { id: 3, text: "Not what I expected, but it works.", rating: 3 },
+    ]);
+
+    const handleAdd = () => setQuantity((prev) => prev + 1);
+    const handleSubtract = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+    const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
+
+    return (
+        <div className="container mx-auto mt-20">
+            {/* Breadcrumb Navigation */}
+            <Breadcrumb />
+
+            <div className="flex flex-col md:flex-row justify-center items-start p-5 gap-8">
+                {/* Product Image */}
+                <div className="w-full md:w-1/2">
+                    <img src={productImage} alt="Product" className="w-full rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300" />
+                </div>
+
+                {/* Product Description */}
+                <div className="md:w-1/2">
+                    <h1 className="text-3xl font-bold mb-3">Solar Camera</h1>
+                    <p className="text-gray-700 mb-5 leading-relaxed">
+                        Discover the powerful features of this Solar Camera, perfect for remote security surveillance. 
+                        Easy to install, eco-friendly, and packed with the latest security features.
+                    </p>
+
+                    {/* Quantity Controls */}
+                    <div className="flex items-center mb-5">
+                        <button
+                            className="px-4 py-2 bg-gray-300 rounded-l-lg text-gray-800 hover:bg-gray-400 transition-all"
+                            onClick={handleSubtract}
+                            aria-label="Decrease Quantity"
+                        >
+                            -
+                        </button>
+                        <span className="px-4 py-2 border-t border-b">{quantity}</span>
+                        <button
+                            className="px-4 py-2 bg-gray-300 rounded-r-lg text-gray-800 hover:bg-gray-400 transition-all"
+                            onClick={handleAdd}
+                            aria-label="Increase Quantity"
+                        >
+                            +
+                        </button>
+                    </div>
+
+                    {/* Add to Cart Button */}
+                    <button
+                        className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        aria-label="Add to Cart"
+                    >
+                        Add to Cart
+                    </button>
+
+                    {/* Reviews Section */}
+                    <div className="mt-10">
+                        <h2 className="text-lg font-semibold">Reviews</h2>
+                        <p className="text-yellow-500">Average Rating: {averageRating.toFixed(1)} / 5</p>
+
+                        <div className="mt-4 space-y-4">
+                            {reviews.map((review) => (
+                                <div key={review.id} className="border-b border-gray-300 pb-2">
+                                    <p className="font-semibold text-yellow-600">{`Rating: ${review.rating} ★`}</p>
+                                    <p className="text-gray-600">{review.text}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ProductDetail;

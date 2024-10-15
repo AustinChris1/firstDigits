@@ -3,7 +3,7 @@ import axios from 'axios';
 import Master from './layouts/admin/Master';
 import Register from './layouts/frontend/auth/Register';
 import Login from './layouts/frontend/auth/Login';
-import AdminPrivateRoute from './AdminPrivateRoute';  // Importing AdminPrivateRoute
+import AdminPrivateRoute from './AdminPrivateRoute'; // Importing AdminPrivateRoute
 
 // Import components from the initial app
 import Navbar from './layouts/frontend/Components/Navbar';
@@ -14,9 +14,9 @@ import Partners from './layouts/frontend/Components/Partners';
 import Footer from './layouts/frontend/Components/Footer';
 import Store from './layouts/frontend/Outer/Store';
 import ProductDetail from './layouts/frontend/Outer/Detail';
-import { useNavigate } from 'react-router-dom';
 import NotFound from './layouts/frontend/Components/404';
 import Forbidden from './layouts/frontend/Components/403';
+import ScrollToTop from './layouts/frontend/Components/ScrollToTop'; // Import ScrollToTop
 
 axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;
@@ -28,9 +28,7 @@ axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem('auth_token');
   config.headers.Authorization = token ? `Bearer ${token}` : '';
   return config;
-}
-);
-
+});
 
 // Home component from the initial app
 function Home() {
@@ -47,6 +45,7 @@ function Home() {
 function Layout() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin'); // Check if the current route is under /admin
+
   // Create a wrapper component to handle redirection based on authentication
   const ProtectedRoute = ({ element }) => {
     const token = localStorage.getItem('auth_token');
@@ -57,6 +56,7 @@ function Layout() {
 
     return element;
   };
+
   return (
     <>
       {!isAdminRoute && <Navbar />} {/* Render Navbar only if not on admin routes */}
@@ -75,11 +75,10 @@ function Layout() {
         {/* Frontend routes */}
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store />} />
-        <Route path="/products/smart-home" element={<ProductDetail />} />
+        <Route path="/collections/:categoryLink/:productLink" element={<ProductDetail />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="/403" element={<Forbidden />} />
         <Route path="/login" element={<ProtectedRoute element={<Login />} />} />
-
         <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
       </Routes>
 
@@ -90,8 +89,9 @@ function Layout() {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App font-raleway">
       <Router>
+        <ScrollToTop /> {/* Scroll to the top when navigating */}
         <Layout /> {/* Use Layout to conditionally render components */}
       </Router>
     </div>

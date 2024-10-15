@@ -1,25 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import fdcLogo from '../assets/fdcLogo.png';
-import { User, Earth, X, Menu, ChevronDown, ShoppingCart, LogOut } from "lucide-react";
+import { User, Earth, X, Menu, ChevronDown, ShoppingCart, LogOut, KeySquare } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
-
-
-// var AuthButtons = '';
-// if(!localStorage.getItem('auth_token')){
-//   AuthButtons = (
-//     <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log In"><Link to="/login"><User aria-label="User" /></Link></li>
-
-//   )
-// }
-// else{
-// AuthButtons = (
-//   <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log Out"><Link to="/logout"><LogOut aria-label="LogOut" /></Link></li>
-
-// )
-// }
 
 const DropdownMenu = ({ title, items, links, dropdownOpen, section, handleDropdownToggle, dropdownRef }) => (
   <li
@@ -88,13 +73,14 @@ const Navbar = () => {
       if(res.data.status === 200){
         localStorage.removeItem("auth_token");
         localStorage.removeItem("auth_name");
+        localStorage.removeItem("auth_email");
+        localStorage.removeItem("role");
         swal("Success", res.data.message, "success");
-        navigate("/"); // Redirect to home after successful login
-
-      }else{
+        navigate("/"); // Redirect to home after successful logout
+      } else {
         swal("Error", res.data.message, "error");
       }
-    })
+    });
   }
 
   const AuthButtons = localStorage.getItem('auth_token') ? (
@@ -108,11 +94,23 @@ const Navbar = () => {
       <Link to="/login"><User aria-label="User" /></Link>
     </li>
   );
-  
+
+  const AdminBtn = localStorage.getItem('role') === 'admin' ? (
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Admin">
+      <Link to="/admin/dashboard" className="flex items-center">
+        <KeySquare aria-label="Admin" />
+      </Link>
+    </li>
+  ) : null;
+
+  const handleNavigation = () => {
+    setToggle(false); // Close mobile menu after navigation
+  };
+
   return (
- <nav ref={navbarRef} className="navbar fixed z-50 bg-slate-200 text-slate-900 dark:text-white w-full flex justify-between items-center px-6 py-4 top-0 mb-20">
+    <nav ref={navbarRef} className="navbar fixed z-50 bg-slate-200 text-slate-900 dark:text-white w-full flex justify-between items-center px-6 py-4 top-0 mb-20">
       <Link to='/'>
-      <img src={fdcLogo} alt="First Digit Communications" className="w-40 h-auto" />
+        <img src={fdcLogo} alt="First Digit Communications" className="w-40 h-auto" />
       </Link>
 
       {/* Desktop Menu */}
@@ -166,6 +164,7 @@ const Navbar = () => {
         <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
         {AuthButtons}
         <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Cart"><ShoppingCart aria-label="ShoppingCart" /></li>
+        {AdminBtn}
       </ul>
 
       {/* Mobile Menu Toggle */}
@@ -186,9 +185,9 @@ const Navbar = () => {
           className={`${toggle ? "flex" : "hidden"} absolute top-20 left-0 w-full bg-slate-200 flex-col items-center justify-center p-4 min-h-full`}
         >
           <ul className="flex flex-col justify-center items-center gap-6 text-3xl">
-          <li className="relative cursor-pointer text-blue-800 hover:text-blue-600 group">
-          <Link to="/store">Store</Link>
-        </li>
+            <li className="relative cursor-pointer text-blue-800 hover:text-blue-600 group">
+              <Link to="/store" onClick={handleNavigation}>Store</Link>
+            </li>
 
             <DropdownMenu
               title="Products"
@@ -226,14 +225,16 @@ const Navbar = () => {
               handleDropdownToggle={handleDropdownToggle}
               dropdownRef={dropdownRef}
             />
+          </ul>
 
-            {/* Mobile Icons */}
-            <ul className="flex justify-center items-center gap-6 mt-4">
-              <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
-              {AuthButtons}
-              <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Cart"><ShoppingCart aria-label="ShoppingCart" /></li>
-            </ul>
-             {/* Mobile Search Bar at the Bottom */}
+          {/* Mobile Icons */}
+          <ul className="flex justify-center items-center gap-6 mt-6">
+            <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
+            {AuthButtons}
+            <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Cart"><ShoppingCart aria-label="ShoppingCart" /></li>
+            {AdminBtn}
+          </ul>
+                       {/* Mobile Search Bar at the Bottom */}
       <div className="sm:hidden text-base text-blue-900 bottom-0 left-0 right-0 p-4 bg-slate-200 border-t border-gray-300">
         <input
           type="text"
@@ -242,10 +243,9 @@ const Navbar = () => {
           aria-label="Mobile Search Input"
         />
       </div>
-          </ul>
+
         </motion.div>
       </div>
-
     </nav>
   );
 };

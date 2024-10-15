@@ -64,20 +64,26 @@ const Products = () => {
         formData.append('image2', picture2);  // Append the second image file
 
         // Append other product data
-        formData.append('category_id', productsInput.category_id);
-        formData.append('name', productsInput.name);
-        formData.append('link', productsInput.link);
-        formData.append('description', productsInput.description);
-        formData.append('meta_title', productsInput.meta_title);
-        formData.append('meta_keywords', productsInput.meta_keywords);
-        formData.append('meta_description', productsInput.meta_description);
-        formData.append('selling_price', productsInput.selling_price);
-        formData.append('original_price', productsInput.original_price);
-        formData.append('qty', productsInput.qty);
-        formData.append('brand', productsInput.brand);
-        formData.append('featured', productsInput.featured);
-        formData.append('popular', productsInput.popular);
-        formData.append('status', productsInput.status);
+      // Ensure numerical fields are numbers
+      formData.append('category_id', parseInt(productsInput.category_id) || 0);
+      formData.append('name', productsInput.name || '');
+      formData.append('link', productsInput.link || '');
+      formData.append('description', productsInput.description || '');
+      formData.append('meta_title', productsInput.meta_title || '');
+      formData.append('meta_keywords', productsInput.meta_keywords || '');
+      formData.append('meta_description', productsInput.meta_description || '');  // Ensure a value is provided
+  
+      // Ensure prices and quantity are numbers
+      formData.append('selling_price', parseFloat(productsInput.selling_price) || 0);
+      formData.append('original_price', parseFloat(productsInput.original_price) || 0);
+      formData.append('qty', parseInt(productsInput.qty) || 0);
+      formData.append('brand', productsInput.brand || '');
+      
+      // Convert checkboxes and booleans to 1 or 0
+      formData.append('featured', productsInput.featured ? 1 : 0);
+      formData.append('popular', productsInput.popular ? 1 : 0);
+      formData.append('status', productsInput.status ? 1 : 0);
+  
 
         axios.post('/api/products/store', formData, {
             headers: {

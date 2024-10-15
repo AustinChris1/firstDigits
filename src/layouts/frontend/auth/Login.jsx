@@ -35,6 +35,8 @@ const Login = () => {
                         localStorage.setItem("auth_token", res.data.token);
                         localStorage.setItem("auth_name", res.data.username);
                         localStorage.setItem("auth_email", res.data.email);
+                        if (res.data.role == 'admin') localStorage.setItem("role", res.data.role);
+                        else localStorage.setItem("role", res.data.role);
                         swal("Success", res.data.message, "success");
 
                         if (res.data.role === "admin") {
@@ -50,8 +52,13 @@ const Login = () => {
                     }
                 })
                 .catch((err) => {
-                    swal("Error", "Something went wrong. Please try again later.", "error");
-                    console.error("Error details:", err.response);
+                    if (err.response && err.response.status === 422) {
+                        setError(err.response.data.validation_errors || {}); // Correctly handle errors
+                        swal('Error', 'Please check the input fields.', 'error');
+                    } else {
+                        swal('Error', 'Something went wrong. Please try again later.', 'error');
+                        console.error('Error details:', err.response || err);
+                    }
                 });
         });
     };
@@ -72,11 +79,7 @@ const Login = () => {
                         className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required
                     />
-                    {/* Conditionally render email error if it exists */}
-                    {error?.email && (
-                        <p className="text-red-500 text-xs">{error.email[0]}</p>
-                    )}
-
+                    <small className="text-red-500">{error?.email?.[0]}</small>
                     {/* Password Input */}
                     <input
                         type="password"
@@ -88,11 +91,7 @@ const Login = () => {
                         className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required
                     />
-                    {/* Conditionally render password error if it exists */}
-                    {error?.password && (
-                        <p className="text-red-500 text-xs">{error.password[0]}</p>
-                    )}
-
+                    <small className="text-red-500">{error?.password?.[0]}</small>
                     {/* Submit Button */}
                     <button
                         type="submit"

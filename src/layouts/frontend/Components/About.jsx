@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const About = () => {
   return (
     <>
-      <div className="relative w-full h-screen">
+      <div className="relative w-full h-screen overflow-hidden"> {/* Changed overflow-x-hidden to overflow-hidden */}
         {/* Wavy Top SVG */}
         <div className="absolute top-0 w-full">
           <svg
@@ -52,9 +52,9 @@ const About = () => {
 
             {/* Our Mission */}
             <motion.div
-              initial={{ x: '-100%', opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1.5}}
+              initial={{ translateX: '-100%', opacity: 0 }}
+              whileInView={{ translateX: 0, opacity: 1 }}
+              transition={{ duration: 1.5 }}
               viewport={{ once: true }}
               className="relative flex flex-col sm:flex-row items-center sm:items-start w-full sm:mb-10"
             >
@@ -69,9 +69,9 @@ const About = () => {
 
             {/* Our Vision */}
             <motion.div
-              initial={{ x: '100%', opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1.5}}
+              initial={{ translateX: '100%', opacity: 0 }}
+              whileInView={{ translateX: 0, opacity: 1 }}
+              transition={{ duration: 1.5 }}
               viewport={{ once: true }}
               className="relative flex flex-col sm:flex-row items-center sm:justify-end w-full sm:mb-10"
             >

@@ -53,6 +53,7 @@ const ViewProducts = () => {
           <td><img src={`http://localhost:8000/${items.image}`} width='50' alt={items.name}></img></td>
           <td>{items.selling_price}</td>
           <td>{items.original_price}</td>
+          <td>{items.status == 0 ? "Active" : "Hidden"}</td>
           <td><Link to={`/admin/products/edit/${items.id}`} className='btn btn-primary btn-sm'>Edit</Link></td>
           <td>
             <button
@@ -89,6 +90,7 @@ const ViewProducts = () => {
                 <th>Image</th>
                 <th>Selling Price</th>
                 <th>Cost Price</th>
+                <th>Status</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>

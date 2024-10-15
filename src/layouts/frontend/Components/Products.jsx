@@ -1,46 +1,70 @@
-import React, { useState, useRef } from 'react';
-import domecam from "../assets/products/2MP-IR-Dome-Camera.jpg";
-import netcam from "../assets/products/2MP-IR-Network-Camera-with-In-built-Microphone.jpg";
-import dsPS from "../assets/products/DS-Power-Supply.jpg";
-import felicityCharge from "../assets/products/Felicity-Charge-controller.jpg";
-import monoCrystallinePanel from "../assets/products/Monocrystalline-Solar-Panel-300WTT.jpg";
-import thermcam from "../assets/products/Handheld-Thermographic-Camera.jpg";
-import inverterMount from "../assets/products/Inverter-Tower-Mount.png";
-import ipFinger from "../assets/products/IP-based-Fingerprint-Access-Control-Terminal.png";
-import lumBat from "../assets/products/luminous-battery.png";
-import solcam from "../assets/products/solar-camera.png";
-import wireMonitor from "../assets/products/Wire-indoor-monitor-KIT.png";
+import React, { useState, useEffect } from 'react';
 import { ShoppingCart } from 'lucide-react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
-
-const products = [
-    { id: "prod-1", name: "2MP IR Dome Camera", img: domecam, price: 40, category: "Camera" },
-    { id: "prod-2", name: "2MP IR Network Camera with In-built Microphone", img: netcam, price: 35, category: "Camera" },
-    { id: "prod-3", name: "DS Power Supply", img: dsPS, price: 720, category: "Power" },
-    { id: "prod-4", name: "Felicity Charge Controller", img: felicityCharge, price: 400, category: "Power" },
-    { id: "prod-5", name: "Monocrystalline Solar Panel 300WTT", img: monoCrystallinePanel, price: 98, category: "Solar" },
-    { id: "prod-6", name: "Handheld Thermographic Camera", img: thermcam, price: 124, category: "Camera" },
-    { id: "prod-7", name: "Inverter Tower Mount", img: inverterMount, price: 45, category: "Power" },
-    { id: "prod-8", name: "IP-based Fingerprint Access Control Terminal", img: ipFinger, price: 85, category: "Security" },
-    { id: "prod-9", name: "Luminous Battery", img: lumBat, price: 155, category: "Power" },
-    { id: "prod-10", name: "Solar Camera", img: solcam, price: 90, category: "Camera" },
-    { id: "prod-11", name: "Wire Indoor Monitor KIT", img: wireMonitor, price: 245, category: "Security" },
-];
+import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
+import LoadingSpinner from './Loader';
+import swal from 'sweetalert'; // Ensure swal is imported
+import { Link } from 'react-router-dom';
 
 const Products = () => {
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [categories, setCategories] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [inView, setInView] = useState(false); // Manual in-view state
+    const [currentPage, setCurrentPage] = useState(1); // Pagination state
+    const itemsPerPage = 8; // Number of items per page
 
-    const categories = ["All", "Camera", "Power", "Solar", "Security"];
+    // Fetch categories and products from the backend
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const categoryRes = await axios.get(`/api/getCategory`);
+                if (categoryRes.data.status === 200) {
+                    setCategories(categoryRes.data.category);
+                } else {
+                    swal("Error", "Unable to fetch categories", "error");
+                }
 
+                const productsRes = await axios.get(`/api/allProducts`);
+                if (productsRes.data.status === 200) {
+                    setProducts(productsRes.data.products);
+                } else {
+                    swal("Error", "Unable to fetch products", "error");
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // Manually trigger animation on mount
+    useEffect(() => {
+        setInView(true);
+    }, []);
+
+    // Function to filter products based on selected category
     const filteredProducts = selectedCategory === "All"
         ? products
-        : products.filter(prod => prod.category === selectedCategory);
+        : products.filter(prod => prod.category_id === selectedCategory);
 
-    // Ref for the product section
-    const productRef = useRef(null);
+    // Pagination logic
+    const indexOfLastProduct = currentPage * itemsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-    // Hook to detect when the component is in view
-    const isInView = useInView(productRef, { once: true, threshold: 0.1 });
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages));
+    };
+
+    const handlePrevPage = () => {
+        setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
+    };
 
     // Framer Motion animation variants
     const productCardVariants = {
@@ -54,54 +78,59 @@ const Products = () => {
         visible: { opacity: 1, scale: 1, transition: { duration: 1.5 } }
     };
 
+    if (loading) {
+        return <LoadingSpinner />;
+    }
+
     return (
-        <div className="w-full mt-20">
+        <div className="w-full mt-20 px-4 md:px-0 overflow-hidden"> {/* Prevent overflow */}
             <h1 className="text-center text-3xl font-semibold mb-10">Products</h1>
-            
+
             {/* Category buttons */}
-            <div className="flex justify-center mb-5">
+            <div className="flex flex-wrap justify-center mb-5 gap-2">
+                <motion.button
+                    key="all"
+                    onClick={() => setSelectedCategory("All")}
+                    className={`mx-2 p-2 rounded-lg transition duration-300 transform ${selectedCategory === "All" ? 'bg-blue-900 text-white scale-105' : 'bg-gray-200 text-black'} hover:scale-110`}
+                >
+                    All
+                </motion.button>
                 {categories.map(category => (
                     <motion.button
-                        key={category}
-                        onClick={() => setSelectedCategory(category)}
-                        className={`mx-2 p-2 rounded-lg transition duration-300 transform ${
-                            selectedCategory === category ? 'bg-blue-900 text-white scale-105' : 'bg-gray-200 text-black'
-                        } hover:scale-110`}
-                        whileHover={{ scale: 1.1 }}
+                        key={category.id}
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`mx-2 p-2 rounded-lg transition duration-300 transform ${selectedCategory === category.id ? 'bg-blue-900 text-white scale-105' : 'bg-gray-200 text-black'} hover:scale-110`}
                     >
-                        {category}
+                        {category.name}
                     </motion.button>
                 ))}
             </div>
 
             {/* Products grid */}
             <motion.div
-                ref={productRef}
-                className="flex flex-wrap justify-center gap-5 px-5"
+                className="flex flex-wrap justify-center gap-4"
                 initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
+                animate={inView ? "visible" : "hidden"}
                 variants={gridVariants}
             >
                 <AnimatePresence>
-                    {filteredProducts.map(prod => (
+                    {currentProducts.map(prod => (
                         <motion.div
                             key={prod.id}
-                            className="w-full sm:w-[40%] md:w-[25%] lg:w-[17%] p-4 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                            className="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 p-2 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out"
                             variants={productCardVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
                         >
+                            <Link to={`/collections/${prod.category.link}/${prod.link}`}>
                             <motion.img
-                                src={prod.img}
+                                src={`http://localhost:8000/${prod.image}`}  // Ensure image field in response is correct
                                 alt={prod.name}
-                                className="w-full h-50 object-cover rounded-t-lg"
+                                className="w-full h-32 object-cover rounded-t-lg" // Adjusted height for a smaller image size
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ duration: 0.3 }}
                             />
-                            <div className="flex flex-col justify-center items-center gap-3">
-                                <p className="pt-2 text-center font-semibold">{prod.name}</p>
-                                <p className="pt-2 text-left font-thin text-red-500">${prod.price}</p>
+                            <div className="flex flex-col justify-center items-center gap-2 p-4">
+                                <p className="text-center font-semibold">{prod.name}</p>
+                                <p className="text-left font-thin text-red-500">${prod.selling_price}</p>
                                 <motion.button 
                                     whileHover={{ scale: 1.05 }} 
                                     className="w-fit p-2 flex items-center justify-center text-gray-200 hover:brightness-110 bg-gradient-to-r from-[#1c4587] to-gray-200 rounded-full transition-transform duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -109,10 +138,30 @@ const Products = () => {
                                     Add to Cart <ShoppingCart className="ml-1" />
                                 </motion.button>
                             </div>
+                            </Link>
                         </motion.div>
                     ))}
                 </AnimatePresence>
             </motion.div>
+
+            {/* Pagination controls */}
+            <div className="flex justify-center mt-8 gap-4">
+                <button
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50"
+                >
+                    Previous
+                </button>
+                <span className="text-lg font-semibold">{currentPage} of {totalPages}</span>
+                <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50"
+                >
+                    Next
+                </button>
+            </div>
         </div>
     );
 };

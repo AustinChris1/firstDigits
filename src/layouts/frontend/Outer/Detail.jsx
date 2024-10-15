@@ -1,53 +1,140 @@
-import React, { useState } from 'react';
-import productImage from '../assets/products/solar-camera.png'; // Replace with your product image
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import swal from 'sweetalert';
+import LoadingSpinner from '../Components/Loader';
 
 const ProductDetail = () => {
+    const navigate = useNavigate();
+    const { categoryLink, productLink } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [product, setProduct] = useState(null); // Initialize to null
     const [quantity, setQuantity] = useState(1);
-    const [reviews] = useState([
+    const reviews = [
         { id: 1, text: "Great product! Highly recommend.", rating: 5 },
         { id: 2, text: "Good quality but a bit pricey.", rating: 4 },
         { id: 3, text: "Not what I expected, but it works.", rating: 3 },
-    ]);
+    ];
+
+    useEffect(() => {
+        const fetchProductDetails = async () => {
+            try {
+                const response = await axios.get(`/api/fetchProducts/${categoryLink}/${productLink}`);
+                
+                if (response.data.status === 200) {
+                    setProduct(response.data.product);
+                } else {
+                    swal('Warning', response.data.message, "error");
+                    navigate('/store');
+                }
+            } catch (error) {
+                swal('Error', 'Failed to fetch product.', 'error');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProductDetails();
+    }, [categoryLink, productLink, navigate]);
+
+    // Handle case when loading
+    if (loading) {
+        return <LoadingSpinner />;
+    }
+
+    // Handle case when product is not found
+    if (!product) {
+        return <div>No product found.</div>;
+    }
 
     const handleAdd = () => setQuantity(prev => prev + 1);
     const handleSubtract = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
 
     const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
 
+    // Convert prices to numbers if they're strings
+    const sellingPrice = typeof product.selling_price === 'string' ? parseFloat(product.selling_price) : product.selling_price;
+    const originalPrice = typeof product.original_price === 'string' ? parseFloat(product.original_price) : product.original_price;
+
     return (
-        <div className="mt-20 flex flex-col md:flex-row justify-center items-start p-5">
-            {/* Product Image */}
-            <img src={productImage} alt="Product" className="w-full md:w-1/2 rounded-lg shadow-md" />
+        <div className="mt-28 p-5">
+            {/* Breadcrumb */}
+            <nav className="text-gray-600 text-sm mb-5">
+                <ul className="flex space-x-2">
+                    <li>
+                        <Link to="/" className="text-blue-500 hover:underline">Home</Link>
+                    </li>
+                    <li>/</li>
+                    <li>
+                        <Link to={`collections/${product.category.name}`} className="text-blue-500 hover:underline">{product.category.name}</Link>
+                    </li>
+                    <li>/</li>
+                    <li className="text-gray-500">{product.name}</li>
+                </ul>
+            </nav>
 
-            {/* Product Description */}
-            <div className="md:w-1/2 md:pl-5 mt-5 md:mt-0">
-                <h1 className="text-2xl font-bold mb-3">Solar Camera</h1>
-                <p className="text-gray-700 mb-5">
-                    This is a detailed description of the product. It highlights the key features and benefits, ensuring the customer understands why they should buy it.
-                </p>
-
-                {/* Quantity Controls */}
-                <div className="flex items-center mb-5">
-                    <button className="px-3 py-1 bg-gray-200 rounded-l" onClick={handleSubtract}>-</button>
-                    <span className="px-4 py-1 border-t border-b">{quantity}</span>
-                    <button className="px-3 py-1 bg-gray-200 rounded-r" onClick={handleAdd}>+</button>
+            <div className="flex flex-col md:flex-row justify-center items-start gap-8">
+                {/* Product Image */}
+                <div className="w-full md:w-1/2">
+                    <img 
+                  src={`http://localhost:8000/${product.image}`}
+                  alt={product.name} // Use product name for better accessibility
+                        className="w-full rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300" 
+                    />
                 </div>
 
-                {/* Add to Cart Button */}
-                <button className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                    Add to Cart
-                </button>
+                {/* Product Description */}
+                <div className="md:w-1/2">
+                    <h1 className="text-3xl font-bold mb-3">{product.name}</h1>
+                    <p className="text-gray-700 mb-2 leading-relaxed">{product.description}</p>
+                    <p className="text-lg font-semibold text-red-600 mb-1">{`Selling Price: $${sellingPrice.toFixed(2)}`}</p>
+                    <p className="text-lg text-gray-500 line-through mb-5">{`Original Price: $${originalPrice.toFixed(2)}`}</p>
+                    <p className="text-sm text-gray-500 mb-2">{`Brand: ${product.brand}`}</p>
+                    <p className={`text-sm ${product.status ? 'text-green-500' : 'text-red-500'}`}>
+                        {product.status ? 'Available' : 'Out of Stock'}
+                    </p>
 
-                {/* Reviews Section */}
-                <h2 className="text-lg font-semibold mt-10">Reviews</h2>
-                <p className="text-yellow-500">Average Rating: {averageRating.toFixed(1)} / 5</p>
-                <div className="mt-2">
-                    {reviews.map(review => (
-                        <div key={review.id} className="border-b py-2">
-                            <p className="font-semibold">{`Rating: ${review.rating} ★`}</p>
-                            <p>{review.text}</p>
+                    {/* Quantity Controls */}
+                    <div className="flex items-center mb-5">
+                        <button 
+                            className="px-4 py-2 bg-gray-300 rounded-l-lg text-gray-800 hover:bg-gray-400 transition-all" 
+                            onClick={handleSubtract}
+                            aria-label="Decrease Quantity"
+                        >
+                            -
+                        </button>
+                        <span className="px-4 py-2 border-t border-b">{quantity}</span>
+                        <button 
+                            className="px-4 py-2 bg-gray-300 rounded-r-lg text-gray-800 hover:bg-gray-400 transition-all" 
+                            onClick={handleAdd}
+                            aria-label="Increase Quantity"
+                        >
+                            +
+                        </button>
+                    </div>
+
+                    {/* Add to Cart Button */}
+                    <button 
+                        className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        aria-label="Add to Cart"
+                    >
+                        Add to Cart
+                    </button>
+
+                    {/* Reviews Section */}
+                    <div className="mt-10">
+                        <h2 className="text-lg font-semibold">Reviews</h2>
+                        <p className="text-yellow-500">Average Rating: {averageRating.toFixed(1)} / 5</p>
+
+                        <div className="mt-4 space-y-4">
+                            {reviews.map(review => (
+                                <div key={review.id} className="border-b border-gray-300 pb-2">
+                                    <p className="font-semibold text-yellow-600">{`Rating: ${review.rating} ★`}</p>
+                                    <p className="text-gray-600">{review.text}</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </div>
