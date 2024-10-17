@@ -20,7 +20,7 @@ import ScrollToTop from './layouts/frontend/Components/ScrollToTop'; // Import S
 
 axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;
-axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.baseURL = '/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Accept'] = 'application/json';
 
