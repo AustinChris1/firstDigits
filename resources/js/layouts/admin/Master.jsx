@@ -12,6 +12,10 @@ import Products from '../../components/admin/Products/Products';
 import ViewProducts from '../../components/admin/Products/ViewProducts';
 import EditProducts from '../../components/admin/Products/EditProducts';
 
+// Import admin CSS and JS files
+import '../../../sass/scripts';
+import '../../../sass/styles.css';
+
 // Import Bootstrap's JavaScript via npm
 import "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';

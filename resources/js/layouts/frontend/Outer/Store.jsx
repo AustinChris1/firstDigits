@@ -167,7 +167,7 @@ const Store = () => {
             products.map((product) => (
               <Link key={product.id} className="border p-4 rounded-lg shadow-md flex flex-col" to={`/collections/${product.category?.link}/${product.link}`}>
                 <img
-                  src={`${import.meta.env.VITE_API_URL}/${product.image}`}
+                  src={`/${product.image}`}
                   alt={product.name}
                   className="w-full h-48 object-cover mb-4 rounded-md"
                 />

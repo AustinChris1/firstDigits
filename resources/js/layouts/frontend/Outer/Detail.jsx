@@ -1,187 +1,187 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
 import LoadingSpinner from '../Components/Loader';
-import { ChevronLeft, ChevronRight } from 'lucide-react'; // Icons for navigation
+import swal from 'sweetalert';
 
-const ProductDetail = () => {
-    const navigate = useNavigate();
-    const { categoryLink, productLink } = useParams();
-    const [loading, setLoading] = useState(true);
-    const [product, setProduct] = useState(null); // Initialize to null
-    const [quantity, setQuantity] = useState(1);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0); // To track the current image index
-    const reviews = [
-        { id: 1, text: "Great product! Highly recommend.", rating: 5 },
-        { id: 2, text: "Good quality but a bit pricey.", rating: 4 },
-        { id: 3, text: "Not what I expected, but it works.", rating: 3 },
-    ];
+const itemsPerPageOptions = [4, 8, 12];
+const sortingOptions = [
+  { value: 'featured', label: 'Featured' },
+  { value: 'alphaAsc', label: 'Alphabetically, A-Z' },
+  { value: 'alphaDesc', label: 'Alphabetically, Z-A' },
+  { value: 'dateAsc', label: 'Date, old to new' },
+  { value: 'dateDesc', label: 'Date, new to old' }
+];
 
-    useEffect(() => {
-        const fetchProductDetails = async () => {
-            try {
-                const response = await axios.get(`/api/fetchProducts/${categoryLink}/${productLink}`);
-                
-                if (response.data.status === 200) {
-                    setProduct(response.data.product);
-                } else {
-                    swal('Warning', response.data.message, "error");
-                    navigate('/store');
-                }
-            } catch (error) {
-                swal('Error', 'Failed to fetch product.', 'error');
-            } finally {
-                setLoading(false);
-            }
-        };
+const Store = () => {
+  const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [sortOption, setSortOption] = useState('featured');
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(1);
 
-        fetchProductDetails();
-    }, [categoryLink, productLink, navigate]);
+  useEffect(() => {
+    let isMounted = true;
 
-    // Handle case when loading
-    if (loading) {
-        return <LoadingSpinner />;
-    }
-
-    // Handle case when product is not found
-    if (!product) {
-        return <div>No product found.</div>;
-    }
-
-    const handleAdd = () => setQuantity(prev => prev + 1);
-    const handleSubtract = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
-
-    const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
-
-    // Convert prices to numbers if they're strings
-    const sellingPrice = typeof product.selling_price === 'string' ? parseFloat(product.selling_price) : product.selling_price;
-    const originalPrice = typeof product.original_price === 'string' ? parseFloat(product.original_price) : product.original_price;
-
-    // Array of images using image1 and image2 fields
-    const images = [product.image1, product.image2].filter(Boolean); // Filter out any null/undefined images
-
-    // Navigate to the next image
-    const handleNextImage = () => {
-        if (images.length > 0) {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    // Fetch categories
+    axios.get(`/api/getCategory`).then(res => {
+      if (isMounted) {
+        if (res.data.status === 200) {
+          setCategories([{ name: "All" }, ...res.data.category]);
         }
+      }
+    });
+
+    const fetchProducts = () => {
+      setLoading(true);
+      axios.get(`/api/getProducts`, {
+        params: {
+          category: selectedCategory,
+          sort: sortOption,
+          itemsPerPage: itemsPerPage,
+          page: currentPage,
+        }
+      }).then(res => {
+        if (isMounted) {
+          if (res.data.status === 200) {
+            setProducts(res.data.products.data);
+            setTotalPages(res.data.products.last_page);
+            setLoading(false);
+          } else if (res.data.status === 404) {
+            navigate('/');
+            swal('Warning', res.data.message, "error");
+          }
+        }
+      }).catch(() => {
+        setLoading(false);
+        swal('Error', 'Failed to fetch products.', 'error');
+      });
     };
 
-    // Navigate to the previous image
-    const handlePrevImage = () => {
-        if (images.length > 0) {
-            setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-        }
+    fetchProducts();
+
+    return () => {
+      isMounted = false;
     };
+  }, [navigate, selectedCategory, sortOption, itemsPerPage, currentPage]);
 
-    return (
-        <div className="mt-28 p-5">
-            {/* Breadcrumb */}
-            <nav className="text-gray-600 text-sm mb-5">
-                <ul className="flex space-x-2">
-                    <li>
-                        <Link to="/" className="text-blue-900 hover:underline">Home</Link>
-                    </li>
-                    <li>/</li>
-                    <li>
-                        <Link to={`/collections/${product.category?.link}`} className="text-blue-900 hover:underline">
-                            {product.category?.name || 'Category'}
-                        </Link>
-                    </li>
-                    <li>/</li>
-                    <li className="text-gray-900">{product.name || 'Product'}</li>
-                </ul>
-            </nav>
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
-            <div className="flex flex-col md:flex-row justify-center items-start gap-8">
-                {/* Product Image Slider */}
-                <div className="w-full md:w-1/2 relative">
-                    {images.length > 0 ? (
-                        <div className="relative w-full">
-                            <img 
-                                src={`${import.meta.env.VITE_API_URL}/${images[currentImageIndex]}`} 
-                                alt={product.name || 'Product Image'} // Use product name for better accessibility
-                                className="w-full rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300" 
-                                onError={(e) => e.target.src = '/path/to/fallback-image.jpg'} // Fallback image in case of error
-                            />
-                            {/* Previous Button */}
-                            <button
-                                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full hover:bg-gray-400"
-                                onClick={handlePrevImage}
-                            >
-                                <ChevronLeft className="w-5 h-5 text-gray-700" />
-                            </button>
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category.name);
+    setCurrentPage(1);
+  };
 
-                            {/* Next Button */}
-                            <button
-                                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full hover:bg-gray-400"
-                                onClick={handleNextImage}
-                            >
-                                <ChevronRight className="w-5 h-5 text-gray-700" />
-                            </button>
-                        </div>
-                    ) : (
-                        <p>No images available for this product.</p>
-                    )}
-                </div>
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+    setCurrentPage(1); // Reset to first page when sorting changes
+  };
 
-                {/* Product Description */}
-                <div className="md:w-1/2">
-                    <h1 className="text-3xl font-bold mb-3">{product.name || 'Product Name'}</h1>
-                    <p className="text-gray-700 mb-2 leading-relaxed">{product.description || 'No description available'}</p>
-                    <p className="text-lg font-semibold text-red-600 mb-1">{`Selling Price: $${sellingPrice?.toFixed(2)}`}</p>
-                    <p className="text-lg text-gray-900 line-through mb-5">{`Original Price: $${originalPrice?.toFixed(2)}`}</p>
-                    <p className="text-sm text-gray-900 mb-2">{`Brand: ${product.brand || 'Unknown'}`}</p>
-                    <p className={`text-sm ${product.status === 0 ? 'text-green-900' : 'text-red-900'}`}>
-                        {product.status === 0 ? 'Available' : 'Out of Stock'}
-                    </p>
+  const handleItemsPerPageChange = (event) => {
+    setItemsPerPage(parseInt(event.target.value));
+    setCurrentPage(1);
+  };
 
-                    {/* Quantity Controls */}
-                    <div className="flex items-center mb-5">
-                        <button 
-                            className="px-4 py-2 bg-gray-300 rounded-l-lg text-gray-800 hover:bg-gray-400 transition-all" 
-                            onClick={handleSubtract}
-                            aria-label="Decrease Quantity"
-                        >
-                            -
-                        </button>
-                        <span className="px-4 py-2 border-t border-b">{quantity}</span>
-                        <button 
-                            className="px-4 py-2 bg-gray-300 rounded-r-lg text-gray-800 hover:bg-gray-400 transition-all" 
-                            onClick={handleAdd}
-                            aria-label="Increase Quantity"
-                        >
-                            +
-                        </button>
-                    </div>
+  return (
+    <div className="flex flex-col md:flex-row p-5 mt-20">
+      {/* Sidebar */}
+      <div className="w-full md:w-1/4 mb-5 md:mb-0 md:mr-5">
+        <h3 className="text-lg font-semibold mb-4">Categories</h3>
+        <ul className="space-y-2">
+          {categories.map((category) => (
+            <li
+              key={category.name}
+              className={`cursor-pointer ${selectedCategory === category.name ? 'text-blue-900 font-semibold' : 'text-gray-700'}`}
+              onClick={() => handleCategorySelect(category)}
+            >
+              {category.name}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-                    {/* Add to Cart Button */}
-                    <button 
-                        className="w-full p-3 bg-blue-800 text-white rounded-lg hover:bg-blue-700 active:bg-blue-900 transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        aria-label="Add to Cart"
-                    >
-                        Add to Cart
-                    </button>
+      {/* Main Content */}
+      <div className="w-full md:w-3/4">
+        <h2 className="text-2xl font-bold mb-5">Products</h2>
 
-                    {/* Reviews Section */}
-                    <div className="mt-10">
-                        <h2 className="text-lg font-semibold">Reviews</h2>
-                        <p className="text-yellow-900">Average Rating: {averageRating.toFixed(1)} / 5</p>
+        {/* Sorting and Items per Page */}
+        <div className="flex justify-between mb-4 flex-wrap">
+          <div className="mb-2">
+            <label htmlFor="sort" className="mr-2">Sort by:</label>
+            <select id="sort" value={sortOption} onChange={handleSortChange} className="border rounded px-2">
+              {sortingOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-                        <div className="mt-4 space-y-4">
-                            {reviews.map(review => (
-                                <div key={review.id} className="border-b border-gray-300 pb-2">
-                                    <p className="font-semibold text-yellow-600">{`Rating: ${review.rating} ★`}</p>
-                                    <p className="text-gray-600">{review.text}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div className="mb-2">
+            <label htmlFor="itemsPerPage" className="mr-2">Items per page:</label>
+            <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange} className="border rounded px-2">
+              {itemsPerPageOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-    );
+
+        {/* Products List */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <Link key={product.id} className="border p-4 rounded-lg shadow-md flex flex-col" to={`/collections/${product.category?.link}/${product.link}`}>
+                <img
+                  src={`/${product.image}`}
+                  alt={product.name}
+                  className="w-full h-48 object-cover mb-4 rounded-md"
+                />
+                <h3 className="text-lg font-bold">{product.name}</h3>
+                <p className="text-gray-700">${product.selling_price}</p>
+                <button className="mt-auto bg-blue-800 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+                  View Details
+                </button>
+              </Link>
+            ))
+          ) : (
+            <p>No products found.</p>
+          )}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="mt-8 flex justify-between items-center flex-wrap">
+          <button
+            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition duration-200"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          
+          <span className="mx-2">
+            Page {currentPage} of {totalPages}
+          </span>
+          
+          <button
+            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition duration-200"
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default ProductDetail;
+export default Store;

@@ -50,7 +50,7 @@ const ViewProducts = () => {
           <td>{items.id}</td>
           <td>{items.category.name}</td>
           <td>{items.name}</td>
-          <td><img src={`${import.meta.env.VITE_API_URL}/${items.image}`} width='50' alt={items.name}></img></td>
+          <td><img src={`/${items.image}`} width='50' alt={items.name}></img></td>
           <td>{items.selling_price}</td>
           <td>{items.original_price}</td>
           <td>{items.status == 0 ? "Active" : "Hidden"}</td>

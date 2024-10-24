@@ -56,66 +56,55 @@ class FrontendController extends Controller
         }
     }
 
-            // Fetch products based on filters
-    public function products(Request $request)
-    {
-        // Start with a query to get only active products
-        $query = Product::where('status', '0');
-        $categories = Category::all();
+// Fetch products based on filters
+public function products(Request $request)
+{
+    // Start with a query to get only active products
+    $query = Product::where('status', '0');
+    $categories = Category::all();
 
-        // Filter by category if provided
-        if ($request->has('category') && $request->input('category') !== 'All') {
-            $category = $request->input('category');
-            $query->whereHas('category', function($q) use ($category) {
-                $q->where('name', $category);
-            });
-        }
-
-        // Filter by price range
-        $minPrice = $request->input('min_price', 0); // Default to 0 if not provided
-        $maxPrice = $request->input('max_price', 2000); // Default to 2000 if not provided
-        $query->whereBetween('selling_price', [$minPrice, $maxPrice]);
-
-        // Filter by brand if provided
-        if ($request->has('brand')) {
-            $brand = $request->input('brand');
-            $query->where('brand', $brand);
-        }
-
-        // Sorting products
-        $sortOption = $request->input('sort', 'featured'); // Default to 'featured'
-        switch ($sortOption) {
-            case 'alphaAsc':
-                $query->orderBy('name', 'asc');
-                break;
-            case 'alphaDesc':
-                $query->orderBy('name', 'desc');
-                break;
-            case 'priceAsc':
-                $query->orderBy('selling_price', 'asc');
-                break;
-            case 'priceDesc':
-                $query->orderBy('selling_price', 'desc');
-                break;
-            case 'dateAsc':
-                $query->orderBy('created_at', 'asc');
-                break;
-            case 'dateDesc':
-                $query->orderBy('created_at', 'desc');
-                break;
-            default:
-                $query->orderBy('featured', 'desc'); // Show featured products first
-                break;
-        }
-
-        // Paginate the results
-        $perPage = $request->input('itemsPerPage', 4);
-        $products = $query->paginate($perPage);
-
-        return response()->json([
-            'status' => 200,
-            'products' => $products,
-            'category' => $categories
-        ]);
+    // Filter by category if provided
+    if ($request->has('category') && $request->input('category') !== 'All') {
+        $category = $request->input('category');
+        $query->whereHas('category', function($q) use ($category) {
+            $q->where('name', $category);
+        });
     }
+
+    // Filter by brand if provided
+    if ($request->has('brand')) {
+        $brand = $request->input('brand');
+        $query->where('brand', $brand);
+    }
+
+    // Sorting products
+    $sortOption = $request->input('sort', 'featured'); // Default to 'featured'
+    switch ($sortOption) {
+        case 'alphaAsc':
+            $query->orderBy('name', 'asc');
+            break;
+        case 'alphaDesc':
+            $query->orderBy('name', 'desc');
+            break;
+        case 'dateAsc':
+            $query->orderBy('created_at', 'asc');
+            break;
+        case 'dateDesc':
+            $query->orderBy('created_at', 'desc');
+            break;
+        default:
+            $query->orderBy('featured', 'desc'); // Show featured products first
+            break;
+    }
+
+    // Paginate the results
+    $perPage = $request->input('itemsPerPage', 4);
+    $products = $query->paginate($perPage);
+
+    return response()->json([
+        'status' => 200,
+        'products' => $products,
+        'category' => $categories
+    ]);
+}
 }

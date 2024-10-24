@@ -122,7 +122,7 @@ const Products = () => {
                         >
                             <Link to={`/collections/${prod.category.link}/${prod.link}`}>
                             <motion.img
-                                src={`${import.meta.env.VITE_API_URL}/${prod.image}`}  // Ensure image field in response is correct
+                                src={`/${prod.image}`}  // Ensure image field in response is correct
                                 alt={prod.name}
                                 className="w-full h-32 object-cover rounded-t-lg" // Adjusted height for a smaller image size
                                 whileHover={{ scale: 1.1 }}
@@ -130,12 +130,11 @@ const Products = () => {
                             />
                             <div className="flex flex-col justify-center items-center gap-2 p-4">
                                 <p className="text-center font-semibold">{prod.name}</p>
-                                <p className="text-left font-thin text-red-500">${prod.selling_price}</p>
                                 <motion.button 
                                     whileHover={{ scale: 1.05 }} 
                                     className="w-fit p-2 flex items-center justify-center text-gray-200 hover:brightness-110 bg-gradient-to-r from-[#1c4587] to-gray-200 rounded-full transition-transform duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400"
                                 >
-                                    Add to Cart <ShoppingCart className="ml-1" />
+                                    View Details
                                 </motion.button>
                             </div>
                             </Link>
