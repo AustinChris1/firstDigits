@@ -64,8 +64,8 @@ const Login = () => {
     };
 
     return (
-        <div className="mt-28 flex flex-col items-center p-5 md:flex-row md:justify-center">
-            <div className="flex flex-col justify-center bg-white border border-gray-200 rounded-lg p-8 shadow-lg w-full max-w-md">
+        <div className="flex flex-col items-center p-5 md:flex-row md:justify-center">
+            <div className="mt-28 flex flex-col justify-center bg-white border border-gray-200 rounded-lg p-8 shadow-lg w-full max-w-md">
                 <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">Login</h1>
                 <form onSubmit={loginSubmit} className="flex flex-col space-y-4">
                     {/* Email Input */}

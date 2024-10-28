@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\FrontendController;
+use App\Http\Controllers\API\UsersController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
@@ -33,8 +34,8 @@ Route::middleware('auth:sanctum', 'isApiAdmin')->group(function () {
     Route::post('/category/store', [CategoryController::class, 'store']);
     Route::get('/viewCategory', [CategoryController::class, 'index']);
     Route::get('category/edit/{id}', [CategoryController::class, 'edit']);
-    Route::put('category/update/{id}', [CategoryController::class, 'update']); // New update route
-    Route::delete('category/delete/{id}', [CategoryController::class, 'destroy']); // New delete route
+    Route::post('category/update/{id}', [CategoryController::class, 'update']); // New update route
+    Route::post('category/delete/{id}', [CategoryController::class, 'destroy']); // New delete route
     Route::get('allCategory', [CategoryController::class, 'allCategory']);
 
     //Product
@@ -42,7 +43,13 @@ Route::middleware('auth:sanctum', 'isApiAdmin')->group(function () {
     Route::get('/products/view', [ProductController::class, 'index']);
     Route::get('products/edit/{id}', [ProductController::class, 'edit']);
     Route::post('products/update/{id}', [ProductController::class, 'update']); // New update route
-    Route::delete('products/delete/{id}', [ProductController::class, 'destroy']); // New delete route
+    Route::post('products/delete/{id}', [ProductController::class, 'destroy']); // New delete route
 
+    //Users
+    Route::get('/users/view', [UsersController::class, 'allUsers']);
+    Route::post('/users/make-admin/{id}', [UsersController::class, 'makeAdmin']);
+    Route::post('/users/delete/{id}', [UsersController::class, 'deleteUser']);
+    Route::get('/users/edit/{id}', [UsersController::class, 'editUser']);
+    Route::post('/users/update/{id}', [UsersController::class, 'updateUser']);
 
 });

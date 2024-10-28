@@ -26,7 +26,7 @@ const ViewProducts = () => {
     e.preventDefault();
     setDeleteLoading((prev) => ({ ...prev, [id]: true })); // Set loading for the specific button
 
-    axios.delete(`/api/products/delete/${id}`)
+    axios.post(`/api/products/delete/${id}`)
         .then(res => {
             if (res.data.status === 200) {
                 setProducts(prevProducts => prevProducts.filter(item => item.id !== id)); // Update the category list

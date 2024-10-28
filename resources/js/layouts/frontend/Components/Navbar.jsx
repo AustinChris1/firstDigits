@@ -48,6 +48,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const dropdownRef = useRef(null);
   const navbarRef = useRef(null);
@@ -70,7 +71,7 @@ const Navbar = () => {
   const logout = (e) => {
     e.preventDefault();
     axios.post(`/api/logout`).then(res => {
-      if(res.data.status === 200){
+      if (res.data.status === 200) {
         localStorage.removeItem("auth_token");
         localStorage.removeItem("auth_name");
         localStorage.removeItem("auth_email");
@@ -96,19 +97,31 @@ const Navbar = () => {
   );
 
   const AdminBtn = localStorage.getItem('role') === 'admin' ? (
-    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Admin">
+    <li className="cursor-pointer text-blue-800 hover:text-blue600" title="Admin">
       <Link to="/admin/dashboard" className="flex items-center">
         <KeySquare aria-label="Admin" />
       </Link>
     </li>
   ) : null;
 
+  // Scroll effect to make navbar sticky and resize
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleNavigation = () => {
     setToggle(false); // Close mobile menu after navigation
   };
 
   return (
-    <nav ref={navbarRef} className="navbar fixed z-50 bg-slate-200 text-slate-900 dark:text-white w-full flex justify-between items-center px-6 py-4 top-0 mb-20">
+    <nav
+      ref={navbarRef}
+      className={`navbar fixed z-50 w-full bg-slate-200 text-slate-900 dark:text-white flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2 shadow-md' : 'py-4'}`}
+    >
       <Link to='/'>
         <img src={fdcLogo} alt="First Digit Communications" className="w-40 h-auto" />
       </Link>
@@ -170,25 +183,20 @@ const Navbar = () => {
       {/* Mobile Menu Toggle */}
       <div className="sm:hidden flex items-center">
         <button onClick={() => setToggle(!toggle)} aria-label="Toggle Menu">
-          {toggle ? (
-            <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
-          ) : (
-            <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
-          )}
+          {toggle ? <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" /> : <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />}
         </button>
-
         {/* Mobile Menu */}
         <motion.div
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: toggle ? "100vh" : 0, opacity: toggle ? 1 : 0 }}
           transition={{ duration: 0.3 }}
-          className={`${toggle ? "flex" : "hidden"} absolute top-20 left-0 w-full bg-slate-200 flex-col items-center justify-center p-4 min-h-full`}
+          className={`${toggle ? "flex" : "hidden"} absolute top-16 left-0 w-full bg-slate-200 flex-col items-center justify-center p-4 min-h-full`} // Adjusted top spacing
         >
           <ul className="flex flex-col justify-center items-center gap-6 text-3xl">
             <li className="relative cursor-pointer text-blue-800 hover:text-blue-600 group">
               <Link to="/store" onClick={handleNavigation}>Store</Link>
+              <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </li>
-
             <DropdownMenu
               title="Products"
               items={['Smart Home', 'Robotics', 'Automations']}
@@ -226,7 +234,6 @@ const Navbar = () => {
               dropdownRef={dropdownRef}
             />
           </ul>
-
           {/* Mobile Icons */}
           <ul className="flex justify-center items-center gap-6 mt-6">
             <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
@@ -234,15 +241,15 @@ const Navbar = () => {
             <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Cart"><ShoppingCart aria-label="ShoppingCart" /></li>
             {AdminBtn}
           </ul>
-                       {/* Mobile Search Bar at the Bottom */}
-      <div className="sm:hidden text-base text-blue-900 bottom-0 left-0 right-0 p-4 bg-slate-200 border-t border-gray-300">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full p-3 border border-gray-300 rounded-md"
-          aria-label="Mobile Search Input"
-        />
-      </div>
+          {/* Mobile Search Bar at the Bottom */}
+          <div className="sm:hidden text-base text-blue-900 bottom-0 left-0 right-0 p-4 bg-slate-200 border-t border-gray-300">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full p-3 border border-gray-300 rounded-md"
+              aria-label="Mobile Search Input"
+            />
+          </div>
 
         </motion.div>
       </div>

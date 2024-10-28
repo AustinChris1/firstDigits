@@ -98,9 +98,9 @@ const Store = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row p-5 mt-20">
+    <div className="flex flex-col md:flex-row p-5 w-full relative">
       {/* Sidebar */}
-      <div className="w-full md:w-1/4 mb-5 md:mb-0 md:mr-5">
+      <div className="mt-20 w-full md:w-1/4 mb-5 md:mb-0 md:mr-5">
         <h3 className="text-lg font-semibold mb-4">Categories</h3>
         <ul className="space-y-2">
           {categories.map((category) => (
@@ -115,21 +115,6 @@ const Store = () => {
         </ul>
 
         {/* Price Filter */}
-        <div className="mt-10">
-          <h3 className="text-lg font-semibold mb-4">Filter by Price</h3>
-          <input
-            type="range"
-            min="0"
-            max="2000"
-            value={priceRange[1]}
-            onChange={handlePriceChange}
-            className="w-full text-blue-900"
-          />
-          <div className="flex justify-between mt-2 text-gray-600">
-            <span>$0</span>
-            <span>${priceRange[1]}</span>
-          </div>
-        </div>
       </div>
 
       {/* Main Content */}

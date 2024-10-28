@@ -19,7 +19,25 @@ const Navbar = () => {
                 <li><Link className="dropdown-item" to="#!">Settings</Link></li>
                 <li><Link className="dropdown-item" to="#!">Activity Log</Link></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><Link className="dropdown-item" to="#!">Logout</Link></li>
+                    <Link className="dropdown-item" to="/admin/dashboard">
+                        Dashboard
+                    </Link>
+                    <Link className="dropdown-item" to="/admin/profile">
+                        Profile
+                    </Link>
+
+                    <Link className="dropdown-item" to="/admin/category">
+                        Add Category
+                    </Link>
+                    <Link className="dropdown-item" to="/admin/category/view">
+                        View Category
+                    </Link>
+                    <Link className="dropdown-item" to="/admin/products">
+                        Add Products
+                    </Link>
+                    <Link className="dropdown-item" to="/admin/products/view">
+                        View Products
+                    </Link>
             </ul>
         </li>
     </ul>

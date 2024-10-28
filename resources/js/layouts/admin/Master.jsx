@@ -19,6 +19,7 @@ import '../../../sass/styles.css';
 // Import Bootstrap's JavaScript via npm
 import "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import EditUser from '../../components/admin/EditUser';
 
 const Master = () => {
   useEffect(() => {
@@ -51,6 +52,7 @@ const Master = () => {
               <Route path="products" element={<Products/>} />
               <Route path='products/view' element={<ViewProducts/>} />
               <Route path='products/edit/:id' element={<EditProducts/>} />
+              <Route path='user/edit/:id' element={<EditUser/>} />
               
             </Routes>
           </main>

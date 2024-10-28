@@ -49,7 +49,7 @@ const EditCategory = () => {
         setEditLoading(true);
         const data = categoryInput;
         
-        axios.put(`/api/category/update/${id}`, data)
+        axios.post(`/api/category/update/${id}`, data)
             .then(res => {
                 if (res.data.status === 200) {
                     // console.log(data);
