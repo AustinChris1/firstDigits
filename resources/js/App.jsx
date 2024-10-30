@@ -76,10 +76,12 @@ function Layout() {
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store />} />
         <Route path="/collections/:categoryLink/:productLink" element={<ProductDetail />} />
-        <Route path="/404" element={<NotFound />} />
         <Route path="/403" element={<Forbidden />} />
         <Route path="/login" element={<ProtectedRoute element={<Login />} />} />
         <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
+        
+        {/* Fallback route for non-existing pages */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {!isAdminRoute && <Footer />} {/* Render Footer only if not on admin routes */}

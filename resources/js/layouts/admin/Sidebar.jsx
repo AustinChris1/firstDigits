@@ -12,10 +12,6 @@ const Sidebar = () => {
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Dashboard
                     </Link>
-                    <Link className="nav-link" to="/admin/profile">
-                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                        Profile
-                    </Link>
                     <div className="sb-sidenav-menu-heading">Category</div>
 
                     <Link className="nav-link" to="/admin/category">
@@ -36,19 +32,11 @@ const Sidebar = () => {
                         View Products
                     </Link>
                     <div className="sb-sidenav-menu-heading">Addons</div>
-                    <Link className="nav-link" to="charts.html">
-                        <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
-                        Charts
-                    </Link>
-                    <Link className="nav-link" to="tables.html">
-                        <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
-                        Tables
-                    </Link>
                 </div>
             </div>
             <div className="sb-sidenav-footer">
                 <div className="small">Logged in as:</div>
-                FDC Admin
+                {localStorage.getItem('auth_email')}
             </div>
         </nav>
 )

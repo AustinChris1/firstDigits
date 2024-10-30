@@ -3,156 +3,212 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
 import swal from 'sweetalert';
+import './dashboard.css';
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [deleteLoading, setDeleteLoading] = useState({});
   const [adminLoading, setAdminLoading] = useState({});
+  
+  // Pagination states
+  const [currentPageUsers, setCurrentPageUsers] = useState(1);
+  const [currentPageTeams, setCurrentPageTeams] = useState(1);
+  const [usersPerPage] = useState(5); // Change this number to show more or fewer users per page
+  const [teamsPerPage] = useState(5); // Change this number to show more or fewer teams per page
 
- // Function to fetch users
- const fetchUsers = () => {
-  setLoading(true);
-  axios.get('/api/users/view')
-    .then((res) => {
-      console.log(res.data.users);
-      if (res.data.status === 200) {
-        setUsers(res.data.users);
-      } else {
-        swal("Error", res.data.message || "An error occurred", "error");
-      }
-    })
-    .catch((error) => {
+  useEffect(() => {
+    document.title = "Admin Dashboard";
+    fetchUsers();
+    fetchTeams();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get('/api/users/view');
+      data.status === 200 ? setUsers(data.users) : swal("Error", data.message || "An error occurred", "error");
+    } catch {
       swal("Error", "Failed to load users", "error");
-      console.error(error);
-    })
-    .finally(() => setLoading(false));
-};
+    } finally {
+      setLoading(false);
+    }
+  };
 
-// Initial user fetch on component mount
-useEffect(() => {
-  document.title = "Dashboard";
-  fetchUsers();
-}, []);
+  const fetchTeams = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get('/api/team/view');
+      data.status === 200 ? setTeams(data.teams) : swal("Error", data.message || "An error occurred", "error");
+    } catch {
+      swal("Error", "Failed to load teams", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-const makeAdmin = (e, id) => {
-  e.preventDefault();
-  setAdminLoading((prev) => ({ ...prev, [id]: true }));
+  const toggleLoadingState = (id, setLoadingFunc) => {
+    setLoadingFunc(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
-  axios.post(`/api/users/make-admin/${id}`)
-      .then((res) => {
-          if (res.data.status === 200) {
-              // Update the user's role in the local state
-              setUsers((prevUsers) => 
-                  prevUsers.map((user) => 
-                      user.id === id ? { ...user, role_as: user.role_as === 1 ? 0 : 1 } : user
-                  )
-              );
-              swal("Success", res.data.message, "success");
-          } else {
-              swal("Error", res.data.message, "error");
-          }
-      })
-      .catch((error) => {
-          swal("Error", "Failed to make user an admin", "error");
-          console.error(error);
-      })
-      .finally(() => setAdminLoading((prev) => ({ ...prev, [id]: false })));
-};
-
-const deleteUser = (e, id) => {
-  e.preventDefault();
-  setDeleteLoading((prev) => ({ ...prev, [id]: true }));
-
-  axios.post(`/api/users/delete/${id}`)
-    .then((res) => {
-      if (res.data.status === 200) {
-        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-        swal("Success", res.data.message, "success");
+  const handleAdminToggle = async (e, id) => {
+    e.preventDefault();
+    toggleLoadingState(id, setAdminLoading);
+    try {
+      const { data } = await axios.post(`/api/users/make-admin/${id}`);
+      if (data.status === 200) {
+        setUsers(prev => prev.map(user => user.id === id ? { ...user, role_as: user.role_as === 1 ? 0 : 1 } : user));
+        swal("Success", data.message, "success");
       } else {
-        swal("Error", res.data.message, "error");
+        swal("Error", data.message, "error");
       }
-    })
-    .catch((error) => {
-      swal("Error", "Failed to delete user", "error");
-      console.error(error);
-    })
-    .finally(() => setDeleteLoading((prev) => ({ ...prev, [id]: false })));
-};
+    } catch {
+      swal("Error", "Failed to update user role", "error");
+    } finally {
+      toggleLoadingState(id, setAdminLoading);
+    }
+  };
 
-const renderUsers = () => {
-  return users.map((user) => (
-    <tr key={user.id}>
+  const handleDelete = async (e, id, isUser = true) => {
+    e.preventDefault();
+    toggleLoadingState(id, setDeleteLoading);
+    const apiUrl = isUser ? `/api/users/delete/${id}` : `/api/team/delete/${id}`;
+    const updateFunc = isUser ? setUsers : setTeams;
+
+    try {
+      const { data } = await axios.post(apiUrl);
+      if (data.status === 200) {
+        updateFunc(prev => prev.filter(item => item.id !== id));
+        swal("Success", data.message, "success");
+      } else {
+        swal("Error", data.message, "error");
+      }
+    } catch {
+      swal("Error", `Failed to delete ${isUser ? 'user' : 'team'}`, "error");
+    } finally {
+      toggleLoadingState(id, setDeleteLoading);
+    }
+  };
+
+  const renderSpinner = isLoading => (
+    isLoading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Delete'
+  );
+
+  // Pagination Logic for Users
+  const indexOfLastUser = currentPageUsers * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const renderUsers = () => currentUsers.map(user => (
+    <tr key={user.id} className="dashboard-row">
       <td>{user.id}</td>
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.role_as === 0 ? "User" : "Admin"}</td>
-      <td>{new Date(user.created_at).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
+      <td>{new Date(user.created_at).toLocaleString('en-GB')}</td>
+      <td><Link to={`/admin/user/edit/${user.id}`} className="btn btn-link btn-sm">Edit</Link></td>
       <td>
-        <Link to={`/admin/user/edit/${user.id}`} className="btn btn-primary btn-sm">Edit</Link>
-      </td>
-      <td>
-        <button
-          className="btn btn-secondary btn-sm"
-          onClick={(e) => makeAdmin(e, user.id)}
-          disabled={adminLoading[user.id]}
-        >
-          {adminLoading[user.id] ? (
-            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          ) : (
-            '✅'
-          )}
+        <button className="btn btn-link btn-sm" onClick={e => handleAdminToggle(e, user.id)} disabled={adminLoading[user.id]}>
+          {adminLoading[user.id] ? renderSpinner(true) : '✅'}
         </button>
       </td>
       <td>
-        <button
-          className="btn btn-danger btn-sm"
-          onClick={(e) => deleteUser(e, user.id)}
-          disabled={deleteLoading[user.id]}
-        >
-          {deleteLoading[user.id] ? (
-            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          ) : (
-            'Delete'
-          )}
+        <button className="btn btn-link btn-sm text-danger" onClick={e => handleDelete(e, user.id)} disabled={deleteLoading[user.id]}>
+          {renderSpinner(deleteLoading[user.id])}
         </button>
       </td>
     </tr>
   ));
-};
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
+  // Pagination Logic for Teams
+  const indexOfLastTeam = currentPageTeams * teamsPerPage;
+  const indexOfFirstTeam = indexOfLastTeam - teamsPerPage;
+  const currentTeams = teams.slice(indexOfFirstTeam, indexOfLastTeam);
+
+  const renderTeams = () => currentTeams.map(team => (
+    <tr key={team.id} className="dashboard-row">
+      <td>{team.id}</td>
+      <td>{team.name}</td>
+      <td>{team.role}</td>
+      <td><img src={`/${team.image}`} width="100px" alt={team.name} /></td>
+      <td>{team.status === 0 ? "Visible" : "Hidden"}</td>
+      <td>{new Date(team.created_at).toLocaleString('en-GB')}</td>
+      <td><Link to={`/admin/teams/edit/${team.id}`} className="btn btn-link btn-sm">Edit</Link></td>
+      <td>
+        <button className="btn btn-link btn-sm text-danger" onClick={e => handleDelete(e, team.id, false)} disabled={deleteLoading[team.id]}>
+          {renderSpinner(deleteLoading[team.id])}
+        </button>
+      </td>
+    </tr>
+  ));
+
+  const totalPagesUsers = Math.ceil(users.length / usersPerPage);
+  const totalPagesTeams = Math.ceil(teams.length / teamsPerPage);
+
+  const handlePageChangeUsers = (pageNumber) => setCurrentPageUsers(pageNumber);
+  const handlePageChangeTeams = (pageNumber) => setCurrentPageTeams(pageNumber);
+
+  if (loading) return <LoadingSpinner />;
 
   return (
-    <div className="card px-4 mt-3">
-      <div className="card-header">
-        <h4>
-          Registered Users
-        </h4>
-      </div>
-      <div className="card-body">
-        <div className="table-responsive">
-          <table className="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Joined</th>
-                <th>Edit</th>
-                <th>Change Role</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {renderUsers()}
-            </tbody>
-          </table>
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <p className="dashboard-subheading">Manage users, teams, and more with efficiency.</p>
+      </header>
+
+      <section className="dashboard-section">
+        <h2>Registered Users</h2>
+        <table className="dashboard-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Joined</th>
+              <th>Edit</th>
+              <th>Change Role</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>{renderUsers()}</tbody>
+        </table>
+        <div className="pagination">
+          {Array.from({ length: totalPagesUsers }, (_, index) => (
+            <button key={index + 1} onClick={() => handlePageChangeUsers(index + 1)} className={`page-button ${currentPageUsers === index + 1 ? 'active' : ''}`}>
+              {index + 1}
+            </button>
+          ))}
         </div>
-      </div>
+      </section>
+
+      <section className="dashboard-section">
+        <h2>Teams</h2>
+        <table className="dashboard-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Image</th>
+             <th>Status</th>
+              <th>Joined</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>{renderTeams()}</tbody>
+        </table>
+        <div className="pagination">
+          {Array.from({ length: totalPagesTeams }, (_, index) => (
+            <button key={index + 1} onClick={() => handlePageChangeTeams(index + 1)} className={`page-button ${currentPageTeams === index + 1 ? 'active' : ''}`}>
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

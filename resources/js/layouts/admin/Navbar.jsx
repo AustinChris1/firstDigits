@@ -22,10 +22,6 @@ const Navbar = () => {
                     <Link className="dropdown-item" to="/admin/dashboard">
                         Dashboard
                     </Link>
-                    <Link className="dropdown-item" to="/admin/profile">
-                        Profile
-                    </Link>
-
                     <Link className="dropdown-item" to="/admin/category">
                         Add Category
                     </Link>
@@ -37,6 +33,9 @@ const Navbar = () => {
                     </Link>
                     <Link className="dropdown-item" to="/admin/products/view">
                         View Products
+                    </Link>
+                    <Link className="dropdown-item" to="/admin/teams/add">
+                        Add Team
                     </Link>
             </ul>
         </li>

@@ -98,15 +98,17 @@ const Store = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row p-5 w-full relative">
+    <div className="flex flex-col md:flex-row px-4 py-6 lg:px-8 w-full relative">
       {/* Sidebar */}
-      <div className="mt-20 w-full md:w-1/4 mb-5 md:mb-0 md:mr-5">
-        <h3 className="text-lg font-semibold mb-4">Categories</h3>
-        <ul className="space-y-2">
+      <div className="mt-24 w-full md:w-1/4 mb-5 md:mr-6">
+        <h3 className="text-xl font-semibold mb-3">Categories</h3>
+        <ul className="space-y-2 text-sm lg:text-base">
           {categories.map((category) => (
             <li
               key={category.name}
-              className={`cursor-pointer ${selectedCategory === category.name ? 'text-blue-900 font-semibold' : 'text-gray-700'}`}
+              className={`cursor-pointer px-2 py-1 rounded ${
+                selectedCategory === category.name ? 'bg-blue-900 text-white font-semibold' : 'text-gray-700 hover:bg-gray-100'
+              }`}
               onClick={() => handleCategorySelect(category)}
             >
               {category.name}
@@ -114,18 +116,22 @@ const Store = () => {
           ))}
         </ul>
 
-        {/* Price Filter */}
       </div>
 
       {/* Main Content */}
       <div className="w-full md:w-3/4">
-        <h2 className="text-2xl font-bold mb-5">Products</h2>
+        <h2 className="text-2xl font-bold mb-4">Products</h2>
 
         {/* Sorting and Items per Page */}
-        <div className="flex justify-between mb-4 flex-wrap">
-          <div className="mb-2">
-            <label htmlFor="sort" className="mr-2">Sort by:</label>
-            <select id="sort" value={sortOption} onChange={handleSortChange} className="border rounded px-2">
+        <div className="flex justify-between items-center mb-5 space-x-2">
+          <div className="flex items-center space-x-2">
+            <label htmlFor="sort" className="text-sm font-medium">Sort by:</label>
+            <select
+              id="sort"
+              value={sortOption}
+              onChange={handleSortChange}
+              className="border rounded px-3 py-1 text-sm"
+            >
               {sortingOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -134,9 +140,14 @@ const Store = () => {
             </select>
           </div>
 
-          <div className="mb-2">
-            <label htmlFor="itemsPerPage" className="mr-2">Items per page:</label>
-            <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange} className="border rounded px-2">
+          <div className="flex items-center space-x-2">
+            <label htmlFor="itemsPerPage" className="text-sm font-medium">Items per page:</label>
+            <select
+              id="itemsPerPage"
+              value={itemsPerPage}
+              onChange={handleItemsPerPageChange}
+              className="border rounded px-3 py-1 text-sm"
+            >
               {itemsPerPageOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
@@ -147,43 +158,46 @@ const Store = () => {
         </div>
 
         {/* Products List */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.length > 0 ? (
             products.map((product) => (
-              <Link key={product.id} className="border p-4 rounded-lg shadow-md flex flex-col" to={`/collections/${product.category?.link}/${product.link}`}>
+              <Link
+                key={product.id}
+                className="border rounded-lg shadow-md flex flex-col p-4 transition-transform transform hover:scale-105"
+                to={`/collections/${product.category?.link}/${product.link}`}
+              >
                 <img
                   src={`/${product.image}`}
                   alt={product.name}
-                  className="w-full h-48 object-cover mb-4 rounded-md"
+                  className="w-full h-40 sm:h-48 object-cover rounded-md mb-3"
                 />
-                <h3 className="text-lg font-bold">{product.name}</h3>
-                <p className="text-gray-700">${product.selling_price}</p>
-                <button className="mt-auto bg-blue-800 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+                <h3 className="text-lg font-bold truncate">{product.name}</h3>
+                <button className="mt-auto bg-blue-900 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">
                   View Details
                 </button>
               </Link>
             ))
           ) : (
-            <p>No products found.</p>
+            <p className="col-span-full text-center text-gray-600">No products found.</p>
           )}
         </div>
 
         {/* Pagination Controls */}
-        <div className="mt-8 flex justify-between items-center flex-wrap">
+        <div className="mt-8 flex justify-between items-center flex-wrap space-y-4 md:space-y-0">
           <button
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition duration-200"
+            className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
             Previous
           </button>
-          
-          <span className="mx-2">
-            Page {currentPage} of {totalPages}
+
+          <span className="text-sm text-gray-700">
+            {currentPage} of {totalPages}
           </span>
-          
+
           <button
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition duration-200"
+            className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
           >

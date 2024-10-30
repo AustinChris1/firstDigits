@@ -44,7 +44,7 @@ const EditUser = () => {
         e.preventDefault();
         setEditLoading(true);
         const data = userInput;
-        
+
         axios.post(`/api/users/update/${id}`, data)
             .then(res => {
                 if (res.data.status === 200) {
@@ -84,14 +84,14 @@ const EditUser = () => {
             <form onSubmit={edituser} id='userForm' className='mt-3'>
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
-                        <button 
-                            className="nav-link active" 
-                            id="home-tab" 
-                            data-bs-toggle="tab" 
-                            data-bs-target="#home" 
-                            type="button" 
-                            role="tab" 
-                            aria-controls="home" 
+                        <button
+                            className="nav-link active"
+                            id="home-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#home"
+                            type="button"
+                            role="tab"
+                            aria-controls="home"
                             aria-selected="true"
                         >
                             Home
@@ -112,18 +112,24 @@ const EditUser = () => {
                             <input onChange={handleInput} value={userInput.email || ''} type="email" id="email" name="email" className="form-control" />
                             <small className="text-danger">{error.email ? error.email[0] : ''}</small>
                         </div>
-                        <div className="form-group mb-3">
-                            <label htmlFor="role_as">Role</label>
-                            <input onChange={handleInput} checked={userInput.role_as} type='checkbox' id="role_as" name="role_as" className="form-check-input" />
-                            <small className="text-danger">{error.role_as ? error.role_as[0] : ''}</small>
-                            </div>
+                        <div className="form-check form-switch mb-3">
+                            <input
+                                onChange={handleInput}
+                                checked={userInput.role_as}
+                                type='checkbox'
+                                id="role_as"
+                                name="role_as"
+                                className="form-check-input"
+                            />
+                            <label className="form-check-label" htmlFor="role_as">Role</label>
+                        </div>
                     </div>
 
                 </div>
                 <button className="btn btn-primary mt-3 px-4 float-end" type='submit' disabled={editLoading} >{editLoading ? (<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    ) : (
-                        'Edit'
-                    )}</button>
+                ) : (
+                    'Edit'
+                )}</button>
             </form>
         </div>
     );

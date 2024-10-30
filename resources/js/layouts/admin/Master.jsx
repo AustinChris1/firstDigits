@@ -11,6 +11,7 @@ import EditCategory from '../../components/admin/Category/EditCategory';
 import Products from '../../components/admin/Products/Products';
 import ViewProducts from '../../components/admin/Products/ViewProducts';
 import EditProducts from '../../components/admin/Products/EditProducts';
+import NotFound from '../frontend/Components/404';
 
 // Import admin CSS and JS files
 import '../../../sass/scripts';
@@ -20,6 +21,8 @@ import '../../../sass/styles.css';
 import "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import EditUser from '../../components/admin/EditUser';
+import AddTeam from '../../components/admin/Teams/AddTeam';
+import EditTeam from '../../components/admin/Teams/EditTeam';
 
 const Master = () => {
   useEffect(() => {
@@ -45,7 +48,6 @@ const Master = () => {
           <main>
             <Routes>
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="profile" element={<Profile />} />
               <Route path="category" element={<Category />} />
               <Route path="category/view" element={<ViewCategory />} />
               <Route path="category/edit/:id" element={<EditCategory />} />
@@ -53,6 +55,10 @@ const Master = () => {
               <Route path='products/view' element={<ViewProducts/>} />
               <Route path='products/edit/:id' element={<EditProducts/>} />
               <Route path='user/edit/:id' element={<EditUser/>} />
+              <Route path='teams/add' element={<AddTeam/>} />
+              <Route path='teams/edit/:id' element={<EditTeam/>} />
+
+              <Route path='*' element={<NotFound />} />
               
             </Routes>
           </main>

@@ -7,6 +7,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\API\UsersController;
+use App\Http\Controllers\API\TeamController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
@@ -51,5 +52,12 @@ Route::middleware('auth:sanctum', 'isApiAdmin')->group(function () {
     Route::post('/users/delete/{id}', [UsersController::class, 'deleteUser']);
     Route::get('/users/edit/{id}', [UsersController::class, 'editUser']);
     Route::post('/users/update/{id}', [UsersController::class, 'updateUser']);
+
+    //Team
+    Route::post('/team/store', [TeamController::class, 'store']);
+    Route::get('/team/view', [TeamController::class, 'index']);
+    Route::get('team/edit/{id}', [TeamController::class, 'edit']);
+    Route::post('team/update/{id}', [TeamController::class, 'update']); // New update route
+    Route::post('team/delete/{id}', [TeamController::class, 'destroy']); // New delete route
 
 });

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import fdcLogo from '../assets/fdcLogo.png';
-import { User, Earth, X, Menu, ChevronDown, ShoppingCart, LogOut, KeySquare } from "lucide-react";
+import { User, Earth, X, Menu, ChevronDown, LogOut, KeySquare } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
@@ -49,7 +49,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  
   const dropdownRef = useRef(null);
   const navbarRef = useRef(null);
 
@@ -97,7 +97,7 @@ const Navbar = () => {
   );
 
   const AdminBtn = localStorage.getItem('role') === 'admin' ? (
-    <li className="cursor-pointer text-blue-800 hover:text-blue600" title="Admin">
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Admin">
       <Link to="/admin/dashboard" className="flex items-center">
         <KeySquare aria-label="Admin" />
       </Link>
@@ -176,7 +176,6 @@ const Navbar = () => {
       <ul className="hidden sm:flex justify-end items-center gap-6">
         <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
         {AuthButtons}
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Cart"><ShoppingCart aria-label="ShoppingCart" /></li>
         {AdminBtn}
       </ul>
 
@@ -238,7 +237,6 @@ const Navbar = () => {
           <ul className="flex justify-center items-center gap-6 mt-6">
             <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
             {AuthButtons}
-            <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Cart"><ShoppingCart aria-label="ShoppingCart" /></li>
             {AdminBtn}
           </ul>
           {/* Mobile Search Bar at the Bottom */}
