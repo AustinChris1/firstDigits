@@ -64,8 +64,8 @@ const Register = () => {
     };
 
     return (
-        <div className="flex flex-col items-center p-5 md:flex-row md:justify-center">
-            <div className="mt-28 flex flex-col justify-center bg-white border border-gray-200 rounded-lg p-8 shadow-lg w-full max-w-md">
+        <div className="flex items-center justify-center min-h-screen bg-gray-50 px-5 py-10 sm:px-6 md:px-8">
+            <div className="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow-lg p-8">
                 <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">Register</h1>
 
                 <form onSubmit={registerSubmit} className="flex flex-col space-y-4">

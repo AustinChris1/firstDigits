@@ -69,8 +69,8 @@ const Login = () => {
     };
 
     return (
-        <div className="flex flex-col items-center p-5 md:flex-row md:justify-center">
-            <div className="mt-28 flex flex-col justify-center bg-white border border-gray-200 rounded-lg p-8 shadow-lg w-full max-w-md">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 p-5">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">Login</h1>
                 <form onSubmit={loginSubmit} className="flex flex-col space-y-4">
                     {/* Email Input */}
@@ -81,7 +81,7 @@ const Login = () => {
                         aria-label="Email"
                         onChange={handleInput}
                         value={loginInput.email}
-                        className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
                         required
                     />
                     <small className="text-red-500">{error?.email?.[0]}</small>
@@ -107,7 +107,7 @@ const Login = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors"
+                        className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors w-full"
                     >
                         Login
                     </button>

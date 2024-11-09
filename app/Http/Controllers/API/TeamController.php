@@ -52,10 +52,18 @@ class TeamController extends Controller
     public function index()
     {
         $teams = Team::all();
+        if($teams){
         return response()->json([
             'status' => 200,
             'teams' => $teams
         ], 200);
+    } else {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Team not found',
+        ]);
+    }
+
     }
 
     public function edit($id)

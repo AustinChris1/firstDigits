@@ -117,10 +117,6 @@ class ProductController extends Controller
             'meta_title' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'link' => 'required|string|max:255',
-            'selling_price' => 'required|numeric', // Should be numeric
-            'original_price' => 'required|numeric', // Should be numeric
-            'qty' => 'required|integer', // Should be an integer
-            'brand' => 'required|string',
         ]);
 
         // Return validation errors

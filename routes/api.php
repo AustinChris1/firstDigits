@@ -21,6 +21,7 @@ Route::get('getCategory', [FrontendController::class, 'category']);
 Route::get('getProducts', [FrontendController::class, 'products']);
 Route::get('fetchProducts/{categoryLink}/{productLink}', [FrontendController::class, 'fetchProducts']);
 
+Route::get('/team/view', [TeamController::class, 'index']);
 
 //Admin routes
 Route::middleware('auth:sanctum', 'isApiAdmin')->group(function () {
@@ -55,7 +56,6 @@ Route::middleware('auth:sanctum', 'isApiAdmin')->group(function () {
 
     //Team
     Route::post('/team/store', [TeamController::class, 'store']);
-    Route::get('/team/view', [TeamController::class, 'index']);
     Route::get('team/edit/{id}', [TeamController::class, 'edit']);
     Route::post('team/update/{id}', [TeamController::class, 'update']); // New update route
     Route::post('team/delete/{id}', [TeamController::class, 'destroy']); // New delete route

@@ -41,6 +41,9 @@ importers:
       sweetalert:
         specifier: ^2.1.2
         version: 2.1.2
+      swiper:
+        specifier: ^11.1.14
+        version: 11.1.14
     devDependencies:
       '@eslint/js':
         specifier: ^9.9.0
@@ -1669,6 +1672,10 @@ packages:
 
   sweetalert@2.1.2:
     resolution: {integrity: sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA==}
+
+  swiper@11.1.14:
+    resolution: {integrity: sha512-VbQLQXC04io6AoAjIUWuZwW4MSYozkcP9KjLdrsG/00Q/yiwvhz9RQyt0nHXV10hi9NVnDNy1/wv7Dzq1lkOCQ==}
+    engines: {node: '>= 4.7.0'}
 
   tailwindcss@3.4.14:
     resolution: {integrity: sha512-IcSvOcTRcUtQQ7ILQL5quRDg7Xs93PdJEk1ZLbhhvJc7uj/OAhYOnruEiwnGgBvUtaUAJ8/mhSw1o8L2jCiENA==}
@@ -3486,6 +3493,8 @@ snapshots:
     dependencies:
       es6-object-assign: 1.1.0
       promise-polyfill: 6.1.0
+
+  swiper@11.1.14: {}
 
   tailwindcss@3.4.14:
     dependencies:
