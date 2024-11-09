@@ -36,6 +36,7 @@ h2 {
 .dashboard-table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: auto; /* Ensures table scrolls on smaller screens */
 }
 
 .dashboard-table th, .dashboard-table td {
@@ -78,7 +79,7 @@ h2 {
     .dashboard-header h1 {
         font-size: 1.5rem; /* Adjust header size for smaller screens */
     }
-    
+
     .dashboard-table th, .dashboard-table td {
         font-size: 0.8rem; /* Smaller text size for better fit */
         padding: 0.5rem; /* Reduced padding for small screens */
@@ -96,6 +97,7 @@ h2 {
 @media (max-width: 480px) {
     .dashboard-container {
         padding: 1rem; /* Reduce padding for very small screens */
+        overflow-x: auto; /* Allow horizontal scroll instead of stacking */
     }
 
     .dashboard-header h1 {
@@ -106,23 +108,25 @@ h2 {
         font-size: 0.85rem; /* Smaller subheading size */
     }
 
-    .dashboard-table th, .dashboard-table td {
-        display: block; /* Stack table cells vertically */
-        width: 100%; /* Full width for small screens */
-        box-sizing: border-box; /* Include padding in width */
+    .dashboard-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto; /* Horizontal scrolling for full-width view */
     }
 
-    .dashboard-table th {
-        background-color: #f7f7f9; /* Background for headers */
+    .dashboard-table th, .dashboard-table td {
+        font-size: 0.75rem; /* Smaller text for mobile */
+        padding: 0.5rem; /* Adjust padding */
     }
 }
+
 .pagination {
     display: flex;
     justify-content: center;
     margin-top: 1rem;
-  }
-  
-  .page-button {
+}
+
+.page-button {
     margin: 0 0.25rem;
     padding: 0.5rem 0.75rem;
     border: none;
@@ -130,13 +134,12 @@ h2 {
     color: white;
     cursor: pointer;
     border-radius: 0.25rem;
-  }
-  
-  .page-button.active {
+}
+
+.page-button.active {
     background-color: #0056b3;
-  }
-  
-  .page-button:hover:not(.active) {
+}
+
+.page-button:hover:not(.active) {
     background-color: #0056b3;
-  }
-  
+}

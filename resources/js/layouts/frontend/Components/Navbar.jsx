@@ -49,7 +49,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   const dropdownRef = useRef(null);
   const navbarRef = useRef(null);
 
@@ -79,7 +79,12 @@ const Navbar = () => {
         swal("Success", res.data.message, "success");
         navigate("/"); // Redirect to home after successful logout
       } else {
-        swal("Error", res.data.message, "error");
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("auth_name");
+        localStorage.removeItem("auth_email");
+        localStorage.removeItem("role");
+        swal("Success", res.data.message, "success");
+        navigate("/"); // Redirect to home after successful logout
       }
     });
   }
@@ -113,9 +118,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Add this function to handle navigation and toggle the menu
   const handleNavigation = () => {
-    setToggle(false); // Close mobile menu after navigation
+    setToggle(false); // Close the menu when navigating
   };
+
 
   return (
     <nav
@@ -145,8 +152,8 @@ const Navbar = () => {
         />
         <DropdownMenu
           title="Services"
-          items={['Academy', 'Internship', 'Service 3']}
-          links={['/services/learn', '/services/internship', '/services/service3']}
+          items={['Academy', 'Internship']}
+          links={['/services/learn', '/services/internship']}
           dropdownOpen={dropdownOpen}
           section="services"
           handleDropdownToggle={handleDropdownToggle}
@@ -154,8 +161,8 @@ const Navbar = () => {
         />
         <DropdownMenu
           title="Company"
-          items={['About Us', 'Contact Us', 'Why Choose First Digits?']}
-          links={['/company/about', '/company/contact', '/company/why-choose-us']}
+          items={['About Us', 'Team', 'Contact Us', 'Why Choose First Digits?']}
+          links={['/company/about', '/company/team', '/company/contact', '/company/why-choose-us']}
           dropdownOpen={dropdownOpen}
           section="company"
           handleDropdownToggle={handleDropdownToggle}
@@ -179,78 +186,88 @@ const Navbar = () => {
         {AdminBtn}
       </ul>
 
-      {/* Mobile Menu Toggle */}
-      <div className="sm:hidden flex items-center">
-        <button onClick={() => setToggle(!toggle)} aria-label="Toggle Menu">
-          {toggle ? <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" /> : <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />}
-        </button>
-        {/* Mobile Menu */}
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: toggle ? "100vh" : 0, opacity: toggle ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-          className={`${toggle ? "flex" : "hidden"} absolute top-16 left-0 w-full bg-slate-200 flex-col items-center justify-center p-4 min-h-full`} // Adjusted top spacing
-        >
-          <ul className="flex flex-col justify-center items-center gap-6 text-3xl">
-            <li className="relative cursor-pointer text-blue-800 hover:text-blue-600 group">
-              <Link to="/store" onClick={handleNavigation}>Store</Link>
-              <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-            </li>
-            <DropdownMenu
-              title="Products"
-              items={['Smart Home', 'Robotics', 'Automations']}
-              links={['/products/smart-home', '/products/robotics', '/products/automations']}
-              dropdownOpen={dropdownOpen}
-              section="products"
-              handleDropdownToggle={handleDropdownToggle}
-              dropdownRef={dropdownRef}
-            />
-            <DropdownMenu
-              title="Services"
-              items={['Academy', 'Internship', 'Service 3']}
-              links={['/services/learn', '/services/internship', '/services/service3']}
-              dropdownOpen={dropdownOpen}
-              section="services"
-              handleDropdownToggle={handleDropdownToggle}
-              dropdownRef={dropdownRef}
-            />
-            <DropdownMenu
-              title="Company"
-              items={['About Us', 'Contact Us', 'Why Choose First Digits?']}
-              links={['/company/about', '/company/contact', '/company/why-choose-us']}
-              dropdownOpen={dropdownOpen}
-              section="company"
-              handleDropdownToggle={handleDropdownToggle}
-              dropdownRef={dropdownRef}
-            />
-            <DropdownMenu
-              title="Support"
-              items={['FAQ', 'Help Center', 'Community']}
-              links={['/support/faq', '/support/help-center', '/support/community']}
-              dropdownOpen={dropdownOpen}
-              section="support"
-              handleDropdownToggle={handleDropdownToggle}
-              dropdownRef={dropdownRef}
-            />
-          </ul>
-          {/* Mobile Icons */}
-          <ul className="flex justify-center items-center gap-6 mt-6">
-            <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
-            {AuthButtons}
-            {AdminBtn}
-          </ul>
-          {/* Mobile Search Bar at the Bottom */}
-          <div className="sm:hidden text-base text-blue-900 bottom-0 left-0 right-0 p-4 bg-slate-200 border-t border-gray-300">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full p-3 border border-gray-300 rounded-md"
-              aria-label="Mobile Search Input"
-            />
-          </div>
-
-        </motion.div>
-      </div>
+{/* Mobile Menu Toggle */}
+<div className="sm:hidden flex items-center">
+  <button onClick={() => setToggle(!toggle)} aria-label="Toggle Menu">
+    {toggle ? (
+      <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
+    ) : (
+      <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
+    )}
+  </button>
+  
+  {/* Mobile Menu */}
+  <motion.div
+    initial={{ height: 0, opacity: 0 }}
+    animate={{ height: toggle ? "100vh" : 0, opacity: toggle ? 1 : 0 }}
+    transition={{ duration: 0.3 }}
+    className={`${toggle ? "flex" : "hidden"} absolute top-16 left-0 w-full bg-slate-200 flex-col items-center justify-center p-4 min-h-full`}
+  >
+    <ul className="flex flex-col justify-center items-center gap-6 text-3xl">
+      <li className="relative cursor-pointer text-blue-800 hover:text-blue-600 group">
+        <Link to="/store" onClick={handleNavigation}>Store</Link>
+        <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+      </li>
+      <DropdownMenu
+        title="Products"
+        items={['Smart Home', 'Robotics', 'Automations']}
+        links={['/products/smart-home', '/products/robotics', '/products/automations']}
+        dropdownOpen={dropdownOpen}
+        section="products"
+        handleDropdownToggle={handleDropdownToggle}
+        dropdownRef={dropdownRef}
+        onClick={handleNavigation} // Pass handleNavigation here
+      />
+      <DropdownMenu
+        title="Services"
+        items={['Academy', 'Internship']}
+        links={['/services/learn', '/services/internship']}
+        dropdownOpen={dropdownOpen}
+        section="services"
+        handleDropdownToggle={handleDropdownToggle}
+        dropdownRef={dropdownRef}
+        onClick={handleNavigation} // Pass handleNavigation here
+      />
+      <DropdownMenu
+        title="Company"
+        items={['About Us', 'Team', 'Contact Us', 'Why Choose First Digits?']}
+        links={['/company/about', '/company/team', '/company/contact', '/company/why-choose-us']}
+        dropdownOpen={dropdownOpen}
+        section="company"
+        handleDropdownToggle={handleDropdownToggle}
+        dropdownRef={dropdownRef}
+        onClick={handleNavigation} // Pass handleNavigation here
+      />
+      <DropdownMenu
+        title="Support"
+        items={['FAQ', 'Help Center', 'Community']}
+        links={['/support/faq', '/support/help-center', '/support/community']}
+        dropdownOpen={dropdownOpen}
+        section="support"
+        handleDropdownToggle={handleDropdownToggle}
+        dropdownRef={dropdownRef}
+        onClick={handleNavigation} // Pass handleNavigation here
+      />
+    </ul>
+    
+    {/* Mobile Icons */}
+    <ul className="flex justify-center items-center gap-6 mt-6">
+      <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
+      {AuthButtons}
+      {AdminBtn}
+    </ul>
+    
+    {/* Mobile Search Bar at the Bottom */}
+    <div className="sm:hidden text-base text-blue-900 bottom-0 left-0 right-0 p-4 bg-slate-200 border-t border-gray-300">
+      <input
+        type="text"
+        placeholder="Search..."
+        className="w-full p-3 border border-gray-300 rounded-md"
+        aria-label="Mobile Search Input"
+      />
+    </div>
+  </motion.div>
+</div>
     </nav>
   );
 };

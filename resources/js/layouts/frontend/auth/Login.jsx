@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -10,12 +11,17 @@ const Login = () => {
         password: "",
     });
     const [error, setError] = useState({}); // Error state for validation errors
+    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
     const handleInput = (e) => {
         setLogin({
             ...loginInput,
             [e.target.name]: e.target.value,
         });
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     const loginSubmit = (e) => {
@@ -35,8 +41,7 @@ const Login = () => {
                         localStorage.setItem("auth_token", res.data.token);
                         localStorage.setItem("auth_name", res.data.username);
                         localStorage.setItem("auth_email", res.data.email);
-                        if (res.data.role == 'admin') localStorage.setItem("role", res.data.role);
-                        else localStorage.setItem("role", res.data.role);
+                        localStorage.setItem("role", res.data.role);
                         swal("Success", res.data.message, "success");
 
                         if (res.data.role === "admin") {
@@ -80,17 +85,24 @@ const Login = () => {
                         required
                     />
                     <small className="text-red-500">{error?.email?.[0]}</small>
-                    {/* Password Input */}
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        aria-label="Password"
-                        onChange={handleInput}
-                        value={loginInput.password}
-                        className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                    />
+                    {/* Password Input with Toggle Icon */}
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            aria-label="Password"
+                            onChange={handleInput}
+                            value={loginInput.password}
+                            className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                        {showPassword ? (
+                            <EyeOff onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                        ) : (
+                            <Eye onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                        )}
+                    </div>
                     <small className="text-red-500">{error?.password?.[0]}</small>
                     {/* Submit Button */}
                     <button

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate, Link } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Register = () => {
         error_list: {},
     });
     const [error, setError] = useState({});
+    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
     const handleInput = (e) => {
         setRegister({
@@ -21,9 +23,12 @@ const Register = () => {
         });
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     const registerSubmit = (e) => {
         e.preventDefault();
-
         const data = {
             name: registerInput.name,
             email: registerInput.email,
@@ -31,7 +36,7 @@ const Register = () => {
             password_confirmation: registerInput.password_confirmation,
         };
 
-        axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios.get("/sanctum/csrf-cookie").then(() => {
             axios
                 .post(`/api/register`, data)
                 .then((res) => {
@@ -39,16 +44,16 @@ const Register = () => {
                         localStorage.setItem("auth_token", res.data.access_token);
                         localStorage.setItem("auth_name", res.data.username);
                         localStorage.setItem("auth_email", res.data.email);
-                        setError({});  // Clear any previous errors
+                        setError({});
                         swal("Success", res.data.message, "success");
                         navigate("/");
                     } else {
-                        setError(res.data.validation_errors || {}); // Ensure it's accessing the right field
+                        setError(res.data.validation_errors || {});
                     }
                 })
                 .catch((err) => {
                     if (err.response && err.response.status === 422) {
-                        setError(err.response.data.validation_errors || {}); // Correctly handle errors
+                        setError(err.response.data.validation_errors || {});
                         swal('Error', 'Please check the input fields.', 'error');
                     } else {
                         swal('Error', 'Something went wrong. Please try again later.', 'error');
@@ -63,9 +68,7 @@ const Register = () => {
             <div className="mt-28 flex flex-col justify-center bg-white border border-gray-200 rounded-lg p-8 shadow-lg w-full max-w-md">
                 <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">Register</h1>
 
-                {/* Form */}
                 <form onSubmit={registerSubmit} className="flex flex-col space-y-4">
-                    {/* Full Name */}
                     <input
                         type="text"
                         name="name"
@@ -77,7 +80,6 @@ const Register = () => {
                     />
                     <small className="text-red-500">{error?.name?.[0]}</small>
 
-                    {/* Email */}
                     <input
                         type="email"
                         name="email"
@@ -89,31 +91,44 @@ const Register = () => {
                     />
                     <small className="text-red-500">{error?.email?.[0]}</small>
 
-                    {/* Password */}
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        aria-label="Password"
-                        onChange={handleInput}
-                        value={registerInput.password}
-                        className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    {/* Password Field with Toggle Icon */}
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            aria-label="Password"
+                            onChange={handleInput}
+                            value={registerInput.password}
+                            className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        {showPassword ? (
+                            <EyeOff onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                        ) : (
+                            <Eye onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                        )}
+                    </div>
                     <small className="text-red-500">{error?.password?.[0]}</small>
 
-                    {/* Confirm Password */}
-                    <input
-                        type="password"
-                        name="password_confirmation"
-                        placeholder="Confirm Password"
-                        aria-label="Confirm Password"
-                        onChange={handleInput}
-                        value={registerInput.password_confirmation}
-                        className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    {/* Confirm Password Field with Toggle Icon */}
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="password_confirmation"
+                            placeholder="Confirm Password"
+                            aria-label="Confirm Password"
+                            onChange={handleInput}
+                            value={registerInput.password_confirmation}
+                            className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        {showPassword ? (
+                            <EyeOff onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                        ) : (
+                            <Eye onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                        )}
+                    </div>
                     <small className="text-red-500">{error?.password_confirmation?.[0]}</small>
 
-                    {/* Submit Button */}
                     <button
                         type="submit"
                         className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors"
@@ -122,17 +137,6 @@ const Register = () => {
                     </button>
                 </form>
 
-                {/* Social Login */}
-                <div className="flex flex-col space-y-2 mt-4">
-                    <button className="bg-red-500 text-white rounded-md p-3 hover:bg-red-600 transition-colors">
-                        Sign up with Google
-                    </button>
-                    <button className="bg-blue-700 text-white rounded-md p-3 hover:bg-blue-800 transition-colors">
-                        Sign up with Facebook
-                    </button>
-                </div>
-
-                {/* Already have an account */}
                 <p className="text-center mt-4">
                     Already have an account?{" "}
                     <Link to="/login" className="text-blue-500 hover:underline">

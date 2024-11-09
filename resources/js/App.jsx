@@ -1,22 +1,33 @@
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import axios from 'axios';
-import Master from './layouts/admin/Master';
-import Register from './layouts/frontend/auth/Register';
-import Login from './layouts/frontend/auth/Login';
-import AdminPrivateRoute from './AdminPrivateRoute'; // Importing AdminPrivateRoute
 
-// Import components from the initial app
-import Navbar from './layouts/frontend/Components/Navbar';
-import Slider from './layouts/frontend/Components/Slider';
-import About from './layouts/frontend/Components/About';
-import Products from './layouts/frontend/Components/Products';
-import Partners from './layouts/frontend/Components/Partners';
-import Footer from './layouts/frontend/Components/Footer';
-import Store from './layouts/frontend/Outer/Store';
-import ProductDetail from './layouts/frontend/Outer/Detail';
-import NotFound from './layouts/frontend/Components/404';
-import Forbidden from './layouts/frontend/Components/403';
-import ScrollToTop from './layouts/frontend/Components/ScrollToTop'; // Import ScrollToTop
+import LoadingSpinner from './layouts/frontend/Components/Loader';
+import AboutUs from './layouts/frontend/Outer/AboutUs';
+import ContactUs from './layouts/frontend/Outer/ContactUs';
+import WhyChooseFirstDigits from './layouts/frontend/Outer/WhyChooseFirstDigits';
+import FAQ from './layouts/frontend/Outer/FAQ';
+import HelpCenter from './layouts/frontend/Outer/HelpCenter';
+import Community from './layouts/frontend/Outer/Community';
+import Academy from './layouts/frontend/Outer/Academy';
+import Internship from './layouts/frontend/Outer/Internship';
+import Team from './layouts/frontend/Outer/Team';
+
+const Master = lazy(() => import('./layouts/admin/Master'));
+const Register = lazy(() => import('./layouts/frontend/auth/Register'));
+const Login = lazy(() => import('./layouts/frontend/auth/Login'));
+const AdminPrivateRoute = lazy(() => import('./AdminPrivateRoute'));
+const Navbar = lazy(() => import('./layouts/frontend/Components/Navbar'));
+const Slider = lazy(() => import('./layouts/frontend/Components/Slider'));
+const About = lazy(() => import('./layouts/frontend/Components/About'));
+const Products = lazy(() => import('./layouts/frontend/Components/Products'));
+const Partners = lazy(() => import('./layouts/frontend/Components/Partners'));
+const Footer = lazy(() => import('./layouts/frontend/Components/Footer'));
+const Store = lazy(() => import('./layouts/frontend/Outer/Store'));
+const ProductDetail = lazy(() => import('./layouts/frontend/Outer/Detail'));
+const NotFound = lazy(() => import('./layouts/frontend/Components/404'));
+const Forbidden = lazy(() => import('./layouts/frontend/Components/403'));
+const ScrollToTop = lazy(() => import('./layouts/frontend/Components/ScrollToTop'));
 
 axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;
@@ -75,10 +86,20 @@ function Layout() {
         {/* Frontend routes */}
         <Route path="/" element={<Home />} />
         <Route path="/store" element={<Store />} />
+        <Route path="/company/about" element={<AboutUs />} />
+        <Route path="/company/team" element={<Team />} />
+        <Route path="/company/contact" element={<ContactUs />} />
+        <Route path="/company/why-choose-us" element={<WhyChooseFirstDigits />} />
+        <Route path="/support/faq" element={<FAQ />} />
+        <Route path="/support/help-center" element={<HelpCenter />} />
+        <Route path="/support/community" element={<Community />} />
+        <Route path="/services/learn" element={<Academy />} />
+        <Route path="/services/internship" element={<Internship />} />
         <Route path="/collections/:categoryLink/:productLink" element={<ProductDetail />} />
         <Route path="/403" element={<Forbidden />} />
         <Route path="/login" element={<ProtectedRoute element={<Login />} />} />
         <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
+        
         
         {/* Fallback route for non-existing pages */}
         <Route path="*" element={<NotFound />} />
@@ -94,7 +115,9 @@ function App() {
     <div className="App font-raleway">
       <Router>
         <ScrollToTop /> {/* Scroll to the top when navigating */}
+        <Suspense fallback={<LoadingSpinner />}> 
         <Layout /> {/* Use Layout to conditionally render components */}
+        </Suspense>
       </Router>
     </div>
   );
