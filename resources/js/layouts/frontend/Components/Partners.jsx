@@ -6,11 +6,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import LoadingSpinner from '../Components/Loader';
+import { X } from "lucide-react";
+import Load from './Load';
+
 
 const Partners = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     axios.get(`/api/team/view`)
@@ -25,9 +29,19 @@ const Partners = () => {
         swal('Error', 'Failed to fetch team.', 'error');
       })
       .finally(() => {
-        setLoading(false); // This will be executed after the request, whether it succeeds or fails
+        setLoading(false);
       });
   }, []);
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
 
   return (
     <div className="w-full mt-20">
@@ -35,7 +49,7 @@ const Partners = () => {
       <div>
         <h1 className="text-center text-4xl font-semibold mb-10">Gallery</h1>
         {loading ? (
-          <LoadingSpinner />
+          <Load />
         ) : (
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -53,15 +67,20 @@ const Partners = () => {
           >
             {teams.map((team) => (
               <SwiperSlide key={team.id}>
-                <div className="p-4 bg-white rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out">
+                <div
+                  className="p-4 bg-white rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                  onClick={() => openModal(`/${team.image}`)} // Open modal with selected image
+                >
                   <img
                     src={`/${team.image}`}
                     alt={team.name}
-                    className="w-full h-40 object-contain rounded-t-lg"
+                    className="w-full h-40 object-contain rounded-t-lg cursor-pointer"
                   />
                   <div className="pt-4 pb-2 text-center">
                     <p className="text-lg font-semibold">{team.name}</p>
-                    <p className="text-sm text-gray-500">{team.role && team.role.toLowerCase() === 'group' ? '' : team.role}</p>
+                    <p className="text-sm text-gray-500">
+                      {team.role && team.role.toLowerCase() === 'group' ? '' : team.role}
+                    </p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -70,6 +89,24 @@ const Partners = () => {
         )}
       </div>
 
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={closeModal}>
+          <div className="relative bg-white p-4 rounded-lg shadow-lg">
+            <button
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+              onClick={closeModal}
+            >
+              <X/>
+            </button>
+            <img
+              src={selectedImage}
+              alt="Selected"
+              className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

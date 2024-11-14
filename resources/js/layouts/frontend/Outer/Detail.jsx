@@ -13,7 +13,7 @@ const ProductDetail = () => {
     const navigate = useNavigate();
     const { categoryLink, productLink } = useParams();
     const [loading, setLoading] = useState(true);
-    const [product, setProduct] = useState(null); 
+    const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [reviews, setReviews] = useState([]); // Initialize reviews as an empty array
 
@@ -21,7 +21,7 @@ const ProductDetail = () => {
         const fetchProductDetails = async () => {
             try {
                 const response = await axios.get(`/api/fetchProducts/${categoryLink}/${productLink}`);
-                
+
                 if (response.data.status === 200) {
                     setProduct(response.data.product);
                 } else {
@@ -53,15 +53,19 @@ const ProductDetail = () => {
 
     // Ensure both image1 and image2 are available
     const images = [product.image, product.image2].filter(Boolean);
-    console.log("Images:", images); // Debugging to check the image paths
 
     return (
         <div className="p-6 max-w-screen-xl mx-auto">
+            <div className="mt-24"></div>
             {/* Breadcrumb */}
-            <nav className="text-gray-600 text-sm mt-24 mb-5">
+            <nav className="text-gray-600 text-sm mb-5">
                 <ul className="flex space-x-2">
                     <li>
                         <Link to="/" className="text-blue-900 hover:underline">Home</Link>
+                    </li>
+                    <li>/</li>
+                    <li>
+                        <Link to="/store" className="text-blue-900 hover:underline">Store</Link>
                     </li>
                     <li>/</li>
                     <li>
@@ -87,10 +91,10 @@ const ProductDetail = () => {
                         >
                             {images.map((image, index) => (
                                 <SwiperSlide key={index}>
-                                    <img 
-                                        src={`/${image}`} 
+                                    <img
+                                        src={`/${image}`}
                                         alt={product.name || 'Product Image'}
-                                        className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300"
+                                        className="w-full h-auto max-h-[500px] object-contain rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300"
                                         onError={(e) => e.target.src = '/path/to/fallback-image.jpg'}
                                     />
                                 </SwiperSlide>
@@ -112,16 +116,16 @@ const ProductDetail = () => {
 
                     {/* Quantity Controls */}
                     <div className="flex items-center mb-5">
-                        <button 
-                            className="px-4 py-2 bg-gray-300 rounded-l-lg text-gray-800 hover:bg-gray-400 transition-all" 
+                        <button
+                            className="px-4 py-2 bg-gray-300 rounded-l-lg text-gray-800 hover:bg-gray-400 transition-all"
                             onClick={handleSubtract}
                             aria-label="Decrease Quantity"
                         >
                             -
                         </button>
                         <span className="px-4 py-2 border-t border-b">{quantity}</span>
-                        <button 
-                            className="px-4 py-2 bg-gray-300 rounded-r-lg text-gray-800 hover:bg-gray-400 transition-all" 
+                        <button
+                            className="px-4 py-2 bg-gray-300 rounded-r-lg text-gray-800 hover:bg-gray-400 transition-all"
                             onClick={handleAdd}
                             aria-label="Increase Quantity"
                         >
@@ -130,7 +134,7 @@ const ProductDetail = () => {
                     </div>
 
                     {/* Add to Cart Button */}
-                    <button 
+                    <button
                         className="w-full p-3 bg-blue-800 text-white rounded-lg hover:bg-blue-700 active:bg-blue-900 transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         aria-label="Add to Cart"
                     >

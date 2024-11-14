@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
+import Load from '../Components/Load';
 
 const Team = () => {
     const [teams, setTeams] = useState([]);
@@ -27,10 +28,14 @@ const Team = () => {
         fetchTeams();
     }, []);
 
-    // Separate individual members and group photos
-    const individualMembers = teams.filter(member => member.role.toLowerCase() !== 'group');
-    const groupPhotos = teams.filter(member => member.role.toLowerCase() === 'group');
-
+// Separate individual members and group photos
+const individualMembers = teams.filter(
+    member => member.role === null || (member.role && member.role.toLowerCase() !== 'group')
+  );
+  const groupPhotos = teams.filter(
+    member => member.role && member.role.toLowerCase() === 'group'
+  );
+  
     return (
         <div className="relative w-full min-h-screen bg-gray-900 text-white">
             {/* Header Section */}
@@ -58,7 +63,7 @@ const Team = () => {
 
                 {/* Team Members Section */}
                 {loading ? (
-                    <p className="text-center text-gray-400">Loading team data...</p>
+                    <Load />
                 ) : (
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-10">
                         {individualMembers.map((member) => (
@@ -102,7 +107,7 @@ const Team = () => {
                                 className="w-full h-48 object-cover"
                             />
                             <div className="p-4 text-center">
-                                <p className="text-gray-300 italic">{photo.name || "Group Event"}</p>
+                                <p className="text-gray-300 italic">{photo.name || "Team Photo"}</p>
                             </div>
                         </motion.div>
                     ))}

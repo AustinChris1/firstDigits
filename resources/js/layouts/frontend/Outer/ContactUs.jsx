@@ -6,7 +6,7 @@ const ContactUs = () => {
   return (
     <div className="relative w-full min-h-screen bg-blue-900">
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-5 sm:p-10 text-center bg-black/70">
-      <div className="mt-24">
+      <div className="mt-20">
         <motion.h1
           initial={{ y: -100, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}

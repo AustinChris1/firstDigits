@@ -55,7 +55,7 @@ const Internship = () => {
             {/* Background Overlay */}
             <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-5 sm:p-10 text-center bg-black/70">
                 {/* Internship Header */}
-                <div className="mt-24"></div>
+                <div className="mt-20"></div>
                 <motion.h1
                     initial={{ y: -100, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}

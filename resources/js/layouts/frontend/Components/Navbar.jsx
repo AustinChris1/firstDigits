@@ -6,10 +6,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
 
-const DropdownMenu = ({ title, items, links, dropdownOpen, section, handleDropdownToggle, dropdownRef }) => (
+const DropdownMenu = ({
+  title,
+  items,
+  links,
+  dropdownOpen,
+  section,
+  handleDropdownToggle,
+  dropdownRef,
+  handleNavigation
+}) => (
   <li
     className="relative cursor-pointer text-blue-800 hover:text-blue-600 group"
-    onClick={() => handleDropdownToggle(section)}
+    onClick={() => handleDropdownToggle(section)} // Only toggles the dropdown here
     aria-haspopup="true"
     aria-expanded={dropdownOpen === section}
   >
@@ -35,7 +44,12 @@ const DropdownMenu = ({ title, items, links, dropdownOpen, section, handleDropdo
               className="p-2 hover:bg-blue-800 hover:text-white transition-colors cursor-pointer"
               role="menuitem"
             >
-              <Link to={links[index]}>{item}</Link>
+              <Link
+                to={links[index]}
+                onClick={() => handleNavigation(links[index])} // Call handleNavigation on link click
+              >
+                {item}
+              </Link>
             </li>
           ))}
         </motion.ul>
@@ -49,7 +63,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [category, setCategory] = useState([]); // State to store categories
   const dropdownRef = useRef(null);
   const navbarRef = useRef(null);
 
@@ -64,8 +78,26 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Toggle the dropdown
   const handleDropdownToggle = (section) => {
     setDropdownOpen(prev => (prev === section ? null : section));
+  };
+
+  // Fetch categories
+  useEffect(() => {
+    axios.get('/api/getCategory').then(res => {
+      if (res.data.status === 200) {
+        setCategory(res.data.category); // Set categories to state
+      } else {
+        swal("Error", "Unable to fetch categories", "error");
+      }
+    });
+  }, []);
+
+  // Handle navigation
+  const handleNavigation = (path) => {
+    setToggle(false); // Close the mobile menu when navigating
+    navigate(path); // Navigate to the clicked route
   };
 
   const logout = (e) => {
@@ -87,27 +119,7 @@ const Navbar = () => {
         navigate("/"); // Redirect to home after successful logout
       }
     });
-  }
-
-  const AuthButtons = localStorage.getItem('auth_token') ? (
-    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log Out">
-      <button onClick={logout} className="flex items-center">
-        <LogOut aria-label="LogOut" />
-      </button>
-    </li>
-  ) : (
-    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log In">
-      <Link to="/login"><User aria-label="User" /></Link>
-    </li>
-  );
-
-  const AdminBtn = localStorage.getItem('role') === 'admin' ? (
-    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Admin">
-      <Link to="/admin/dashboard" className="flex items-center">
-        <KeySquare aria-label="Admin" />
-      </Link>
-    </li>
-  ) : null;
+  };
 
   // Scroll effect to make navbar sticky and resize
   useEffect(() => {
@@ -118,11 +130,34 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Add this function to handle navigation and toggle the menu
-  const handleNavigation = () => {
-    setToggle(false); // Close the menu when navigating
-  };
+  useEffect(() => {
+    document.body.style.overflow = toggle ? 'hidden' : 'auto';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [toggle]);
 
+  // Auth buttons for login/logout
+  const AuthButtons = localStorage.getItem('auth_token') ? (
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log Out">
+      <button onClick={logout} className="flex items-center">
+        <LogOut aria-label="LogOut" />
+      </button>
+    </li>
+  ) : (
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log In">
+      <Link to="/login" onClick={() => handleNavigation('/login')}><User aria-label="User" /></Link>
+    </li>
+  );
+
+  // Admin button for admin role
+  const AdminBtn = localStorage.getItem('role') === 'admin' ? (
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Admin">
+      <Link to="/admin/dashboard" className="flex items-center">
+        <KeySquare aria-label="Admin" />
+      </Link>
+    </li>
+  ) : null;
 
   return (
     <nav
@@ -140,16 +175,19 @@ const Navbar = () => {
           <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
         </li>
 
-        {/* Reusable Dropdowns */}
+        {/* Products Dropdown with Dynamic Categories */}
         <DropdownMenu
           title="Products"
-          items={['Smart Home', 'Robotics', 'Automations']}
-          links={['/products/smart-home', '/products/robotics', '/products/automations']}
+          items={category.map(cat => cat.name)} // Dynamically displaying category names
+          links={category.map(cat => `/collections/${cat.link}`)} // Dynamically generating links
           dropdownOpen={dropdownOpen}
           section="products"
           handleDropdownToggle={handleDropdownToggle}
           dropdownRef={dropdownRef}
+          handleNavigation={handleNavigation}
         />
+        
+        {/* Other Dropdowns */}
         <DropdownMenu
           title="Services"
           items={['Academy', 'Internship']}
@@ -158,6 +196,7 @@ const Navbar = () => {
           section="services"
           handleDropdownToggle={handleDropdownToggle}
           dropdownRef={dropdownRef}
+          handleNavigation={handleNavigation}
         />
         <DropdownMenu
           title="Company"
@@ -167,6 +206,7 @@ const Navbar = () => {
           section="company"
           handleDropdownToggle={handleDropdownToggle}
           dropdownRef={dropdownRef}
+          handleNavigation={handleNavigation}
         />
         <DropdownMenu
           title="Support"
@@ -176,9 +216,9 @@ const Navbar = () => {
           section="support"
           handleDropdownToggle={handleDropdownToggle}
           dropdownRef={dropdownRef}
+          handleNavigation={handleNavigation}
         />
       </ul>
-
       {/* Desktop Icons */}
       <ul className="hidden sm:flex justify-end items-center gap-6">
         <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
@@ -186,88 +226,110 @@ const Navbar = () => {
         {AdminBtn}
       </ul>
 
-{/* Mobile Menu Toggle */}
-<div className="sm:hidden flex items-center">
-  <button onClick={() => setToggle(!toggle)} aria-label="Toggle Menu">
-    {toggle ? (
-      <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
-    ) : (
-      <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
-    )}
-  </button>
-  
-  {/* Mobile Menu */}
-  <motion.div
-    initial={{ height: 0, opacity: 0 }}
-    animate={{ height: toggle ? "100vh" : 0, opacity: toggle ? 1 : 0 }}
-    transition={{ duration: 0.3 }}
-    className={`${toggle ? "flex" : "hidden"} absolute top-16 left-0 w-full bg-slate-200 flex-col items-center justify-center p-4 min-h-full`}
-  >
-    <ul className="flex flex-col justify-center items-center gap-6 text-3xl">
-      <li className="relative cursor-pointer text-blue-800 hover:text-blue-600 group">
-        <Link to="/store" onClick={handleNavigation}>Store</Link>
-        <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-      </li>
-      <DropdownMenu
-        title="Products"
-        items={['Smart Home', 'Robotics', 'Automations']}
-        links={['/products/smart-home', '/products/robotics', '/products/automations']}
-        dropdownOpen={dropdownOpen}
-        section="products"
-        handleDropdownToggle={handleDropdownToggle}
-        dropdownRef={dropdownRef}
-        onClick={handleNavigation} // Pass handleNavigation here
-      />
-      <DropdownMenu
-        title="Services"
-        items={['Academy', 'Internship']}
-        links={['/services/learn', '/services/internship']}
-        dropdownOpen={dropdownOpen}
-        section="services"
-        handleDropdownToggle={handleDropdownToggle}
-        dropdownRef={dropdownRef}
-        onClick={handleNavigation} // Pass handleNavigation here
-      />
-      <DropdownMenu
-        title="Company"
-        items={['About Us', 'Team', 'Contact Us', 'Why Choose First Digits?']}
-        links={['/company/about', '/company/team', '/company/contact', '/company/why-choose-us']}
-        dropdownOpen={dropdownOpen}
-        section="company"
-        handleDropdownToggle={handleDropdownToggle}
-        dropdownRef={dropdownRef}
-        onClick={handleNavigation} // Pass handleNavigation here
-      />
-      <DropdownMenu
-        title="Support"
-        items={['FAQ', 'Help Center', 'Community']}
-        links={['/support/faq', '/support/help-center', '/support/community']}
-        dropdownOpen={dropdownOpen}
-        section="support"
-        handleDropdownToggle={handleDropdownToggle}
-        dropdownRef={dropdownRef}
-        onClick={handleNavigation} // Pass handleNavigation here
-      />
-    </ul>
-    
-    {/* Mobile Icons */}
-    <ul className="flex justify-center items-center gap-6 mt-6">
-      <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
-      {AuthButtons}
-      {AdminBtn}
-    </ul>
-    
-    {/* Mobile Search Bar at the Bottom */}
-    <div className="sm:hidden text-base text-blue-900 bottom-0 left-0 right-0 p-4 bg-slate-200 border-t border-gray-300">
-      <input
-        type="text"
-        placeholder="Search..."
-        className="w-full p-3 border border-gray-300 rounded-md"
-        aria-label="Mobile Search Input"
-      />
-    </div>
-  </motion.div>
-</div>
+      {/* Mobile Menu Toggle */}
+      <div className="sm:hidden flex items-center">
+        <button onClick={() => setToggle(!toggle)} aria-label="Toggle Menu">
+          {toggle ? (
+            <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
+          ) : (
+            <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
+          )}
+        </button>
+
+        {/* Mobile Menu */}
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{
+            height: toggle ? "100vh" : 0,
+            opacity: toggle ? 1 : 0,
+            y: toggle ? 0 : -20, // Adds smooth upward motion on closing
+          }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut", // Smooth transition when closing
+          }}
+          className={`${toggle ? "flex" : "hidden"} absolute top-20 left-0 w-full bg-slate-200 z-10 flex-col items-center gap-6 p-6 md:p-8`}
+        >
+          <ul className="space-y-10 mt-10 text-lg font-medium">
+            {/* Store Menu Item */}
+            <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Store">
+              <Link to="/store" onClick={() => handleNavigation('/store')}>Store</Link>
+            </li>
+
+            {/* Products Dropdown */}
+            <DropdownMenu
+              title="Products"
+              items={category.map(cat => cat.name)} // Dynamically displaying category names
+              links={category.map(cat => `/collections/${cat.link}`)} // Dynamically generating links
+              dropdownOpen={dropdownOpen}
+              section="products"
+              handleDropdownToggle={handleDropdownToggle}
+              dropdownRef={dropdownRef}
+              handleNavigation={handleNavigation}
+            />
+
+            {/* Services Dropdown */}
+            <DropdownMenu
+              title="Services"
+              items={['Academy', 'Internship']}
+              links={['/services/learn', '/services/internship']}
+              dropdownOpen={dropdownOpen}
+              section="services"
+              handleDropdownToggle={handleDropdownToggle}
+              dropdownRef={dropdownRef}
+              handleNavigation={handleNavigation}
+            />
+
+            {/* Company Dropdown */}
+            <DropdownMenu
+              title="Company"
+              items={['About Us', 'Team', 'Contact Us', 'Why Choose First Digits?']}
+              links={['/company/about', '/company/team', '/company/contact', '/company/why-choose-us']}
+              dropdownOpen={dropdownOpen}
+              section="company"
+              handleDropdownToggle={handleDropdownToggle}
+              dropdownRef={dropdownRef}
+              handleNavigation={handleNavigation}
+            />
+
+            {/* Support Dropdown */}
+            <DropdownMenu
+              title="Support"
+              items={['FAQ', 'Help Center', 'Community']}
+              links={['/support/faq', '/support/help-center', '/support/community']}
+              dropdownOpen={dropdownOpen}
+              section="support"
+              handleDropdownToggle={handleDropdownToggle}
+              dropdownRef={dropdownRef}
+              handleNavigation={handleNavigation}
+            />
+
+            {/* Authentication and Admin Buttons with Labels */}
+            <div className="flex items-center gap-6">
+              <div className="flex flex-col items-center">
+                <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
+              </div>
+              <div className="flex flex-col items-center">
+                {AuthButtons}
+              </div>
+
+              <div className="flex flex-col items-center">
+                {AdminBtn}
+              </div>
+            </div>
+          </ul>
+
+          {/* Mobile Search Bar at the Bottom */}
+          <div className="sm:hidden text-base text-blue-900 mt-24 w-full p-4 bg-slate-200 border-t border-gray-300">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full p-3 border border-gray-300 rounded-md text-lg focus:outline-none"
+              aria-label="Mobile Search Input"
+            />
+          </div>
+        </motion.div>
+      </div>
     </nav>
   );
 };

@@ -168,7 +168,7 @@ const Store = () => {
                 <img
                   src={`/${product.image}`}
                   alt={product.name}
-                  className="w-full h-40 sm:h-48 object-cover rounded-md mb-3"
+                  className="w-full h-40 sm:h-48 object-contain rounded-md mb-3"
                 />
                 <h3 className="text-lg font-bold truncate">{product.name}</h3>
                 <button className="mt-auto bg-blue-900 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">

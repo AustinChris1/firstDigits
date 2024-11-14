@@ -6,7 +6,7 @@ const WhyChooseFirstDigits = () => {
   return (
     <div className="relative w-full min-h-screen bg-gray-100">
       <div className="p-5 sm:p-10 flex flex-col items-center text-center">
-      <div className="mt-24">
+      <div className="mt-20">
         <motion.h2
           initial={{ y: -100, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}

@@ -12,6 +12,7 @@ import Community from './layouts/frontend/Outer/Community';
 import Academy from './layouts/frontend/Outer/Academy';
 import Internship from './layouts/frontend/Outer/Internship';
 import Team from './layouts/frontend/Outer/Team';
+import Collections from './layouts/frontend/Outer/Collections';
 
 const Master = lazy(() => import('./layouts/admin/Master'));
 const Register = lazy(() => import('./layouts/frontend/auth/Register'));
@@ -95,6 +96,7 @@ function Layout() {
         <Route path="/support/community" element={<Community />} />
         <Route path="/services/learn" element={<Academy />} />
         <Route path="/services/internship" element={<Internship />} />
+        <Route path="/collections/:categoryLink" element={<Collections />} />
         <Route path="/collections/:categoryLink/:productLink" element={<ProductDetail />} />
         <Route path="/403" element={<Forbidden />} />
         <Route path="/login" element={<ProtectedRoute element={<Login />} />} />

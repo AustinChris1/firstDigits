@@ -121,22 +121,22 @@ const Products = () => {
                             variants={productCardVariants}
                         >
                             <Link to={`/collections/${prod.category.link}/${prod.link}`}>
-                            <motion.img
-                                src={`/${prod.image}`}  // Ensure image field in response is correct
-                                alt={prod.name}
-                                className="w-full h-32 object-cover rounded-t-lg" // Adjusted height for a smaller image size
-                                whileHover={{ scale: 1.1 }}
-                                transition={{ duration: 0.3 }}
-                            />
-                            <div className="flex flex-col justify-center items-center gap-2 p-4">
-                                <p className="text-center font-semibold">{prod.name}</p>
-                                <motion.button 
-                                    whileHover={{ scale: 1.05 }} 
-                                    className="w-fit p-2 flex items-center justify-center text-gray-200 hover:brightness-110 bg-gradient-to-r from-[#1c4587] to-gray-200 rounded-full transition-transform duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                >
-                                    View Details
-                                </motion.button>
-                            </div>
+                                <motion.img
+                                    src={`/${prod.image}`}
+                                    alt={prod.name}
+                                    className="w-full h-48 object-contain rounded-t-lg" // Changed to object-contain and increased height
+                                    whileHover={{ scale: 1.1 }}
+                                    transition={{ duration: 0.3 }}
+                                />
+                                <div className="flex flex-col justify-center items-center gap-2 p-4">
+                                    <p className="text-center font-semibold">{prod.name}</p>
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        className="w-fit p-2 flex items-center justify-center text-gray-200 hover:brightness-110 bg-gradient-to-r from-[#1c4587] to-gray-200 rounded-full transition-transform duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    >
+                                        View Details
+                                    </motion.button>
+                                </div>
                             </Link>
                         </motion.div>
                     ))}
