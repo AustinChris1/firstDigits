@@ -22,7 +22,7 @@ Route::get('getProducts', [FrontendController::class, 'products']);
 Route::get('fetchProducts/{categoryLink}/{productLink}', [FrontendController::class, 'fetchProducts']);
 
 Route::get('/team/view', [TeamController::class, 'index']);
-
+Route::get('/search', [FrontendController::class, 'search']);
 //Admin routes
 Route::middleware('auth:sanctum', 'isApiAdmin')->group(function () {
     Route::get('/check-auth', function (Request $request) {

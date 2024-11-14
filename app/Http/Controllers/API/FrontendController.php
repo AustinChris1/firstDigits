@@ -107,4 +107,45 @@ class FrontendController extends Controller
             'category' => $categories
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->query('query');
+    
+        if ($searchTerm) {
+            // Search for products where the name or description contains the search term
+            $products = Product::where('name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('brand', 'LIKE', "%{$searchTerm}%")
+            ->get();
+    
+            // Check if any products were found
+            if ($products->isNotEmpty()) {
+                // Retrieve categories for each product by mapping the product IDs to their category
+                $categories = Category::whereIn('id', $products->pluck('category_id'))
+                    ->where('status', '0')
+                    ->get();
+    
+                return response()->json([
+                    'status' => 200,
+                    'products' => $products,
+                    'categories' => $categories
+                ]);
+            }
+    
+            // If no products are found, return a 404 response
+            return response()->json([
+                'status' => 404,
+                'products' => [],
+                'message' => 'No products found'
+            ]);
+        }
+    
+        // If no search term was provided, return an empty result
+        return response()->json([
+            'status' => 404,
+            'products' => [],
+            'message' => 'No search term provided'
+        ]);
+    }
+    
 }

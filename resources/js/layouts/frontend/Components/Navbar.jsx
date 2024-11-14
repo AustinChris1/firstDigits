@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
+import Load from './Load';
 
 const DropdownMenu = ({
   title,
@@ -159,12 +160,43 @@ const Navbar = () => {
     </li>
   ) : null;
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSearch = async (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    if (term.trim()) {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`/api/search`, {
+          params: { query: term },
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (response.data.status === 200 && response.data.products.length > 0) {
+          setSearchResults(response.data.products);
+        } else {
+          setSearchResults([]); // Clear results if no match
+        }
+      } catch (error) {
+        console.error('Search error:', error);
+        setSearchResults([]); // Clear results in case of error
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setSearchResults([]); // Clear results if input is empty
+    }
+  };
   return (
     <nav
       ref={navbarRef}
       className={`navbar fixed z-50 w-full bg-slate-200 text-slate-900 dark:text-white flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2 shadow-md' : 'py-4'}`}
     >
-      <Link to='/'>
+      <Link to='/' onClick={() => handleNavigation('/')}>
         <img src={fdcLogo} alt="First Digit Communications" className="w-40 h-auto" />
       </Link>
 
@@ -178,15 +210,15 @@ const Navbar = () => {
         {/* Products Dropdown with Dynamic Categories */}
         <DropdownMenu
           title="Products"
-          items={category.map(cat => cat.name)} // Dynamically displaying category names
-          links={category.map(cat => `/collections/${cat.link}`)} // Dynamically generating links
+          items={category.map(cat => cat.name)}
+          links={category.map(cat => `/collections/${cat.link}`)}
           dropdownOpen={dropdownOpen}
           section="products"
           handleDropdownToggle={handleDropdownToggle}
-          dropdownRef={dropdownRef}
+          dropdownRef={navbarRef}
           handleNavigation={handleNavigation}
         />
-        
+
         {/* Other Dropdowns */}
         <DropdownMenu
           title="Services"
@@ -195,7 +227,7 @@ const Navbar = () => {
           dropdownOpen={dropdownOpen}
           section="services"
           handleDropdownToggle={handleDropdownToggle}
-          dropdownRef={dropdownRef}
+          dropdownRef={navbarRef}
           handleNavigation={handleNavigation}
         />
         <DropdownMenu
@@ -205,7 +237,7 @@ const Navbar = () => {
           dropdownOpen={dropdownOpen}
           section="company"
           handleDropdownToggle={handleDropdownToggle}
-          dropdownRef={dropdownRef}
+          dropdownRef={navbarRef}
           handleNavigation={handleNavigation}
         />
         <DropdownMenu
@@ -215,10 +247,41 @@ const Navbar = () => {
           dropdownOpen={dropdownOpen}
           section="support"
           handleDropdownToggle={handleDropdownToggle}
-          dropdownRef={dropdownRef}
+          dropdownRef={navbarRef}
           handleNavigation={handleNavigation}
         />
+
+        {/* Search Bar */}
+        <li className="relative">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearch}
+            placeholder="Search..."
+            className="p-2 pl-6 pr-4 rounded-full bg-white border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 w-52"
+          />
+          {isLoading && (
+            <span className="absolute left-3 top-2.5 text-gray-500">
+              <Load />
+            </span>
+          )}
+          {/* Add a dropdown for search results */}
+          {searchResults.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-2 text-blue-900 bg-white shadow-lg rounded-lg border border-slate-300">
+              <ul className="max-h-60 overflow-auto">
+                {searchResults.map((item, index) => (
+                  <li key={index} className="p-2 hover:bg-slate-100 cursor-pointer">
+                    <Link to={`/collections/${item.category.link}/${item.link}`} className="block" onClick={() => { setSearchTerm(''); setSearchResults([]); }}>
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </li>
       </ul>
+
       {/* Desktop Icons */}
       <ul className="hidden sm:flex justify-end items-center gap-6">
         <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
@@ -248,10 +311,13 @@ const Navbar = () => {
             duration: 0.5,
             ease: "easeInOut", // Smooth transition when closing
           }}
-          className={`${toggle ? "flex" : "hidden"} absolute top-20 left-0 w-full bg-slate-200 z-10 flex-col items-center gap-6 p-6 md:p-8`}
+          className={`absolute top-20 left-0 w-full bg-slate-200 z-10 flex-col items-center gap-6 p-6 md:p-8 ${toggle ? "flex" : "hidden"}`}
+          style={{
+            maxHeight: 'calc(100vh - 80px)', // Adjust height based on your menu header height
+            overflowY: 'scroll', // Enable vertical scrolling within the mobile menu
+          }}
         >
-          <ul className="space-y-10 mt-10 text-lg font-medium">
-            {/* Store Menu Item */}
+          <ul className="space-y-10 mt-10 text-lg font-medium">            {/* Store Menu Item */}
             <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Store">
               <Link to="/store" onClick={() => handleNavigation('/store')}>Store</Link>
             </li>
@@ -319,14 +385,36 @@ const Navbar = () => {
             </div>
           </ul>
 
-          {/* Mobile Search Bar at the Bottom */}
-          <div className="sm:hidden text-base text-blue-900 mt-24 w-full p-4 bg-slate-200 border-t border-gray-300">
+          {/* Mobile Search Bar */}
+          <div className="sm:hidden text-base text-blue-900 w-full mt-16 p-4 bg-slate-200 border-t border-gray-300 relative">             
             <input
-              type="text"
-              placeholder="Search..."
-              className="w-full p-3 border border-gray-300 rounded-md text-lg focus:outline-none"
-              aria-label="Mobile Search Input"
-            />
+            type="text"
+            value={searchTerm}
+            onChange={handleSearch}
+            placeholder="Search..."
+            className="w-full p-3 border border-gray-300 rounded-md text-lg focus:outline-none"
+            aria-label="Mobile Search Input"
+          />
+          {isLoading && (
+            <span className="absolute left-3 top-2.5 text-gray-500">
+              <Load />
+            </span>
+          )}
+            {/* Display search results */}
+            {searchResults.length > 0 && (
+              <div className="mt-1 bg-white rounded-md shadow-lg p-1">
+                {searchResults.map((product) => (
+                  <div key={product.id} className="border-b border-gray-200 py-2">
+                    <Link to={`/collections/${product.category?.link || 'default-category'}/${product.link}`} onClick={() => { setToggle(false); setSearchTerm(''); setSearchResults([]); }}>{product.name}</Link>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Show a message if no results are found */}
+            {searchTerm && searchResults.length === 0 && (
+              <p className="text-center text-gray-500 mt-4">No products found.</p>
+            )}
           </div>
         </motion.div>
       </div>

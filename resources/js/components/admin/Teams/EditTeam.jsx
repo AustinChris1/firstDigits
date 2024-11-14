@@ -83,7 +83,7 @@ const EditTeam = () => {
     return (
         <div className='container px-4'>
             <h4 className="mt-4">Edit Team
-                <Link to="/admin/team/view" className="btn btn-primary btn-sm float-end">Back</Link>
+                <Link to="/admin/dashboard" className="btn btn-primary btn-sm float-end">Back</Link>
             </h4>
             <form onSubmit={editTeam} encType='multipart/form-data' className='mt-3'>
                 <ul className="nav nav-tabs" role="tablist">
