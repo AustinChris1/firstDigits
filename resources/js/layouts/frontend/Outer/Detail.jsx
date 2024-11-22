@@ -167,7 +167,13 @@ const ProductDetail = () => {
                 </div>
 
                 <div className="w-full md:w-1/2">
-                    <h2 className="text-3xl font-bold">{product.name}</h2>
+                    <h1 className="text-3xl font-bold mb-3 text-gray-800">{product.name || 'Product Name'}</h1>
+                    <p className="text-gray-700 mb-2 leading-relaxed">{product.description || 'No description available'}</p>
+                    <p className="text-sm text-gray-900 mb-2">{`Brand: ${product.brand || 'Unknown'}`}</p>
+                    <p className={`text-sm ${product.status === 0 ? 'text-green-900' : 'text-red-900'}`}>
+                        {product.status === 0 ? 'Available' : 'Out of Stock'}
+                    </p>
+
                     <div className="mt-2 text-gray-700">
                         <StarRating rating={averageRating} />
                         <p className="text-sm">Average Rating</p>
