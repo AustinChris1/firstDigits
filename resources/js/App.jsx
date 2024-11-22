@@ -13,6 +13,8 @@ import Academy from './layouts/frontend/Outer/Academy';
 import Internship from './layouts/frontend/Outer/Internship';
 import Team from './layouts/frontend/Outer/Team';
 import Collections from './layouts/frontend/Outer/Collections';
+import ResendEmail from './layouts/frontend/auth/Verification';
+import VerifyEmail from './layouts/frontend/auth/Verify';
 
 const Master = lazy(() => import('./layouts/admin/Master'));
 const Register = lazy(() => import('./layouts/frontend/auth/Register'));
@@ -101,6 +103,8 @@ function Layout() {
         <Route path="/403" element={<Forbidden />} />
         <Route path="/login" element={<ProtectedRoute element={<Login />} />} />
         <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
+        <Route path="/email/resend" element={<ResendEmail />} />
+        <Route path="/email/verify" element={<VerifyEmail />} />
         
         
         {/* Fallback route for non-existing pages */}

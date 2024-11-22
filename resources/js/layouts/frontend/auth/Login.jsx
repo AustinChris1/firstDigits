@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { Eye, EyeOff } from 'lucide-react';
+import Load from "../Components/Load";
 
 const Login = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [loginInput, setLogin] = useState({
         email: "",
         password: "",
@@ -64,8 +66,16 @@ const Login = () => {
                         swal('Error', 'Something went wrong. Please try again later.', 'error');
                         console.error('Error details:', err.response || err);
                     }
+                })
+                .finally(() => {
+                    setLoading(false); // Stop loading
                 });
-        });
+        })
+            .catch((csrfError) => {
+                setLoading(false); // Stop loading if CSRF fails
+                swal("Error", "Failed to set CSRF token. Please try again later.", "error");
+                console.error("CSRF Error:", csrfError);
+            });
     };
 
     return (
@@ -108,8 +118,9 @@ const Login = () => {
                     <button
                         type="submit"
                         className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors w-full"
+                        disabled={loading}
                     >
-                        Login
+                        {loading ? <Load /> : "Login"}
                     </button>
                 </form>
 

@@ -199,7 +199,8 @@ return [
     |
     */
 
-    'same_site' => env('SESSION_SAME_SITE', 'lax'),
+'same_site' => 'none', // Set to 'none' for cross-site cookies
+'secure' => env('SESSION_SECURE_COOKIE', true), // Should be 'true' in production
 
     /*
     |--------------------------------------------------------------------------

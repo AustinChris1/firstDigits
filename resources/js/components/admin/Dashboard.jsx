@@ -55,20 +55,33 @@ const Dashboard = () => {
   const handleAdminToggle = async (e, id) => {
     e.preventDefault();
     toggleLoadingState(id, setAdminLoading);
+
     try {
-      const { data } = await axios.post(`/api/users/make-admin/${id}`);
-      if (data.status === 200) {
-        setUsers(prev => prev.map(user => user.id === id ? { ...user, role_as: user.role_as === 1 ? 0 : 1 } : user));
-        swal("Success", data.message, "success");
-      } else {
-        swal("Error", data.message, "error");
-      }
-    } catch {
-      swal("Error", "Failed to update user role", "error");
+        const { data } = await axios.post(`/api/users/make-admin/${id}`, {}, {
+            validateStatus: (status) => status < 500, // Treat 400-499 as valid responses
+        });
+
+        if (data.status === 200) {
+            setUsers((prev) =>
+                prev.map((user) =>
+                    user.id === id
+                        ? { ...user, role_as: user.role_as === 1 ? 0 : 1 }
+                        : user
+                )
+            );
+            swal("Success", data.message, "success");
+        } else if (data.status === 403) {
+            swal("Error", data.message, "error");
+        } else {
+            swal("Error", data.message, "error");
+        }
+    } catch (error) {
+        swal("Error", "Failed to update user role", "error");
+        console.error("Error details:", error);
     } finally {
-      toggleLoadingState(id, setAdminLoading);
+        toggleLoadingState(id, setAdminLoading);
     }
-  };
+};
 
   const handleDelete = async (e, id, isUser = true) => {
     e.preventDefault();
@@ -77,19 +90,25 @@ const Dashboard = () => {
     const updateFunc = isUser ? setUsers : setTeams;
 
     try {
-      const { data } = await axios.post(apiUrl);
-      if (data.status === 200) {
-        updateFunc(prev => prev.filter(item => item.id !== id));
-        swal("Success", data.message, "success");
-      } else {
-        swal("Error", data.message, "error");
-      }
-    } catch {
-      swal("Error", `Failed to delete ${isUser ? 'user' : 'team'}`, "error");
+        const { data } = await axios.post(apiUrl, {}, {
+            validateStatus: (status) => status < 500, // Treat 400-499 as valid responses
+        });
+
+        if (data.status === 200) {
+            updateFunc((prev) => prev.filter((item) => item.id !== id));
+            swal("Success", data.message, "success");
+        } else if (data.status === 403) {
+            swal("Error", data.message, "error");
+        } else {
+            swal("Error", data.message, "error");
+        }
+    } catch (error) {
+        swal("Error", `Failed to delete ${isUser ? 'user' : 'team'}`, "error");
+        console.error("Error details:", error);
     } finally {
-      toggleLoadingState(id, setDeleteLoading);
+        toggleLoadingState(id, setDeleteLoading);
     }
-  };
+};
 
   const renderSpinner = isLoading => (
     isLoading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Delete'
