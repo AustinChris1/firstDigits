@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
+  document.title = `FAQ - First Digits`;
+
   const faqs = [
     {
       question: 'What services does First Digits Communications offer?',

@@ -29,6 +29,7 @@ const Store = () => {
 
   useEffect(() => {
     let isMounted = true;
+    document.title = `Store`;
 
     // Fetch categories
     axios.get(`/api/getCategory`).then(res => {

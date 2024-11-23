@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 
 const WhyChooseFirstDigits = () => {
+
+  document.title = `Why Choose First Digits Communications? - First Digits`;
+
   return (
     <div className="relative w-full min-h-screen bg-gray-100">
       <div className="p-5 sm:p-10 flex flex-col items-center text-center">

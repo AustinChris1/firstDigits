@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Community = () => {
+  document.title = `Community Hub - First Digits`;
   const discussions = [
     {
       title: 'Welcome to the First Digits Community!',

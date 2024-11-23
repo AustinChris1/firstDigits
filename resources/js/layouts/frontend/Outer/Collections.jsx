@@ -37,17 +37,19 @@ const Collections = () => {
     if (categoryLink && products.length > 0 && categories.length > 0) {
       // Find the category with the matching link
       const selectedCategory = categories.find(category => category.link === categoryLink);
-      
+
       if (selectedCategory) {
         // Filter products based on the matching category's id
         const filtered = products.filter(product => product.category_id === selectedCategory.id);
         setFilteredProducts(filtered);
+        document.title = `${selectedCategory.name} - Store`;
       } else {
         setFilteredProducts([]); // Clear filtered products if no matching category is found
+        document.title = 'Category Not Found - Store';
       }
     }
   }, [categoryLink, products, categories]); // Add categories to the dependency array
-  
+
   if (loading) {
     return <LoadingSpinner />; // Show a loading spinner while data is being fetched
   }
@@ -57,7 +59,7 @@ const Collections = () => {
       {/* Breadcrumb */}
       <nav className="text-gray-600 text-sm mt-24 mb-6">
         <ul className="flex space-x-2">
-        <li>
+          <li>
             <Link to="/" className="text-blue-900 hover:underline">Home</Link>
           </li>
           <li>/</li>
@@ -80,7 +82,11 @@ const Collections = () => {
               <img src={`/${product.image}`} alt={product.name} className="w-full h-56 object-contain group-hover:scale-110 transition duration-300" />
               <div className="p-4 bg-white">
                 <h3 className="text-lg font-semibold text-blue-900">{product.name}</h3>
-                <p className="text-sm text-gray-500 mt-2">{product.description}</p>
+                <p className="text-sm text-gray-500 mt-2">
+                  {product.description.length > 100
+                    ? `${product.description.slice(0, 100)}...`
+                    : product.description}
+                </p>
                 <Link to={`/collections/${categoryLink}/${product.link}`} className="mt-4 block px-6 py-3 bg-blue-900 text-white text-center rounded-lg hover:bg-blue-700 transition duration-300">
                   View Details
                 </Link>

@@ -10,6 +10,8 @@ const Team = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        document.title = `Team - First Digits`;
+
         const fetchTeams = async () => {
             try {
                 const res = await axios.get(`/api/team/view`);

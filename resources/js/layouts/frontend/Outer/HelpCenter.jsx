@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 const HelpCenter = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
+  document.title = `Help Center - First Digits`;
+
   const articles = [
     { title: 'Getting Started with Our Services', category: 'Onboarding', link: '#' },
     { title: 'Understanding Your Invoice', category: 'Billing', link: '#' },

@@ -12,6 +12,8 @@ let count = 0;
 let slideInterval;
 
 export default function Slider() {
+  document.title = `First Digits - Home`;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef(null);
   const scrollTargetRef = useRef(null);

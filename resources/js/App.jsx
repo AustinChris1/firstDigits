@@ -15,6 +15,7 @@ import Team from './layouts/frontend/Outer/Team';
 import Collections from './layouts/frontend/Outer/Collections';
 import ResendEmail from './layouts/frontend/auth/Verification';
 import VerifyEmail from './layouts/frontend/auth/Verify';
+import Sidebar from './layouts/frontend/Components/Sidebar';
 
 const Master = lazy(() => import('./layouts/admin/Master'));
 const Register = lazy(() => import('./layouts/frontend/auth/Register'));
@@ -111,6 +112,7 @@ function Layout() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
+      {!isAdminRoute && <Sidebar />} {/* Render Footer only if not on admin routes */}
       {!isAdminRoute && <Footer />} {/* Render Footer only if not on admin routes */}
     </>
   );

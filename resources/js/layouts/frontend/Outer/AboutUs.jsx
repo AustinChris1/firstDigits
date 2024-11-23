@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Lightbulb, Users, BookOpen, Code, Globe } from 'lucide-react';
 
 const AboutUs = () => {
+  document.title = `About Us - First Digits`;
   return (
     <div className="relative w-full min-h-screen bg-blue-900">
       {/* Background Image */}

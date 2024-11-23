@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NotFound = () => {
+  document.title = `404 - Page Not Found`;
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-50 to-blue-100">
       {/* Icon */}

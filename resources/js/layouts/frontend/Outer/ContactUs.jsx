@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
 const ContactUs = () => {
+  document.title = `Contact Us - First Digits`;
   return (
     <div className="relative w-full min-h-screen bg-blue-900">
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-5 sm:p-10 text-center bg-black/70">

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Users, CheckCircle, XCircle } from 'lucide-react';
 
 const Internship = () => {
+    document.title = `Internship Opportunities - First Digits`;
     const internshipOpportunities = [
         {
             title: 'Software Development Intern',

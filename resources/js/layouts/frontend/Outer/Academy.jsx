@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { BookOpen, Users, Star, Award } from 'lucide-react';
 
 const Academy = () => {
+    document.title = `Academy - First Digits`;
     const courses = [
         {
             title: 'Introduction to Automation',

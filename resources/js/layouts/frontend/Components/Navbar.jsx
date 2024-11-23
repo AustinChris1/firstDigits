@@ -311,7 +311,7 @@ const Navbar = () => {
             duration: 0.5,
             ease: "easeInOut", // Smooth transition when closing
           }}
-          className={`absolute top-20 left-0 w-full bg-slate-200 z-10 flex-col items-center gap-6 p-6 md:p-8 ${toggle ? "flex" : "hidden"}`}
+          className={`absolute top-20 left-0 w-full bg-slate-200 z-30 flex-col items-center gap-6 p-6 md:p-8 ${toggle ? "flex" : "hidden"}`}
           style={{
             maxHeight: 'calc(100vh - 80px)', // Adjust height based on your menu header height
             overflowY: 'scroll', // Enable vertical scrolling within the mobile menu

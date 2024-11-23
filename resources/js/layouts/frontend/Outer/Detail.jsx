@@ -32,6 +32,8 @@ const ProductDetail = () => {
                 if (response.data.status === 200) {
                     setProduct(response.data.product);
                     fetchReviews(response.data.product.id); // Fetch reviews once the product is fetched
+                    // Dynamically set the page title
+                    document.title = `${response.data.product.name} - Store`;
                 } else {
                     swal('Warning', response.data.message, 'error');
                     navigate('/store');
@@ -221,9 +223,9 @@ const ProductDetail = () => {
                                 className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700"
                                 disabled={currentPage === 1}
                             >
-                                Prev
+                                Previous
                             </button>
-                            <span className="text-lg">{currentPage} / {totalPages}</span>
+                            <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
                             <button
                                 onClick={() => changePage(currentPage + 1)}
                                 className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700"
