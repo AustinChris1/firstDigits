@@ -60,7 +60,7 @@ const Community = () => {
   ];
 
   return (
-    <div className="relative w-full min-h-screen bg-gray-100">
+    <div className="relative w-full min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className="p-5 sm:p-10 flex flex-col items-center text-center">
       <div className="mt-20"></div>
 
@@ -69,61 +69,61 @@ const Community = () => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-blue-900 text-4xl sm:text-5xl mb-6 font-bold"
+          className="text-blue-900 dark:text-blue-300 text-4xl sm:text-5xl mb-6 font-bold"
         >
           Community Hub
         </motion.h2>
 
         <div className="max-w-4xl w-full mb-10">
-          <h3 className="text-blue-800 text-2xl mb-4">Discussions</h3>
+          <h3 className="text-blue-800 dark:text-blue-200 text-2xl mb-4">Discussions</h3>
           {discussions.map((discussion, index) => (
             <motion.div
               key={index}
-              className="mb-4 p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <a href={discussion.link} className="text-blue-900 font-bold text-lg hover:underline">
+              <a href={discussion.link} className="text-blue-900 dark:text-blue-400 font-bold text-lg hover:underline">
                 {discussion.title}
               </a>
-              <p className="text-gray-600">{discussion.description}</p>
+              <p className="text-gray-600 dark:text-gray-300">{discussion.description}</p>
             </motion.div>
           ))}
         </div>
 
         <div className="max-w-4xl w-full mb-10">
-          <h3 className="text-blue-800 text-2xl mb-4">Upcoming Events</h3>
+          <h3 className="text-blue-800 dark:text-blue-200 text-2xl mb-4">Upcoming Events</h3>
           {events.map((event, index) => (
             <motion.div
               key={index}
-              className="mb-4 p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <a href={event.link} className="text-blue-900 font-bold text-lg hover:underline">
+              <a href={event.link} className="text-blue-900 dark:text-blue-400 font-bold text-lg hover:underline">
                 {event.title}
               </a>
-              <p className="text-gray-600">Date: {event.date}</p>
+              <p className="text-gray-600 dark:text-gray-300">Date: {event.date}</p>
             </motion.div>
           ))}
         </div>
 
         <div className="max-w-4xl w-full mb-10">
-          <h3 className="text-blue-800 text-2xl mb-4">Community Resources</h3>
+          <h3 className="text-blue-800 dark:text-blue-200 text-2xl mb-4">Community Resources</h3>
           {resources.map((resource, index) => (
             <motion.div
               key={index}
-              className="mb-4 p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <a href={resource.link} className="text-blue-900 font-bold text-lg hover:underline">
+              <a href={resource.link} className="text-blue-900 dark:text-blue-400 font-bold text-lg hover:underline">
                 {resource.title}
               </a>
             </motion.div>

@@ -1,11 +1,32 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Clock, Share2, ArrowUp } from "lucide-react";
+import { Clock, Share2, ArrowUp, Sun, Moon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
     const [history, setHistory] = useState([]);
     const [showTooltip, setShowTooltip] = useState(false);
     const location = useLocation(); // Tracks the current route
+    const [darkMode, setDarkMode] = useState(
+        localStorage.getItem("theme") === "dark"
+    );
+
+    useEffect(() => {
+        // Apply the initial theme
+        if (darkMode) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    }, [darkMode]);
+
+    const toggleDarkMode = () => {
+        setDarkMode((prev) => {
+            const newMode = !prev;
+            localStorage.setItem("theme", newMode ? "dark" : "light");
+            return newMode;
+        });
+    };
+
 
     // Function to update visited pages in localStorage
     const updateVisitedPages = () => {
@@ -89,7 +110,7 @@ const Sidebar = () => {
 
                 {/* Tooltip showing recently viewed pages */}
                 {showTooltip && (
-                    <div className="tooltip-container absolute right-full top-1/2 transform translate-x-2 -translate-y-1/2 bg-white border border-gray-300 text-gray-800 rounded-md shadow-md p-3 text-sm flex flex-col w-48 z-20">
+                    <div className="tooltip-container absolute right-full top-1/2 transform translate-x-2 -translate-y-1/2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-300 rounded-md shadow-md p-3 text-sm flex flex-col w-48 z-20">
                         <p className="font-bold mb-2">Recently Viewed:</p>
                         <ul className="space-y-1">
                             {history.length > 0 ? (
@@ -99,7 +120,7 @@ const Sidebar = () => {
                                         <li key={index}>
                                             <Link
                                                 to={page.url}
-                                                className="text-blue-500 hover:underline"
+                                                className="text-blue-500 hover:underline dark:text-blue-400"
                                                 title={page.title}
                                             >
                                                 {page.title}
@@ -107,7 +128,7 @@ const Sidebar = () => {
                                         </li>
                                     ))
                             ) : (
-                                <li className="text-gray-500">No recently viewed pages.</li>
+                                <li className="text-gray-500 dark:text-gray-600">No recently viewed pages.</li>
                             )}
                         </ul>
                     </div>
@@ -130,6 +151,14 @@ const Sidebar = () => {
                 title="Scroll to Top"
             >
                 <ArrowUp size={20} />
+            </button>
+            {/* Toggle Dark/Light Mode Button */}
+            <button
+                onClick={toggleDarkMode}
+                className="bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 rounded-full p-2 shadow hover:bg-gray-300 dark:hover:bg-gray-600"
+                title="Toggle Light/Dark Mode"
+            >
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
         </div>
     );

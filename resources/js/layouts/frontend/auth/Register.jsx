@@ -6,6 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import Load from "../Components/Load";
 
 const Register = () => {
+  document.title = "Register - First Digit";
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [registerInput, setRegister] = useState({
@@ -93,9 +94,9 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-5 py-10 sm:px-6 md:px-8">
-      <div className="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow-lg p-8">
-        <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">Register</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 px-5 py-14 sm:px-6 md:px-8">
+      <div className="w-full mt-10 max-w-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-8">
+        <h1 className="text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">Register</h1>
 
         <form onSubmit={registerSubmit} className="flex flex-col space-y-4">
           <input
@@ -105,7 +106,7 @@ const Register = () => {
             aria-label="Full Name"
             onChange={handleInput}
             value={registerInput.name}
-            className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-gray-300 dark:border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           />
           <small className="text-red-500">{error?.name?.[0]}</small>
 
@@ -116,7 +117,7 @@ const Register = () => {
             aria-label="Email"
             onChange={handleInput}
             value={registerInput.email}
-            className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-gray-300 dark:border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           />
           <small className="text-red-500">{error?.email?.[0]}</small>
 
@@ -129,17 +130,17 @@ const Register = () => {
               aria-label="Password"
               onChange={handleInput}
               value={registerInput.password}
-              className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-gray-300 dark:border-gray-600 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
             />
             {showPassword ? (
               <EyeOff
                 onClick={togglePasswordVisibility}
-                className="absolute right-3 top-3 cursor-pointer text-gray-500"
+                className="absolute right-3 top-3 cursor-pointer text-gray-500 dark:text-gray-400"
               />
             ) : (
               <Eye
                 onClick={togglePasswordVisibility}
-                className="absolute right-3 top-3 cursor-pointer text-gray-500"
+                className="absolute right-3 top-3 cursor-pointer text-gray-500 dark:text-gray-400"
               />
             )}
           </div>
@@ -153,22 +154,22 @@ const Register = () => {
             aria-label="Confirm Password"
             onChange={handleInput}
             value={registerInput.password_confirmation}
-            className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-gray-300 dark:border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           />
           <small className="text-red-500">{error?.password_confirmation?.[0]}</small>
 
           <button
             type="submit"
-            className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors"
+            className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors dark:bg-blue-600 dark:hover:bg-blue-500"
             disabled={loading}
           >
             {loading ? <Load /> : "Register"}
           </button>
         </form>
 
-        <p className="text-center mt-4">
+        <p className="text-center mt-4 text-gray-700 dark:text-gray-300">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-500 hover:underline">
+          <Link to="/login" className="text-blue-500 hover:underline dark:text-blue-400">
             Login
           </Link>
         </p>

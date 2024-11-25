@@ -99,24 +99,21 @@ const Store = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row px-4 py-6 lg:px-8 w-full relative">
+    <div className="flex flex-col md:flex-row px-4 py-6 lg:px-8 w-full relative dark:bg-gray-900 dark:text-white">
       {/* Sidebar */}
-      <div className="mt-24 w-full md:w-1/4 mb-5 md:mr-6">
+      <div className="mt-24 w-full md:w-1/4 mb-5 md:mr-6 dark:bg-gray-900 dark:border-gray-700">
         <h3 className="text-xl font-semibold mb-3">Categories</h3>
         <ul className="space-y-2 text-sm lg:text-base">
           {categories.map((category) => (
             <li
               key={category.name}
-              className={`cursor-pointer px-2 py-1 rounded ${
-                selectedCategory === category.name ? 'bg-blue-900 text-white font-semibold' : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              className={`cursor-pointer px-2 py-1 rounded ${selectedCategory === category.name ? 'bg-blue-900 text-white font-semibold dark:bg-blue-700 dark:text-gray-100' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600'}`}
               onClick={() => handleCategorySelect(category)}
             >
               {category.name}
             </li>
           ))}
         </ul>
-
       </div>
       {/* Main Content */}
       <div className="mt-24 w-full md:w-3/4">
@@ -130,7 +127,7 @@ const Store = () => {
               id="sort"
               value={sortOption}
               onChange={handleSortChange}
-              className="border rounded px-3 py-1 text-sm"
+              className="border rounded px-3 py-1 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             >
               {sortingOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -146,7 +143,7 @@ const Store = () => {
               id="itemsPerPage"
               value={itemsPerPage}
               onChange={handleItemsPerPageChange}
-              className="border rounded px-3 py-1 text-sm"
+              className="border rounded px-3 py-1 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
             >
               {itemsPerPageOptions.map((option) => (
                 <option key={option} value={option}>
@@ -163,7 +160,7 @@ const Store = () => {
             products.map((product) => (
               <Link
                 key={product.id}
-                className="border rounded-lg shadow-md flex flex-col p-4 transition-transform transform hover:scale-105"
+                className="border rounded-lg shadow-md flex flex-col p-4 transition-transform transform hover:scale-105 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                 to={`/collections/${product.category?.link}/${product.link}`}
               >
                 <img
@@ -172,32 +169,32 @@ const Store = () => {
                   className="w-full h-40 sm:h-48 object-contain rounded-md mb-3"
                 />
                 <h3 className="text-lg font-bold truncate">{product.name}</h3>
-                <button className="mt-auto bg-blue-900 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">
+                <button className="mt-auto bg-blue-900 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200 dark:bg-blue-700 dark:hover:bg-blue-500">
                   View Details
                 </button>
               </Link>
             ))
           ) : (
-            <p className="col-span-full text-center text-gray-600">No products found.</p>
+            <p className="col-span-full text-center text-gray-600 dark:text-gray-400">No products found.</p>
           )}
         </div>
 
         {/* Pagination Controls */}
         <div className="mt-8 flex justify-between items-center flex-wrap space-y-4 md:space-y-0">
           <button
-            className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
+            className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200 dark:bg-gray-700 dark:hover:bg-gray-600"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
             Previous
           </button>
 
-          <span className="text-sm text-gray-700">
+          <span className="text-sm text-gray-700 dark:text-gray-300">
             {currentPage} of {totalPages}
           </span>
 
           <button
-            className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200"
+            className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 transition duration-200 dark:bg-gray-700 dark:hover:bg-gray-600"
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
           >

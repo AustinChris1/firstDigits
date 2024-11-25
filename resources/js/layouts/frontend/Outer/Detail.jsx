@@ -25,6 +25,10 @@ const ProductDetail = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const reviewsPerPage = 5; // Set number of reviews per page
 
+    // Modal state
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalImage, setModalImage] = useState('');
+
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
@@ -118,27 +122,44 @@ const ProductDetail = () => {
     // Ensure both image1 and image2 are available
     const images = [product.image, product.image2].filter(Boolean);
 
+    // Function to open the modal with the clicked image
+    const openModal = (image) => {
+        setModalImage(image);
+        setIsModalOpen(true);
+    };
+
+    // Function to close the modal
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setModalImage('');
+    };
+
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', options); // Formats the date as "Month Day, Year"
+      };
     return (
-        <div className="p-6 max-w-screen-xl mx-auto">
+        <div className="w-full p-6 dark:bg-gray-900">
             <div className="mt-24"></div>
             {/* Breadcrumb */}
-            <nav className="text-gray-600 text-sm mb-5">
+            <nav className="text-gray-600 text-sm mb-5 dark:text-gray-300">
                 <ul className="flex space-x-2">
                     <li>
-                        <Link to="/" className="text-blue-900 hover:underline">Home</Link>
+                        <Link to="/" className="text-blue-900 hover:underline dark:text-blue-400">Home</Link>
                     </li>
                     <li>/</li>
                     <li>
-                        <Link to="/store" className="text-blue-900 hover:underline">Store</Link>
+                        <Link to="/store" className="text-blue-900 hover:underline dark:text-blue-400">Store</Link>
                     </li>
                     <li>/</li>
                     <li>
-                        <Link to={`/collections/${product.category?.link}`} className="text-blue-900 hover:underline">
+                        <Link to={`/collections/${product.category?.link}`} className="text-blue-900 hover:underline dark:text-blue-400">
                             {product.category?.name || 'Category'}
                         </Link>
                     </li>
                     <li>/</li>
-                    <li className="text-gray-900">{product.name || 'Product'}</li>
+                    <li className="text-gray-900 dark:text-gray-100">{product.name || 'Product'}</li>
                 </ul>
             </nav>
 
@@ -158,27 +179,28 @@ const ProductDetail = () => {
                                     <img
                                         src={`/${image}`}
                                         alt={product.name || 'Product Image'}
-                                        className="w-full h-auto max-h-[500px] object-contain"
+                                        className="w-full h-auto max-h-[500px] object-contain cursor-pointer"
+                                        onClick={() => openModal(image)} // Open modal on click
                                     />
                                 </SwiperSlide>
                             ))}
                         </Swiper>
                     ) : (
-                        <div className="text-center">No product images available.</div>
+                        <div className="text-center dark:text-gray-400">No product images available.</div>
                     )}
                 </div>
 
                 <div className="w-full md:w-1/2">
-                    <h1 className="text-3xl font-bold mb-3 text-gray-800">{product.name || 'Product Name'}</h1>
-                    <p className="text-gray-700 mb-2 leading-relaxed">{product.description || 'No description available'}</p>
-                    <p className="text-sm text-gray-900 mb-2">{`Brand: ${product.brand || 'Unknown'}`}</p>
-                    <p className={`text-sm ${product.status === 0 ? 'text-green-900' : 'text-red-900'}`}>
+                    <h1 className="text-3xl font-bold mb-3 text-gray-800 dark:text-gray-100">{product.name || 'Product Name'}</h1>
+                    <p className="text-gray-700 mb-2 leading-relaxed dark:text-gray-300">{product.description || 'No description available'}</p>
+                    <p className="text-sm text-gray-900 mb-2 dark:text-gray-200">{`Brand: ${product.brand || 'Unknown'}`}</p>
+                    <p className={`text-sm ${product.status === 0 ? 'text-green-900' : 'text-red-900'} dark:text-green-400`}>
                         {product.status === 0 ? 'Available' : 'Out of Stock'}
                     </p>
 
-                    <div className="mt-2 text-gray-700">
+                    <div className="mt-2 text-gray-700 dark:text-gray-300">
                         <StarRating rating={averageRating} />
-                        <p className="text-sm">Average Rating</p>
+                        <p className="text-sm dark:text-gray-400">Average Rating</p>
                     </div>
 
                     {/* Review Form */}
@@ -192,51 +214,76 @@ const ProductDetail = () => {
                                 value={reviewText}
                                 onChange={(e) => setReviewText(e.target.value)}
                                 rows="4"
-                                className="w-full border p-2"
+                                className="w-full border p-2 dark:bg-gray-700 dark:text-gray-200"
                             ></textarea>
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="mt-4 px-6 py-2 bg-blue-900 text-white rounded hover:bg-blue-700"
+                                className="mt-4 px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 dark:bg-blue-500 dark:hover:bg-blue-600"
                             >
                                 {isSubmitting ? 'Submitting...' : 'Submit Review'}
                             </button>
                         </form>
-                    ) : ''}
+                    ) : (
+                        <p className="mt-4 text-sm text-gray-700 dark:text-gray-400">
+                            Please <Link to="/login" className="text-blue-600 dark:text-blue-400">login</Link> to leave a review.
+                        </p>
+                    )}
+                </div>
+            </div>
 
-                    {/* Reviews */}
-                    <div className="mt-6">
-                        <h3 className="text-2xl font-semibold">Reviews</h3>
-                        <div className="mt-4">
+            {/* Reviews */}
+            <div className="mt-8">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Customer Reviews</h3>
+                {reviews.length > 0 ? (
+                    <>
+                        <div className="mt-4 space-y-4">
                             {currentReviews.map((review, index) => (
-                                <div key={index} className="border-b py-4">
-                                    <StarRating rating={review.rating} totalStars={5} />
-                                    <p className="text-gray-700 mt-2">{review.review}</p>
+                                <div key={index} className="p-4 rounded-md dark:bg-gray-700">
+                                    <StarRating rating={review.rating} />
+                                    <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">{review.review}</p>
+                                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">By {review.user.name} on {formatDate(review.created_at)}</p>
                                 </div>
                             ))}
                         </div>
 
                         {/* Pagination */}
-                        <div className="mt-4 flex justify-center space-x-2">
+                        <div className="mt-4 flex dark:text-gray-200 justify-center space-x-2">
                             <button
                                 onClick={() => changePage(currentPage - 1)}
-                                className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700"
+                                className="px-4 py-2 border rounded-md disabled:opacity-50"
                                 disabled={currentPage === 1}
                             >
                                 Previous
                             </button>
-                            <span className="text-gray-700">{`Page ${currentPage} of ${totalPages}`}</span>
                             <button
                                 onClick={() => changePage(currentPage + 1)}
-                                className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700"
+                                className="px-4 py-2 border rounded-md disabled:opacity-50"
                                 disabled={currentPage === totalPages}
                             >
                                 Next
                             </button>
                         </div>
+                    </>
+                ) : (
+                    <p className="mt-4 text-sm text-gray-700 dark:text-gray-400">No reviews yet.</p>
+                )}
+            </div>
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="relative">
+                        <img src={`/${modalImage}`} alt="Product" className="max-w-[90vw] max-h-[80vh] object-contain" />
+                        <button
+                            onClick={closeModal}
+                            className="absolute top-0 right-0 text-white text-3xl p-2"
+                        >
+                            &times;
+                        </button>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

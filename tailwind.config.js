@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ["./resources/**/*.blade.php", "./resources/**/*.{js,jsx}"],
+	darkMode: 'class', // Use class-based dark mode
+	theme: {
+	  extend: {},
+	},
 	theme: {
 		extend: {
 			fontFamily: {

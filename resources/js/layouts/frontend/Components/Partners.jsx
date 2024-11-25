@@ -9,7 +9,6 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { X } from "lucide-react";
 import Load from './Load';
 
-
 const Partners = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -44,10 +43,10 @@ const Partners = () => {
   };
 
   return (
-    <div className="w-full mt-20">
-      {/* Core Team Section */}
-      <div>
-        <h1 className="text-center text-4xl font-semibold mb-10">Gallery</h1>
+<div className="w-full py-10 dark:bg-gray-900">
+  {/* Core Team Section */}
+  <div>
+    <h1 className="text-center text-4xl font-semibold mb-10 dark:text-white">Gallery</h1>
         {loading ? (
           <Load />
         ) : (
@@ -68,7 +67,7 @@ const Partners = () => {
             {teams.map((team) => (
               <SwiperSlide key={team.id}>
                 <div
-                  className="p-4 bg-white rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                  className="p-4 bg-white dark:bg-gray-900 rounded-lg shadow-lg transform hover:scale-105 dark:hover:bg-gray-700 transition-transform duration-300 ease-in-out"
                   onClick={() => openModal(`/${team.image}`)} // Open modal with selected image
                 >
                   <img
@@ -77,8 +76,8 @@ const Partners = () => {
                     className="w-full h-40 object-contain rounded-t-lg cursor-pointer"
                   />
                   <div className="pt-4 pb-2 text-center">
-                    <p className="text-lg font-semibold">{team.name}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-lg font-semibold dark:text-white">{team.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-300">
                       {team.role && team.role.toLowerCase() === 'group' ? '' : team.role}
                     </p>
                   </div>
@@ -92,9 +91,9 @@ const Partners = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={closeModal}>
-          <div className="relative bg-white p-4 rounded-lg shadow-lg">
+          <div className="relative bg-white dark:bg-gray-900 p-4 rounded-lg shadow-lg">
             <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+              className="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
               onClick={closeModal}
             >
               <X/>

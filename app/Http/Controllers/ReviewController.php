@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -68,10 +69,12 @@ class ReviewController extends Controller
     {
         $product = Product::findOrFail($productId);
         $reviews = $product->reviews()->with('user')->orderBy('id', 'desc')->get(); // Get reviews with user info
+        $user = User::whereIn('id', $reviews->pluck('id'))->get();
 
         return response()->json([
             'status' => 200,
             'reviews' => $reviews,
+            'user' => $user,
         ]);
     }
 }

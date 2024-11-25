@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 
 const VerifyEmail = () => {
+    document.title = "Verify Email - First Digit";
     const navigate = useNavigate();
     const location = useLocation();
 

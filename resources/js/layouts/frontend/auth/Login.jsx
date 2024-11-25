@@ -6,6 +6,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import Load from "../Components/Load";
 
 const Login = () => {
+    document.title = "Login - First Digit";
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [loginInput, setLogin] = useState({
@@ -79,9 +80,9 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100 p-5">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-                <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">Login</h1>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 p-5">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+                <h1 className="text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">Login</h1>
                 <form onSubmit={loginSubmit} className="flex flex-col space-y-4">
                     {/* Email Input */}
                     <input
@@ -91,7 +92,7 @@ const Login = () => {
                         aria-label="Email"
                         onChange={handleInput}
                         value={loginInput.email}
-                        className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                        className="border border-gray-300 dark:border-gray-700 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300 w-full"
                         required
                     />
                     <small className="text-red-500">{error?.email?.[0]}</small>
@@ -104,20 +105,20 @@ const Login = () => {
                             aria-label="Password"
                             onChange={handleInput}
                             value={loginInput.password}
-                            className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="border border-gray-300 dark:border-gray-700 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
                             required
                         />
                         {showPassword ? (
-                            <EyeOff onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                            <EyeOff onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500 dark:text-gray-400" />
                         ) : (
-                            <Eye onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500" />
+                            <Eye onClick={togglePasswordVisibility} className="absolute right-3 top-3 cursor-pointer text-gray-500 dark:text-gray-400" />
                         )}
                     </div>
                     <small className="text-red-500">{error?.password?.[0]}</small>
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors w-full"
+                        className="bg-blue-500 text-white rounded-md p-3 hover:bg-blue-600 transition-colors w-full dark:bg-blue-600 dark:hover:bg-blue-700"
                         disabled={loading}
                     >
                         {loading ? <Load /> : "Login"}
@@ -125,9 +126,9 @@ const Login = () => {
                 </form>
 
                 {/* Register Link */}
-                <p className="text-center mt-4">
+                <p className="text-center mt-4 text-gray-700 dark:text-gray-400">
                     Don't have an account?{" "}
-                    <Link to="/register" className="text-blue-500 hover:underline">
+                    <Link to="/register" className="text-blue-500 hover:underline dark:text-blue-400">
                         Register
                     </Link>
                 </p>

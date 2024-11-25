@@ -52,9 +52,9 @@ const Internship = () => {
     ];
 
     return (
-        <div className="relative w-full min-h-screen bg-gray-900">
+        <div className="relative w-full min-h-screen bg-gray-900 dark:bg-gray-800">
             {/* Background Overlay */}
-            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-5 sm:p-10 text-center bg-black/70">
+            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-5 sm:p-10 text-center bg-black/70 dark:bg-black/80">
                 {/* Internship Header */}
                 <div className="mt-20"></div>
                 <motion.h1
@@ -86,13 +86,13 @@ const Internship = () => {
                             whileInView={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.8 }}
                             viewport={{ once: true }}
-                            className="bg-white rounded-lg shadow-lg p-5 text-left"
+                            className="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-5 text-left"
                         >
-                            <h3 className="text-xl font-semibold text-blue-600 mb-2">{internship.title}</h3>
-                            <p className="text-gray-700 mb-4">{internship.description}</p>
-                            <p className="text-gray-500">Duration: {internship.duration}</p>
-                            <p className="text-gray-500">Location: {internship.location}</p>
-                            <p className="text-gray-500">Application Deadline: {internship.applicationDeadline}</p>
+                            <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-2">{internship.title}</h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-4">{internship.description}</p>
+                            <p className="text-gray-500 dark:text-gray-400">Duration: {internship.duration}</p>
+                            <p className="text-gray-500 dark:text-gray-400">Location: {internship.location}</p>
+                            <p className="text-gray-500 dark:text-gray-400">Application Deadline: {internship.applicationDeadline}</p>
                             <button className="mt-4 bg-blue-600 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition duration-300">
                                 Apply Now
                             </button>
@@ -110,17 +110,17 @@ const Internship = () => {
                             whileInView={{ opacity: 1 }}
                             transition={{ duration: 0.8 }}
                             viewport={{ once: true }}
-                            className="bg-gray-800 rounded-lg shadow-lg p-5 text-left"
+                            className="bg-gray-800 dark:bg-gray-700 rounded-lg shadow-lg p-5 text-left"
                         >
                             <h3 className="text-lg font-semibold text-white mb-2">{testimonial.name}</h3>
-                            <p className="text-gray-300 mb-4">{testimonial.feedback}</p>
+                            <p className="text-gray-300 dark:text-gray-200 mb-4">{testimonial.feedback}</p>
                             {testimonial.isApproved ? (
-                                <div className="flex items-center text-green-500">
+                                <div className="flex items-center text-green-500 dark:text-green-400">
                                     <CheckCircle className="mr-2" />
                                     <span>Approved</span>
                                 </div>
                             ) : (
-                                <div className="flex items-center text-red-500">
+                                <div className="flex items-center text-red-500 dark:text-red-400">
                                     <XCircle className="mr-2" />
                                     <span>Pending Approval</span>
                                 </div>
@@ -138,7 +138,7 @@ const Internship = () => {
                     className="max-w-2xl text-center"
                 >
                     <h2 className="text-2xl font-bold text-white mb-4">Ready to Start Your Journey?</h2>
-                    <p className="text-gray-300 mb-5">
+                    <p className="text-gray-300 dark:text-gray-200 mb-5">
                         Apply for our internships today and take the first step towards an exciting career in technology!
                     </p>
                     <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300 shadow-lg">

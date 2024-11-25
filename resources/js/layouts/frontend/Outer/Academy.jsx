@@ -27,10 +27,10 @@ const Academy = () => {
     ];
 
     return (
-        <div className="relative w-full min-h-screen bg-gray-900">
+        <div className="relative w-full min-h-screen bg-gray-900 dark:bg-gray-800">
             {/* Background Overlay */}
-            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-5 sm:p-10 text-center bg-black/70">
-            <div className="mt-20"></div>
+            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-5 sm:p-10 text-center bg-black/70 dark:bg-black/80">
+                <div className="mt-20"></div>
                 {/* Academy Header */}
                 <motion.h1
                     initial={{ y: -100, opacity: 0 }}
@@ -47,7 +47,7 @@ const Academy = () => {
                     whileInView={{ height: 'auto', opacity: 1 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="text-gray-300 mb-10 text-lg sm:text-xl max-w-3xl mx-auto"
+                    className="text-gray-300 dark:text-gray-200 mb-10 text-lg sm:text-xl max-w-3xl mx-auto"
                 >
                     Empowering learners with knowledge in automation and technology. Our courses are designed to equip you with practical skills to thrive in a digital world.
                 </motion.p>
@@ -61,12 +61,12 @@ const Academy = () => {
                             whileInView={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.8 }}
                             viewport={{ once: true }}
-                            className="bg-white rounded-lg shadow-lg p-5 text-left"
+                            className="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-5 text-left"
                         >
-                            <h3 className="text-xl font-semibold text-blue-600 mb-2">{course.title}</h3>
-                            <p className="text-gray-700 mb-4">{course.description}</p>
-                            <p className="text-gray-500">Instructor: {course.instructor}</p>
-                            <p className="text-gray-500">Duration: {course.duration}</p>
+                            <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-500 mb-2">{course.title}</h3>
+                            <p className="text-gray-700 dark:text-gray-300 mb-4">{course.description}</p>
+                            <p className="text-gray-500 dark:text-gray-400">Instructor: {course.instructor}</p>
+                            <p className="text-gray-500 dark:text-gray-400">Duration: {course.duration}</p>
                             <button className="mt-4 bg-blue-600 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition duration-300">
                                 Enroll Now
                             </button>
@@ -83,7 +83,7 @@ const Academy = () => {
                     className="max-w-2xl text-center mt-10"
                 >
                     <h2 className="text-2xl font-bold text-white mb-4">Join Our Academy</h2>
-                    <p className="text-gray-300 mb-5">
+                    <p className="text-gray-300 dark:text-gray-200 mb-5">
                         Be part of a community that embraces technology and innovation. Enroll today and start your journey towards mastering automation!
                     </p>
                     <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300 shadow-lg">

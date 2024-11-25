@@ -27,7 +27,7 @@ const HelpCenter = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-gray-100">
+    <div className="relative w-full min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className="p-5 sm:p-10 flex flex-col items-center text-center">
         <div className="mt-20">
         <motion.h2
@@ -35,7 +35,7 @@ const HelpCenter = () => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-blue-900 text-4xl sm:text-5xl mb-6 font-bold"
+          className="text-blue-900 dark:text-blue-300 text-4xl sm:text-5xl mb-6 font-bold"
         >
           Help Center
         </motion.h2>
@@ -52,7 +52,7 @@ const HelpCenter = () => {
             placeholder="Search articles..."
             value={searchQuery}
             onChange={handleSearchChange}
-            className="w-full sm:w-1/2 p-4 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full sm:w-1/2 p-4 border border-gray-300 dark:border-gray-700 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white dark:focus:ring-blue-300"
           />
         </motion.div>
 
@@ -60,34 +60,34 @@ const HelpCenter = () => {
           {categories.map((category, index) => (
             <motion.div
               key={index}
-              className="m-2 p-3 bg-blue-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              className="m-2 p-3 bg-blue-100 dark:bg-blue-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-blue-900 font-semibold text-lg">{category}</h4>
+              <h4 className="text-blue-900 dark:text-blue-200 font-semibold text-lg">{category}</h4>
             </motion.div>
           ))}
         </div>
 
         <div className="max-w-4xl w-full">
-          <h3 className="text-blue-800 text-2xl mb-4">Articles</h3>
+          <h3 className="text-blue-800 dark:text-blue-400 text-2xl mb-4">Articles</h3>
           {articles.filter(article => 
             article.title.toLowerCase().includes(searchQuery.toLowerCase())
           ).map((article, index) => (
             <motion.div
               key={index}
-              className="mb-4 p-4 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <a href={article.link} className="text-blue-900 font-bold text-lg hover:underline">
+              <a href={article.link} className="text-blue-900 dark:text-blue-300 font-bold text-lg hover:underline">
                 {article.title}
               </a>
-              <p className="text-gray-600">{article.category}</p>
+              <p className="text-gray-600 dark:text-gray-400">{article.category}</p>
             </motion.div>
           ))}
         </div>

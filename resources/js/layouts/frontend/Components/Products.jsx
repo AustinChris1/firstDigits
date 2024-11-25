@@ -69,13 +69,13 @@ const Products = () => {
     // Framer Motion animation variants
     const productCardVariants = {
         hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.2 } },
-        exit: { opacity: 0, y: -20, transition: { duration: 0.5 } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.3, type: "spring", bounce: 0.4 } },
+        exit: { opacity: 0, y: -20, transition: { duration: 0.6, ease: "easeInOut" } },
     };
 
     const gridVariants = {
         hidden: { opacity: 0, scale: 0.95 },
-        visible: { opacity: 1, scale: 1, transition: { duration: 1.5 } }
+        visible: { opacity: 1, scale: 1, transition: { duration: 1.8, type: "spring", stiffness: 60 } }
     };
 
     if (loading) {
@@ -83,7 +83,7 @@ const Products = () => {
     }
 
     return (
-        <div className="w-full mt-20 px-4 md:px-0 overflow-hidden"> {/* Prevent overflow */}
+        <div className="w-full py-6 px-4 md:px-0 overflow-hidden dark:bg-gray-900 dark:text-white"> {/* Dark mode background */}
             <h1 className="text-center text-3xl font-semibold mb-10">Products</h1>
 
             {/* Category buttons */}
@@ -99,7 +99,7 @@ const Products = () => {
                     <motion.button
                         key={category.id}
                         onClick={() => setSelectedCategory(category.id)}
-                        className={`mx-2 p-2 rounded-lg transition duration-300 transform ${selectedCategory === category.id ? 'bg-blue-900 text-white scale-105' : 'bg-gray-200 text-black'} hover:scale-110`}
+                        className={`mx-2 p-2 rounded-lg transition duration-300 transform ${selectedCategory === category.id ? 'bg-indigo-900 text-white scale-110' : 'bg-gray-700 text-white'} hover:scale-110 hover:bg-indigo-700`}
                     >
                         {category.name}
                     </motion.button>
@@ -117,7 +117,7 @@ const Products = () => {
                     {currentProducts.map(prod => (
                         <motion.div
                             key={prod.id}
-                            className="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 p-2 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                            className="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 p-2 bg-white dark:bg-gray-900 rounded-lg shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out"
                             variants={productCardVariants}
                         >
                             <Link to={`/collections/${prod.category.link}/${prod.link}`}>
@@ -126,12 +126,12 @@ const Products = () => {
                                     alt={prod.name}
                                     className="w-full h-48 object-contain rounded-t-lg" // Changed to object-contain and increased height
                                     whileHover={{ scale: 1.1 }}
-                                    transition={{ duration: 0.3 }}
+                                    transition={{ duration: 0.4 }}
                                 />
                                 <div className="flex flex-col justify-center items-center gap-2 p-4">
                                     <p className="text-center font-semibold">{prod.name}</p>
                                     <motion.button
-                                        whileHover={{ scale: 1.05 }}
+                                        whileHover={{ scale: 1.1 }}
                                         className="w-fit p-2 flex items-center justify-center text-gray-200 hover:brightness-110 bg-gradient-to-r from-[#1c4587] to-gray-200 rounded-full transition-transform duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400"
                                     >
                                         View Details
@@ -148,7 +148,7 @@ const Products = () => {
                 <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50"
+                    className="px-4 py-2 bg-gray-600 rounded-lg disabled:opacity-50 hover:bg-gray-500 transition duration-300"
                 >
                     Previous
                 </button>
@@ -156,7 +156,7 @@ const Products = () => {
                 <button
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-gray-300 rounded-lg disabled:opacity-50"
+                    className="px-4 py-2 bg-gray-600 rounded-lg disabled:opacity-50 hover:bg-gray-500 transition duration-300"
                 >
                     Next
                 </button>

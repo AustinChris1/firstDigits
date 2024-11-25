@@ -18,7 +18,7 @@ const DropdownMenu = ({
   handleNavigation
 }) => (
   <li
-    className="relative cursor-pointer text-blue-800 hover:text-blue-600 group"
+    className="relative cursor-pointer text-blue-800 hover:text-blue-600 group dark:text-blue-200 dark:hover:text-blue-400"
     onClick={() => handleDropdownToggle(section)} // Only toggles the dropdown here
     aria-haspopup="true"
     aria-expanded={dropdownOpen === section}
@@ -26,7 +26,7 @@ const DropdownMenu = ({
     <div className="flex items-center">
       {title} <ChevronDown className="inline-block w-4 h-4 ml-1" />
     </div>
-    <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+    <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 dark:bg-blue-200"></div>
 
     <AnimatePresence>
       {dropdownOpen === section && (
@@ -36,13 +36,13 @@ const DropdownMenu = ({
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute left-0 top-full mt-2 bg-slate-200 w-auto rounded-md shadow-lg z-10"
+          className="absolute left-0 top-full mt-2 bg-slate-200 w-auto rounded-md shadow-lg z-10 dark:bg-slate-800"
           role="menu"
         >
           {items.map((item, index) => (
             <li
               key={index}
-              className="p-2 hover:bg-blue-800 hover:text-white transition-colors cursor-pointer"
+              className="p-2 hover:bg-blue-800 hover:text-white transition-colors cursor-pointer dark:hover:bg-blue-600 dark:hover:text-white"
               role="menuitem"
             >
               <Link
@@ -116,9 +116,16 @@ const Navbar = () => {
         localStorage.removeItem("auth_name");
         localStorage.removeItem("auth_email");
         localStorage.removeItem("role");
-        swal("Success", res.data.message, "success");
+        swal("Success", "User logout successful", "success");
         navigate("/"); // Redirect to home after successful logout
       }
+    }).catch((err) => {
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("auth_name");
+      localStorage.removeItem("auth_email");
+      localStorage.removeItem("role");
+      swal("Success", "Logout Successful.", "success");
+      navigate("/"); // Redirect to home after successful logout
     });
   };
 
@@ -140,20 +147,20 @@ const Navbar = () => {
 
   // Auth buttons for login/logout
   const AuthButtons = localStorage.getItem('auth_token') ? (
-    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log Out">
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Log Out">
       <button onClick={logout} className="flex items-center">
         <LogOut aria-label="LogOut" />
       </button>
     </li>
   ) : (
-    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Log In">
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Log In">
       <Link to="/login" onClick={() => handleNavigation('/login')}><User aria-label="User" /></Link>
     </li>
   );
 
   // Admin button for admin role
   const AdminBtn = localStorage.getItem('role') === 'admin' ? (
-    <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Admin">
+    <li className="cursor-pointer text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Admin">
       <Link to="/admin/dashboard" className="flex items-center">
         <KeySquare aria-label="Admin" />
       </Link>
@@ -194,7 +201,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navbarRef}
-      className={`navbar fixed z-50 w-full bg-slate-200 text-slate-900 dark:text-white flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2 shadow-md' : 'py-4'}`}
+      className={`navbar fixed z-50 w-full bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2 shadow-md' : 'py-4'}`}
     >
       <Link to='/' onClick={() => handleNavigation('/')}>
         <img src={fdcLogo} alt="First Digit Communications" className="w-40 h-auto" />
@@ -202,7 +209,7 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <ul className="hidden sm:flex justify-end items-center gap-10 flex-1 mr-10 relative">
-        <li className="relative cursor-pointer text-blue-800 hover:text-blue-600 group">
+        <li className="relative cursor-pointer  text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400 group">
           <Link to="/store">Store</Link>
           <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
         </li>
@@ -258,7 +265,7 @@ const Navbar = () => {
             value={searchTerm}
             onChange={handleSearch}
             placeholder="Search..."
-            className="p-2 pl-6 pr-4 rounded-full bg-white border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 w-52"
+            className="p-2 pl-6 pr-4 rounded-full bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white  focus:outline-none focus:ring-2 focus:ring-blue-500 w-52"
           />
           {isLoading && (
             <span className="absolute left-3 top-2.5 text-gray-500">
@@ -267,10 +274,10 @@ const Navbar = () => {
           )}
           {/* Add a dropdown for search results */}
           {searchResults.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 text-blue-900 bg-white shadow-lg rounded-lg border border-slate-300">
+            <div className="absolute top-full left-0 right-0 mt-2 text-blue-900 dark:text-white bg-white dark:bg-slate-800 shadow-lg rounded-lg border border-slate-300 dark:border-slate-600">
               <ul className="max-h-60 overflow-auto">
                 {searchResults.map((item, index) => (
-                  <li key={index} className="p-2 hover:bg-slate-100 cursor-pointer">
+                  <li key={index} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-600 cursor-pointer">
                     <Link to={`/collections/${item.category.link}/${item.link}`} className="block" onClick={() => { setSearchTerm(''); setSearchResults([]); }}>
                       {item.name}
                     </Link>
@@ -284,7 +291,7 @@ const Navbar = () => {
 
       {/* Desktop Icons */}
       <ul className="hidden sm:flex justify-end items-center gap-6">
-        <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
+        <li className="cursor-pointer text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Language"><Earth aria-label="Language" /></li>
         {AuthButtons}
         {AdminBtn}
       </ul>
@@ -293,9 +300,9 @@ const Navbar = () => {
       <div className="sm:hidden flex items-center">
         <button onClick={() => setToggle(!toggle)} aria-label="Toggle Menu">
           {toggle ? (
-            <X className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
+            <X className="w-8 h-8 text-slate-900 dark:text-blue-200 dark:hover:text-blue-400 hover:text-gray-500" />
           ) : (
-            <Menu className="w-8 h-8 text-slate-900 dark:text-blue-800 hover:text-gray-500" />
+            <Menu className="w-8 h-8 text-slate-900 dark:text-blue-200 dark:hover:text-blue-400 hover:text-gray-500" />
           )}
         </button>
 
@@ -311,14 +318,14 @@ const Navbar = () => {
             duration: 0.5,
             ease: "easeInOut", // Smooth transition when closing
           }}
-          className={`absolute top-20 left-0 w-full bg-slate-200 z-30 flex-col items-center gap-6 p-6 md:p-8 ${toggle ? "flex" : "hidden"}`}
+          className={`absolute top-20 left-0 w-full bg-slate-200 dark:bg-slate-800 z-30 flex-col items-center gap-6 p-6 md:p-8 ${toggle ? "flex" : "hidden"}`}
           style={{
             maxHeight: 'calc(100vh - 80px)', // Adjust height based on your menu header height
             overflowY: 'scroll', // Enable vertical scrolling within the mobile menu
           }}
         >
           <ul className="space-y-10 mt-10 text-lg font-medium">            {/* Store Menu Item */}
-            <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Store">
+            <li className="cursor-pointer text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Store">
               <Link to="/store" onClick={() => handleNavigation('/store')}>Store</Link>
             </li>
 
@@ -373,7 +380,7 @@ const Navbar = () => {
             {/* Authentication and Admin Buttons with Labels */}
             <div className="flex items-center gap-6">
               <div className="flex flex-col items-center">
-                <li className="cursor-pointer text-blue-800 hover:text-blue-600" title="Language"><Earth aria-label="Language" /></li>
+                <li className="cursor-pointer text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Language"><Earth aria-label="Language" /></li>
               </div>
               <div className="flex flex-col items-center">
                 {AuthButtons}
@@ -386,26 +393,28 @@ const Navbar = () => {
           </ul>
 
           {/* Mobile Search Bar */}
-          <div className="sm:hidden text-base text-blue-900 w-full mt-16 p-4 bg-slate-200 border-t border-gray-300 relative">             
+          <div className="sm:hidden text-base text-blue-900 w-full mt-16 p-4 bg-slate-200 border-t border-gray-300 dark:bg-slate-800 dark:text-blue-200 dark:border-gray-600 relative">
             <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearch}
-            placeholder="Search..."
-            className="w-full p-3 border border-gray-300 rounded-md text-lg focus:outline-none"
-            aria-label="Mobile Search Input"
-          />
-          {isLoading && (
-            <span className="absolute left-3 top-2.5 text-gray-500">
-              <Load />
-            </span>
-          )}
+              type="text"
+              value={searchTerm}
+              onChange={handleSearch}
+              placeholder="Search..."
+              className="w-full p-3 border border-gray-300 rounded-md text-lg focus:outline-none dark:bg-slate-700 dark:text-white dark:border-gray-600"
+              aria-label="Mobile Search Input"
+            />
+            {isLoading && (
+              <span className="absolute left-3 top-2.5 text-gray-500 dark:text-gray-400">
+                <Load />
+              </span>
+            )}
             {/* Display search results */}
             {searchResults.length > 0 && (
-              <div className="mt-1 bg-white rounded-md shadow-lg p-1">
+              <div className="mt-1 bg-white rounded-md shadow-lg p-1 dark:bg-slate-700">
                 {searchResults.map((product) => (
-                  <div key={product.id} className="border-b border-gray-200 py-2">
-                    <Link to={`/collections/${product.category?.link || 'default-category'}/${product.link}`} onClick={() => { setToggle(false); setSearchTerm(''); setSearchResults([]); }}>{product.name}</Link>
+                  <div key={product.id} className="border-b border-gray-200 py-2 dark:border-gray-600">
+                    <Link to={`/collections/${product.category?.link || 'default-category'}/${product.link}`} onClick={() => { setToggle(false); setSearchTerm(''); setSearchResults([]); }}>
+                      {product.name}
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -413,7 +422,7 @@ const Navbar = () => {
 
             {/* Show a message if no results are found */}
             {searchTerm && searchResults.length === 0 && (
-              <p className="text-center text-gray-500 mt-4">No products found.</p>
+              <p className="text-center text-gray-500 mt-4 dark:text-gray-400">No products found.</p>
             )}
           </div>
         </motion.div>

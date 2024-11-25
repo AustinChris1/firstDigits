@@ -40,13 +40,13 @@ const About = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-gray-900">
+    <div className="relative w-full min-h-screen overflow-hidden bg-gray-900 dark:bg-gray-800">
       {/* Wavy Top SVG */}
       <div className="absolute top-0 w-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
-          className="w-full h-20"
+          className="w-full h-20 dark:fill-gray-700"
         >
           <path
             fill="#fff"
@@ -57,15 +57,15 @@ const About = () => {
       </div>
 
       {/* Background Image */}
-      <img src={bgImg} alt="Background" className="w-full h-full object-cover absolute inset-0 opacity-20" />
+      <img src={bgImg} alt="Background" className="w-full h-full object-cover absolute inset-0 opacity-20 dark:opacity-30" />
 
       <div className="relative z-10 flex flex-col items-center justify-start p-5 sm:p-8 space-y-8">
         <motion.h1
           initial={{ y: -100, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2 }}
           viewport={{ once: true }}
-          className="text-center text-white text-2xl sm:text-3xl mb-3"
+          className="text-center text-white text-2xl sm:text-3xl mb-3 animate__animated animate__fadeIn animate__delay-0.5s"
         >
           About Us
         </motion.h1>
@@ -73,9 +73,9 @@ const About = () => {
         <motion.p
           initial={{ height: 0, opacity: 0 }}
           whileInView={{ height: 'auto', opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="text-gray-200 text-center max-w-lg sm:max-w-xl mb-6"
+          className="text-gray-200 text-center max-w-lg sm:max-w-xl mb-6 animate__animated animate__fadeIn animate__delay-0.7s"
         >
           First Digits Communications is a company registered under the Corporate Affairs Commission (CAC) that helps you stay connected and lively in the modern world.
         </motion.p>
@@ -104,7 +104,7 @@ const About = () => {
           </video>
           <button
             onClick={toggleMute}
-            className="absolute top-2 right-2 bg-black/50 p-2 rounded-full text-white"
+            className="absolute top-2 right-2 bg-black/50 p-2 rounded-full text-white hover:bg-black/70 transition duration-300"
           >
             {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
           </button>
@@ -112,7 +112,7 @@ const About = () => {
 
         {/* Mission and Vision Sections */}
         <div className="relative w-full max-w-5xl flex flex-col items-center space-y-18 py-8">
-          <div className="absolute hidden sm:block w-1 bg-gray-400 h-full left-1/2 transform -translate-x-1/2"></div>
+          <div className="absolute hidden sm:block w-1 bg-gray-400 h-full left-1/2 transform -translate-x-1/2 dark:bg-gray-600"></div>
 
           <motion.div
             initial={{ translateX: '-100%', opacity: 0 }}
@@ -122,7 +122,7 @@ const About = () => {
             className="relative flex flex-col sm:flex-row items-center sm:items-start w-full sm:mb-8 px-4"
           >
             <div className="flex flex-col items-center sm:items-start sm:w-1/2 sm:pr-8 text-center sm:text-left">
-              <Target className="text-white mb-2" />
+              <Target className="text-white mb-2 text-3xl transition duration-300 transform hover:scale-110 hover:text-gray-400" />
               <h1 className="text-gray-200 text-lg sm:text-xl mb-2">Our Mission</h1>
               <p className="text-gray-200 max-w-xs sm:max-w-sm">
                 To empower individuals and businesses to enhance their lives and operations through innovative, user-friendly smart home and office solutions.
@@ -138,7 +138,7 @@ const About = () => {
             className="relative flex flex-col sm:flex-row items-center sm:justify-end w-full sm:mb-8 px-4"
           >
             <div className="flex flex-col items-center sm:items-end sm:w-1/2 sm:pl-8 text-center sm:text-right">
-              <Eye className="text-white mb-2" />
+              <Eye className="text-white mb-2 text-3xl transition duration-300 transform hover:scale-110 hover:text-gray-400" />
               <h1 className="text-gray-200 text-lg sm:text-xl mb-2">Our Vision</h1>
               <p className="text-gray-200 max-w-xs sm:max-w-sm">
                 To be the leading provider of comprehensive and affordable smart home and office automation systems, revolutionizing the way people live and work, creating a more connected, efficient, and sustainable future.
