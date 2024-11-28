@@ -55,7 +55,7 @@ const Collections = () => {
   }
 
   return (
-    <div className="w-full p-6 dark:bg-gray-900">
+    <div className="w-full min-h-screen p-6 dark:bg-gray-900">
       <div className="mt-24"></div>
       {/* Breadcrumb */}
       <nav className="text-gray-600 text-sm mb-5 dark:text-gray-300">

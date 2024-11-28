@@ -15,6 +15,17 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1); // Pagination state
     const itemsPerPage = 8; // Number of items per page
 
+    // Detect when component is in view for scroll-triggered animation
+    const handleScroll = () => {
+        const productsSection = document.getElementById('products-section');
+        if (productsSection) {
+            const rect = productsSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                setInView(true);
+            }
+        }
+    };
+
     // Fetch categories and products from the backend
     useEffect(() => {
         const fetchData = async () => {
@@ -39,6 +50,14 @@ const Products = () => {
             }
         };
         fetchData();
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Clean up event listener
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     // Manually trigger animation on mount
@@ -108,6 +127,7 @@ const Products = () => {
 
             {/* Products grid */}
             <motion.div
+                id="products-section"
                 className="flex flex-wrap justify-center gap-4"
                 initial="hidden"
                 animate={inView ? "visible" : "hidden"}

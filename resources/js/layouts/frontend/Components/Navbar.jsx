@@ -1,63 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import fdcLogo from '../assets/fdcLogo.png';
-import { User, Earth, X, Menu, ChevronDown, LogOut, KeySquare } from "lucide-react";
+import { User, Earth, X, Menu, ChevronDown, ChevronRight, LogOut, KeySquare } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
 import Load from './Load';
-
-const DropdownMenu = ({
-  title,
-  items,
-  links,
-  dropdownOpen,
-  section,
-  handleDropdownToggle,
-  dropdownRef,
-  handleNavigation
-}) => (
-  <li
-    className="relative cursor-pointer text-blue-800 hover:text-blue-600 group dark:text-blue-200 dark:hover:text-blue-400"
-    onClick={() => handleDropdownToggle(section)} // Only toggles the dropdown here
-    aria-haspopup="true"
-    aria-expanded={dropdownOpen === section}
-  >
-    <div className="flex items-center">
-      {title} <ChevronDown className="inline-block w-4 h-4 ml-1" />
-    </div>
-    <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 dark:bg-blue-200"></div>
-
-    <AnimatePresence>
-      {dropdownOpen === section && (
-        <motion.ul
-          ref={dropdownRef}
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute left-0 top-full mt-2 bg-slate-200 w-auto rounded-md shadow-lg z-10 dark:bg-slate-800"
-          role="menu"
-        >
-          {items.map((item, index) => (
-            <li
-              key={index}
-              className="p-2 hover:bg-blue-800 hover:text-white transition-colors cursor-pointer dark:hover:bg-blue-600 dark:hover:text-white"
-              role="menuitem"
-            >
-              <Link
-                to={links[index]}
-                onClick={() => handleNavigation(links[index])} // Call handleNavigation on link click
-              >
-                {item}
-              </Link>
-            </li>
-          ))}
-        </motion.ul>
-      )}
-    </AnimatePresence>
-  </li>
-);
+import DropdownMenu from './Dropdown';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -209,7 +158,7 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <ul className="hidden sm:flex justify-end items-center gap-10 flex-1 mr-10 relative">
-        <li className="relative cursor-pointer  text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400 group">
+        <li className="relative cursor-pointer text-lg text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400 group">
           <Link to="/store">Store</Link>
           <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-800 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
         </li>
@@ -325,7 +274,7 @@ const Navbar = () => {
           }}
         >
           <ul className="space-y-10 mt-10 text-lg font-medium">            {/* Store Menu Item */}
-            <li className="cursor-pointer text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Store">
+            <li className="cursor-pointer text-lg text-blue-800 hover:text-blue-600 dark:text-blue-200 dark:hover:text-blue-400" title="Store">
               <Link to="/store" onClick={() => handleNavigation('/store')}>Store</Link>
             </li>
 

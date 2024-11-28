@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import axios from 'axios';
+import { HelmetProvider } from 'react-helmet-async';
 
 import LoadingSpinner from './layouts/frontend/Components/Loader';
 import AboutUs from './layouts/frontend/Outer/AboutUs';
@@ -121,12 +122,14 @@ function Layout() {
 function App() {
   return (
     <div className="App font-raleway">
+      <HelmetProvider>
       <Router>
         <ScrollToTop /> {/* Scroll to the top when navigating */}
         <Suspense fallback={<LoadingSpinner />}> 
         <Layout /> {/* Use Layout to conditionally render components */}
         </Suspense>
       </Router>
+      </HelmetProvider>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import StarRating from './StarRating'; // Import StarRating component
 import './stars.css';
+import { Helmet } from 'react-helmet-async'; // Import Helmet
 
 const ProductDetail = () => {
     const navigate = useNavigate();
@@ -138,9 +139,18 @@ const ProductDetail = () => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', options); // Formats the date as "Month Day, Year"
-      };
+    };
     return (
-        <div className="w-full p-6 dark:bg-gray-900">
+        <div className="w-full min-h-screen p-6 dark:bg-gray-900">
+            <Helmet>
+                <title>{product.name} - Store</title>
+                <meta name="description" content={product.description || 'No description available'} />
+                <meta property="og:title" content={product.name} />
+                <meta property="og:description" content={product.description || 'No description available'} />
+                <meta property="og:image" content={`/${product.image}`} />
+                <meta property="og:type" content="product" />
+                <meta property="og:url" content={`https://firstdigit.com.ng/collections/${categoryLink}/${productLink}`} />
+            </Helmet>
             <div className="mt-24"></div>
             {/* Breadcrumb */}
             <nav className="text-gray-600 text-sm mb-5 dark:text-gray-300">
