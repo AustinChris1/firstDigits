@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../LoadingSpinner';
 
 const EditTeam = () => {
@@ -35,12 +35,12 @@ const EditTeam = () => {
             if (res.status === 200) {
                 setTeamInput(res.data.team);
             } else if (res.status === 404) {
-                swal('Error', res.data.message, 'error');
+                toast.error(res.data.message);
                 navigate('/admin/dashboard');
             }
             setLoading(false);
         }).catch(err => {
-            swal('Error', 'Failed to fetch team.', 'error');
+            toast.error('Failed to fetch team.');
             setLoading(false);
         });
     }, [id, navigate]);
@@ -59,21 +59,21 @@ const EditTeam = () => {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then(res => {
             if (res.data.status === 200) {
-                swal('Success', res.data.message, 'success');
+                toast.success(res.data.message);
                 setError({});
                 navigate('/admin/dashboard');
             } else if (res.data.status === 422) {
                 setError(res.data.errors);
             } else if (res.data.status === 404) {
-                swal('Error', res.data.message, 'error');
+                toast.error(res.data.message);
                 navigate('/admin/dashboard');
             }
         }).catch(err => {
             if (err.response && err.response.status === 422) {
                 setError(err.response.data.errors);
-                swal('Error', 'Please check the input fields.', 'error');
+                toast.error('Please check the input fields.');
             } else {
-                swal('Error', 'Something went wrong. Please try again later.', 'error');
+                toast.error('Failed to update team.');
             }
         }).finally(() => setEditLoading(false));
     };

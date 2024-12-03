@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from '../Components/Loader';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
+import { s } from 'framer-motion/client';
 
 const itemsPerPageOptions = [4, 8, 12];
 const sortingOptions = [
@@ -59,12 +60,13 @@ const Store = () => {
             setLoading(false);
           } else if (res.data.status === 404) {
             navigate('/');
-            swal('Warning', res.data.message, "error");
+            setLoading(false);
+            toast.error(res.data.message);
           }
         }
       }).catch(() => {
         setLoading(false);
-        swal('Error', 'Failed to fetch products.', 'error');
+        toast.error('Failed to fetch products.');
       });
     };
 

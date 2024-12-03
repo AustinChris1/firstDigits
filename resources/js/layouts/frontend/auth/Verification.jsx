@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import swal from "sweetalert";
+import { toast } from 'react-toastify';
 
 const ResendEmail = () => {
   document.title = "Resend Email - First Digit";
@@ -26,15 +26,15 @@ const ResendEmail = () => {
         .post("/api/email/resend", null, { withCredentials: true })
         .then((response) => {
           if (response.data.status === 200) {
-            swal("Success", response.data.message, "success");
+            toast.success(response.data.message);
           } else {
-            swal("Error", response.data.message, "error");
+            toast.error(response.data.message);
           }
         })
         .catch((error) => {
           const errorMessage =
             error.response?.data?.message || "An error occurred.";
-          swal("Error", errorMessage, "error");
+          toast.error(errorMessage);
         })
         .finally(() => {
           setLoading(false);

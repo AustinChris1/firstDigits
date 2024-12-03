@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import Load from '../Components/Load';
 
 const Team = () => {
@@ -18,11 +18,10 @@ const Team = () => {
                 if (res.data.status === 200) {
                     setTeams(res.data.teams);
                 } else {
-                    swal("Error", "Unable to fetch team data", "error");
+                    toast.error("Unable to fetch team data");
                 }
             } catch (error) {
-                console.error("Error fetching team data:", error);
-                swal("Error", "An unexpected error occurred", "error");
+                toast.error("An unexpected error occurred");
             } finally {
                 setLoading(false);
             }

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import swal from "sweetalert";
+import { toast } from 'react-toastify';
 
 const VerifyEmail = () => {
     document.title = "Verify Email - First Digit";
@@ -15,11 +15,11 @@ const VerifyEmail = () => {
 
         // Display the SweetAlert based on status
         if (status === "200") {
-            swal("Success", decodeURIComponent(message), "success").then(() => {
+            toast.success(decodeURIComponent(message)).then(() => {
                 navigate("/"); // Redirect to home or login after success
             });
         } else {
-            swal("Error", decodeURIComponent(message), "error").then(() => {
+            toast.error(decodeURIComponent(message)).then(() => {
                 navigate("/register"); // Redirect to registration on error
             });
         }

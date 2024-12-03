@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../LoadingSpinner';
 
 const EditCategory = () => {
@@ -25,13 +25,12 @@ const EditCategory = () => {
             if (res.status === 200) {
                 setCategoryInput(res.data.category);
             } else if (res.status === 404) {
-                swal('Error', res.data.message, 'error');
+                toast.error(res.data.message);
                 navigate('/admin/category/view');
             }
             setLoading(false);
         }).catch(err => {
-            // console.error('Error fetching category:', err);
-            swal('Error', 'Failed to fetch category.', 'error');
+            toast.error('Failed to fetch category.');
             setLoading(false);
         });
     }, [id, navigate]);
@@ -52,25 +51,23 @@ const EditCategory = () => {
         axios.post(`/api/category/update/${id}`, data)
             .then(res => {
                 if (res.data.status === 200) {
-                    // console.log(data);
-                    swal('Success', res.data.message, 'success');
+                    toast.success(res.data.message);
                     setError({});
                     navigate('/admin/category/view');
                 } else if (res.data.status === 422) {
                     setError(res.data.errors);
                 } else if (res.data.status === 404) {
-                    swal('Error', res.data.message, 'error');
+                    toast.error(res.data.message);
                     navigate('/admin/category/view');
                 }
             })
             .catch(err => {
                 if (err.response && err.response.status === 422) {
                     setError(err.response.data.errors);
-                    swal('Error', 'Please check the input fields.', 'error');
+                    toast.error('Please check the input fields.');
                 } else {
-                    swal('Error', 'Something went wrong. Please try again later.', 'error');
+                    toast.error('Failed to update category, try again.');
                 }
-                // console.error('Error updating category:', err.response);
             }).finally(() => {
                 setEditLoading(false);
             });

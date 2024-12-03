@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import './dashboard.css';
 
 const Dashboard = () => {
@@ -28,9 +28,9 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const { data } = await axios.get('/api/users/view');
-      data.status === 200 ? setUsers(data.users) : swal("Error", data.message || "An error occurred", "error");
+      data.status === 200 ? setUsers(data.users) : toast.error(data.message || "An error occurred");
     } catch {
-      swal("Error", "Failed to load users", "error");
+      toast.error("Failed to load users");
     } finally {
       setLoading(false);
     }
@@ -40,9 +40,9 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const { data } = await axios.get('/api/team/view');
-      data.status === 200 ? setTeams(data.teams) : swal("Error", data.message || "An error occurred", "error");
+      data.status === 200 ? setTeams(data.teams) : toast.error(data.message || "An error occurred");
     } catch {
-      swal("Error", "Failed to load teams", "error");
+      toast.error("Failed to load teams");
     } finally {
       setLoading(false);
     }
@@ -69,15 +69,14 @@ const Dashboard = () => {
                         : user
                 )
             );
-            swal("Success", data.message, "success");
+            toast.success(data.message);
         } else if (data.status === 403) {
-            swal("Error", data.message, "error");
+          toast.error(data.message);
         } else {
-            swal("Error", data.message, "error");
+          toast.error(data.message);
         }
     } catch (error) {
-        swal("Error", "Failed to update user role", "error");
-        console.error("Error details:", error);
+      toast.error("Failed to update user role");
     } finally {
         toggleLoadingState(id, setAdminLoading);
     }
@@ -96,14 +95,14 @@ const Dashboard = () => {
 
         if (data.status === 200) {
             updateFunc((prev) => prev.filter((item) => item.id !== id));
-            swal("Success", data.message, "success");
+            toast.success(data.message);
         } else if (data.status === 403) {
-            swal("Error", data.message, "error");
+          toast.error(data.message);
         } else {
-            swal("Error", data.message, "error");
+          toast.error(data.message);
         }
     } catch (error) {
-        swal("Error", `Failed to delete ${isUser ? 'user' : 'team'}`, "error");
+      toast.error(`Failed to delete ${isUser ? 'user' : 'team'}`);
         console.error("Error details:", error);
     } finally {
         toggleLoadingState(id, setDeleteLoading);

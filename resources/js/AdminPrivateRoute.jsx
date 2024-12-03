@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from './components/admin/LoadingSpinner';
 
 const AdminPrivateRoute = ({ children }) => {
@@ -26,7 +26,7 @@ const AdminPrivateRoute = ({ children }) => {
     }, []);  // Empty dependency array to run the effect only once
     axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
         if (err.response.status === 401) {
-            swal('Unauthorized', err.response.data.message, 'warning');
+            toast.warning('Unauthorized', err.response.data.message);
             return <Navigate to="/login" />;
         }
         return Promise.reject(err);
@@ -38,10 +38,10 @@ const AdminPrivateRoute = ({ children }) => {
         return response;
     }, function (error) {
         if (error.response.status === 403) {
-            swal('Unauthorized', error.response.data.message, 'warning');
+            toast.error('Unauthorized', error.response.data.message);
             return <Navigate to="/403" />;
         }else if(error.response.status === 404){
-            swal('Not Found', "Page not found", 'warning');
+            toast.warning('Not Found', "Page not found", 'warning');
             return <Navigate to="/404" />;
         }
         return Promise.reject(error);

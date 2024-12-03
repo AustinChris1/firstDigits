@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -21,11 +21,11 @@ const Partners = () => {
         if (res.status === 200) {
           setTeams(res.data.teams);
         } else if (res.status === 401) {
-          swal('Error', res.data.message, 'error');
+          toast.error(res.data.message);
         }
       })
       .catch(err => {
-        swal('Error', 'Failed to fetch team.', 'error');
+        toast.error('Failed to fetch team.');
       })
       .finally(() => {
         setLoading(false);

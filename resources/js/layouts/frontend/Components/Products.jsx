@@ -3,8 +3,8 @@ import { ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import LoadingSpinner from './Loader';
-import swal from 'sweetalert'; // Ensure swal is imported
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Products = () => {
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -34,14 +34,14 @@ const Products = () => {
                 if (categoryRes.data.status === 200) {
                     setCategories(categoryRes.data.category);
                 } else {
-                    swal("Error", "Unable to fetch categories", "error");
+                    toast.error("Unable to fetch categories");
                 }
 
                 const productsRes = await axios.get(`/api/allProducts`);
                 if (productsRes.data.status === 200) {
                     setProducts(productsRes.data.products);
                 } else {
-                    swal("Error", "Unable to fetch products", "error");
+                    toast.error("Unable to fetch products");
                 }
             } catch (error) {
                 console.error(error);

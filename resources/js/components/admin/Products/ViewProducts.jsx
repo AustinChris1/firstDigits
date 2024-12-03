@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from '../LoadingSpinner';
+import { toast } from 'react-toastify';
 
 const ViewProducts = () => {
   const [loading, setLoading] = useState(true);
@@ -26,9 +27,9 @@ const ViewProducts = () => {
     axios.post(`/api/products/delete/${id}`).then(res => {
       if (res.data.status === 200) {
         setProducts(prevProducts => prevProducts.filter(item => item.id !== id));
-        swal("Success", res.data.message, "success");
+        toast.success(res.data.message);
       } else if (res.data.status === 404) {
-        swal("Error", res.data.message, "error");
+        toast.error(res.data.message);
       }
     }).finally(() => {
       setDeleteLoading((prev) => ({ ...prev, [id]: false }));

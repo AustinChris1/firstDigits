@@ -3,10 +3,10 @@ import fdcLogo from '../assets/fdcLogo.png';
 import { User, Earth, X, Menu, ChevronDown, ChevronRight, LogOut, KeySquare } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
 import axios from 'axios';
 import Load from './Load';
 import DropdownMenu from './Dropdown';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const Navbar = () => {
       if (res.data.status === 200) {
         setCategory(res.data.category); // Set categories to state
       } else {
-        swal("Error", "Unable to fetch categories", "error");
+        toast.error("Unable to fetch categories");
       }
     });
   }, []);
@@ -52,20 +52,21 @@ const Navbar = () => {
 
   const logout = (e) => {
     e.preventDefault();
+    axios.get('/sanctum/csrf-cookie').then(() => {
     axios.post(`/api/logout`).then(res => {
       if (res.data.status === 200) {
         localStorage.removeItem("auth_token");
         localStorage.removeItem("auth_name");
         localStorage.removeItem("auth_email");
         localStorage.removeItem("role");
-        swal("Success", res.data.message, "success");
+        toast.success(res.data.message);
         navigate("/"); // Redirect to home after successful logout
       } else {
         localStorage.removeItem("auth_token");
         localStorage.removeItem("auth_name");
         localStorage.removeItem("auth_email");
         localStorage.removeItem("role");
-        swal("Success", "User logout successful", "success");
+        toast.success("User logout successful");
         navigate("/"); // Redirect to home after successful logout
       }
     }).catch((err) => {
@@ -73,9 +74,11 @@ const Navbar = () => {
       localStorage.removeItem("auth_name");
       localStorage.removeItem("auth_email");
       localStorage.removeItem("role");
-      swal("Success", "Logout Successful.", "success");
+      toast.success("Logout successful");
       navigate("/"); // Redirect to home after successful logout
     });
+  
+  });
   };
 
   // Scroll effect to make navbar sticky and resize

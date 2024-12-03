@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import LoadingSpinner from '../LoadingSpinner';
+import { toast } from 'react-toastify';
 
 const ViewCategory = () => {
     const [loading, setLoading] = useState(true);
@@ -29,9 +30,9 @@ const ViewCategory = () => {
             .then(res => {
                 if (res.data.status === 200) {
                     setCategories(prevCategories => prevCategories.filter(item => item.id !== id));
-                    swal("Success", res.data.message, "success");
+                    toast.success(res.data.message);
                 } else if (res.data.status === 404) {
-                    swal("Error", res.data.message, "error");
+                    toast.error(res.data.message);
                 }
             })
             .finally(() => {

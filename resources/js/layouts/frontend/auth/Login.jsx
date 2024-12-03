@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import swal from "sweetalert";
 import { Eye, EyeOff } from 'lucide-react';
 import Load from "../Components/Load";
+import { toast } from 'react-toastify';
 
 const Login = () => {
     document.title = "Login - First Digit";
@@ -45,26 +45,29 @@ const Login = () => {
                         localStorage.setItem("auth_name", res.data.username);
                         localStorage.setItem("auth_email", res.data.email);
                         localStorage.setItem("role", res.data.role);
-                        swal("Success", res.data.message, "success");
+                        toast.success(res.data.message);
 
                         if (res.data.role === "admin") {
                             navigate("/admin/dashboard"); // Redirect to admin dashboard after successful login
                         } else {
                             navigate("/"); // Redirect to home after successful login
+
                         }
                     } else if (res.data.status === 401) {
-                        swal("Error", res.data.message, "error"); // Display error for invalid credentials
+                        toast.error(res.data.message);
                     } else {
                         // If validation errors exist, set them in the error state
                         setError(res.data.validation_errors || {});
+                        toast.error(res.data.validation_errors || {});
                     }
                 })
                 .catch((err) => {
                     if (err.response && err.response.status === 422) {
                         setError(err.response.data.validation_errors || {}); // Correctly handle errors
-                        swal('Error', 'Please check the input fields.', 'error');
+                        toast.error("Please check the input fields.");
+
                     } else {
-                        swal('Error', 'Something went wrong. Please try again later.', 'error');
+                        toast.error("Something went wrong. Please try again later.");
                         console.error('Error details:', err.response || err);
                     }
                 })
@@ -74,7 +77,7 @@ const Login = () => {
         })
             .catch((csrfError) => {
                 setLoading(false); // Stop loading if CSRF fails
-                swal("Error", "Failed to set CSRF token. Please try again later.", "error");
+                toast.error("Failed to set CSRF token. Please try again later.");
                 console.error("CSRF Error:", csrfError);
             });
     };

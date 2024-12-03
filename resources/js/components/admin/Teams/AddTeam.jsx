@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const AddTeam = () => {
@@ -47,7 +47,7 @@ const AddTeam = () => {
             .then(res => {
                 if (res.data.status === 200) {
                     setError({});
-                    swal('Success', res.data.message, 'success');
+                    toast.success(res.data.message);
                     setTeamsInput({...teamsInput,
                         name: '',
                         role: '',
@@ -57,15 +57,16 @@ const AddTeam = () => {
                     document.getElementById('teamsForm').reset();
                 } else if (res.data.status === 400) {
                     setError(res.data.errors);
+                    toast.error(res.data.errors[0]);
                 }
                 setAddLoading(false);
             })
             .catch(err => {
                 if (err.response && err.response.status === 422) {
                     setError(err.response.data.errors);
-                    swal('Error', 'Please check the input fields.', 'error');
+                    toast.error(err.response.data.errors[0]);
                 } else {
-                    swal('Error', 'Something went wrong. Please try again later.', 'error');
+                    toast.error('Something went wrong. Please try again later.');
                 }
                 setAddLoading(false);
             });

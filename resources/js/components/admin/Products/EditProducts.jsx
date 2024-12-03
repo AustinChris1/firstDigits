@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../LoadingSpinner';
 
 const EditProducts = () => {
@@ -60,19 +60,19 @@ const EditProducts = () => {
                 }
             })
             .catch(err => {
-                swal('Error', 'Error fetching category', 'error');
+                toast.error('Error fetching category');
             });
 
         axios.get(`/api/products/edit/${id}`).then(res => {
             if (res.status === 200) {
                 setProductsInput(res.data.Product);
             } else if (res.status === 404) {
-                swal('Error', res.data.message, 'error');
+                toast.error(res.data.message);
                 navigate('/admin/products/view');
             }
             setLoading(false);
         }).catch(err => {
-            swal('Error', 'Failed to fetch Products.', 'error');
+            toast.error('Failed to fetch Products.');
             setLoading(false);
         });
     }, [id, navigate]);
@@ -112,22 +112,23 @@ const EditProducts = () => {
         }
       }).then(res => {
               if (res.data.status === 200) {
-                  swal('Success', res.data.message, 'success');
+                toast.success(res.data.message);
                   setError({});
                   navigate('/admin/products/view');
               } else if (res.data.status === 422) {
+                toast.error(res.data.errors);
                   setError(res.data.errors);  // This shows which fields are triggering validation errors
               } else if (res.data.status === 404) {
-                  swal('Error', res.data.message, 'error');
+                toast.error(res.data.message);
                   navigate('/admin/products/view');
               }
           })
           .catch(err => {
               if (err.response && err.response.status === 422) {
                   setError(err.response.data.errors);
-                  swal('Error', 'Please check the input fields.', 'error');
+                  toast.error(err.response.data.errors);
               } else {
-                  swal('Error', 'Something went wrong. Please try again later.', 'error');
+                toast.error('Failed to update Products.');
               }
           })
           .finally(() => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import swal from "sweetalert";
+import { toast } from 'react-toastify';
 import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import Load from "../Components/Load";
@@ -62,24 +62,24 @@ const Register = () => {
               localStorage.setItem("role", res.data.role);
 
               setError({});
-              swal("Success", res.data.message, "success");
+              toast.success(res.data.message);
               navigate("/email/resend");
             } else {
               setError(res.data.validation_errors || {});
+              toast.error(res.data.validation_errors || "Please check the input fields.");
             }
           })
           .catch((err) => {
             if (err.response && err.response.status === 422) {
               // Validation errors
               setError(err.response.data.validation_errors || {});
-              swal("Error", "Please check the input fields.", "error");
+              toast.error(err.response.data.validation_errors[0] || "Please check the input fields.");
             } else if (err.response && err.response.status === 401) {
               // Unauthorized
-              swal("Error", "Unauthenticated. Please log in.", "error");
+              toast.error("Unauthenticated. Please log in.");
             } else {
               // General errors
-              swal("Error", "Something went wrong. Please try again later.", "error");
-              console.error("Error details:", err.response || err);
+              toast.error("Something went wrong. Please try again later.");
             }
           })
           .finally(() => {
@@ -88,7 +88,7 @@ const Register = () => {
       })
       .catch((csrfError) => {
         setLoading(false); // Stop loading if CSRF fails
-        swal("Error", "Failed to set CSRF token. Please try again later.", "error");
+        toast.error("Failed to set CSRF token. Please try again later.");
         console.error("CSRF Error:", csrfError);
       });
   };

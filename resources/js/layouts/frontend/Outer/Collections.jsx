@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../Components/Loader';
 
 const Collections = () => {
@@ -20,11 +20,11 @@ const Collections = () => {
           setProducts(productsRes.data.products); // Set products
           setCategories(productsRes.data.categories); // Set categories
         } else {
-          swal("Error", "Unable to fetch products", "error");
+          toast.error('Unable to fetch products');
         }
       } catch (error) {
         console.error(error);
-        swal("Error", "Something went wrong", "error");
+        toast.error('Something went wrong');
       } finally {
         setLoading(false);
       }

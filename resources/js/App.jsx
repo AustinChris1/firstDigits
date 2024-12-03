@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { HelmetProvider } from 'react-helmet-async';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import LoadingSpinner from './layouts/frontend/Components/Loader';
 import AboutUs from './layouts/frontend/Outer/AboutUs';
@@ -107,13 +109,12 @@ function Layout() {
         <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
         <Route path="/email/resend" element={<ResendEmail />} />
         <Route path="/email/verify" element={<VerifyEmail />} />
-        
-        
+
         {/* Fallback route for non-existing pages */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {!isAdminRoute && <Sidebar />} {/* Render Footer only if not on admin routes */}
+      <Sidebar />
       {!isAdminRoute && <Footer />} {/* Render Footer only if not on admin routes */}
     </>
   );
@@ -123,12 +124,22 @@ function App() {
   return (
     <div className="App font-raleway">
       <HelmetProvider>
-      <Router>
-        <ScrollToTop /> {/* Scroll to the top when navigating */}
-        <Suspense fallback={<LoadingSpinner />}> 
-        <Layout /> {/* Use Layout to conditionally render components */}
-        </Suspense>
-      </Router>
+        <Router>
+          <ScrollToTop /> {/* Scroll to the top when navigating */}
+          <Suspense fallback={<LoadingSpinner />}>
+            <Layout /> {/* Use Layout to conditionally render components */}
+          </Suspense>
+        </Router>
+        {/* ToastContainer for global notifications */}
+        <ToastContainer 
+          position="top-right" 
+          autoClose={3000} 
+          newestOnTop 
+          closeOnClick 
+          pauseOnFocusLoss 
+          draggable 
+          pauseOnHover 
+        />
       </HelmetProvider>
     </div>
   );

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../LoadingSpinner';  // Assuming you have a component for center loading spinner
 
 const Category = () => {
@@ -45,7 +45,7 @@ const Category = () => {
             .then(res => {
                 if (res.data.status === 200) {
                     setError({});
-                    swal('Success', res.data.message, 'success');
+                    toast.success(res.data.message);
                     // Reset the form after successful submission
                     setCategoryInput({
                         name: '',
@@ -65,11 +65,10 @@ const Category = () => {
             .catch(err => {
                 if (err.response && err.response.status === 400) {
                     setError(err.response.data.errors);
-                    swal('Error', 'Please check the input fields.', 'error');
+                    toast.error('Please check the input fields.');
                 } else {
-                    swal('Error', 'Something went wrong. Please try again later.', 'error');
+                    toast.error('Something went wrong. Please try again later.');
                 }
-                // console.error('Error updating category:', err.response);
             })
             .finally(() => {
                 setUpdateLoading(false);  // Stop loading spinner for submit button

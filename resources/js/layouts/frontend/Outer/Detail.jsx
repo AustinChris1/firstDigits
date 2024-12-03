@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from '../Components/Loader';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -40,11 +40,11 @@ const ProductDetail = () => {
                     // Dynamically set the page title
                     document.title = `${response.data.product.name} - Store`;
                 } else {
-                    swal('Warning', response.data.message, 'error');
+                    toast.error(response.data.message);
                     navigate('/store');
                 }
             } catch (error) {
-                swal('Error', 'Failed to fetch product.', 'error');
+                toast.error('Failed to fetch product.');
             } finally {
                 setLoading(false);
             }
@@ -59,10 +59,10 @@ const ProductDetail = () => {
             if (response.data.status === 200) {
                 setReviews(response.data.reviews);
             } else {
-                swal('Error', 'Failed to fetch reviews.', 'error');
+                toast.error('Failed to fetch reviews.');
             }
         } catch (error) {
-            swal('Error', 'Failed to fetch reviews.', 'error');
+            toast.error('Failed to fetch reviews.');
         }
     };
 
@@ -70,7 +70,7 @@ const ProductDetail = () => {
         e.preventDefault();
 
         if (!rating || !reviewText) {
-            swal('Error', 'Please provide both a rating and a review.', 'error');
+            toast.error('Please provide both a rating and a review.');
             return;
         }
 
@@ -83,18 +83,18 @@ const ProductDetail = () => {
             });
 
             if (response.data.status === 200) {
-                swal('Success', 'Your review has been submitted!', 'success');
+                toast.success('Your review has been submitted!');
                 setRating(0);
                 setReviewText(''); // Reset the review text
                 fetchReviews(product.id); // Fetch reviews again to display the new review
             } else {
-                swal('Error', response.data.message, 'error');
+                toast.error(response.data.message);
             }
         } catch (error) {
             const errorMessage =
                 error.response?.data?.message || // Check if the server provided a message
                 'Failed to submit your review. Please try again later.'; // Default error message
-            swal('Error', errorMessage, 'error');
+            toast.error(errorMessage);
         } finally {
             setIsSubmitting(false);
         }

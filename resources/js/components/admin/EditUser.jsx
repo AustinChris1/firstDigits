@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import LoadingSpinner from './LoadingSpinner';
 
 const EditUser = () => {
@@ -26,12 +26,12 @@ const EditUser = () => {
                         password: '', // Initialize password as empty
                     });
                 } else if (res.status === 404) {
-                    swal('Error', res.data.message, 'error');
+                    toast.error(res.data.message);
                     navigate('/admin/dashboard');
                 }
             })
             .catch(() => {
-                swal('Error', 'Failed to fetch user.', 'error');
+                toast.error('Failed to fetch user.');
             })
             .finally(() => setLoading(false));
     }, [id, navigate]);
@@ -51,21 +51,22 @@ const EditUser = () => {
         axios.post(`/api/users/update/${id}`, userInput)
             .then(res => {
                 if (res.data.status === 200) {
-                    swal('Success', res.data.message, 'success');
+                    toast.success(res.data.message);
                     setError({});
                     navigate('/admin/dashboard');
                 } else if (res.data.status === 422) {
                     setError(res.data.errors);
                 } else if (res.data.status === 404) {
-                    swal('Error', res.data.message, 'error');
+                    toast.error(res.data.message);
                     navigate('/admin/dashboard');
                 }
             })
             .catch(err => {
                 if (err.response && err.response.status === 422) {
+                    toast.error(err.response.data.errors);
                     setError(err.response.data.errors);
                 } else {
-                    swal('Error', 'Something went wrong. Please try again later.', 'error');
+                    toast.error('Failed to update user.');
                 }
             })
             .finally(() => setEditLoading(false));
