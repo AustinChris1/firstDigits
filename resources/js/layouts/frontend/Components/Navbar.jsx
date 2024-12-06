@@ -151,10 +151,14 @@ const Navbar = () => {
     }
   };
   return (
-    <nav
-      ref={navbarRef}
-      className={`navbar fixed z-50 w-full bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2 shadow-md' : 'py-4'}`}
-    >
+<nav
+  ref={navbarRef}
+  className={`navbar fixed z-50 w-full text-slate-900 dark:text-white flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${
+    isScrolled
+      ? 'bg-slate-200/95 dark:bg-slate-800/95 py-2 shadow-md'
+      : 'bg-slate-200 dark:bg-slate-800 py-4'
+  }`}
+>
       <Link to='/' onClick={() => handleNavigation('/')}>
         <img src={fdcLogo} alt="First Digit Communications" className="w-40 h-auto" />
       </Link>

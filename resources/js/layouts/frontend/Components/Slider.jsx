@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import smarthome from "../assets/smarthome.jpg";
-import robotics1 from "../assets/robotics1.jpg";
-import robotics2 from "../assets/robotics2.jpg";
-import robotics3 from "../assets/robotics3.jpg";
+import smarthome2 from "../assets/smarthome2.jpg";
+import security from "../assets/security.jpg";
 import { Hand } from "lucide-react";
 
-const featuredProducts = [smarthome, robotics1, robotics2, robotics3];
+const featuredProducts = [smarthome, security, smarthome2];
 
 let count = 0;
 let slideInterval;

@@ -10,6 +10,9 @@ use App\Http\Controllers\API\UsersController;
 use App\Http\Controllers\API\TeamController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ContactMessageController;
+
+Route::post('/contact-us', [ContactMessageController::class, 'store']);
 
 Route::middleware('auth:sanctum')->post('/products/{productId}/reviews', [ReviewController::class, 'submitReview']);
 Route::get('/products/{productId}/reviews', [ReviewController::class, 'getReviews']);
