@@ -102,9 +102,9 @@ const Products = () => {
                         meta_title: '',
                         meta_keywords: '',
                         meta_description: '',
-                        selling_price: '',
-                        original_price: '',
-                        qty: '',
+                        // selling_price: '',
+                        // original_price: '',
+                        // qty: '',
                         brand: '',
                         image: '',
                         image2: '',
@@ -180,8 +180,8 @@ const Products = () => {
                             <label htmlFor="description">Description</label>
                             <textarea id="description" name="description" onChange={handleInput} value={productsInput.description || ''} className="form-control" />
                         </div>
-                        <div className="form-group mb-3">
-                            <label htmlFor="status">Status</label>
+                        <div className="form-check form-switch mb-3">
+                        <label className="form-check-label" htmlFor="status">Status</label>
                             <input onChange={handleInput} checked={productsInput.status} type='checkbox' id="status" name="status" className="form-check-input" />
                         </div>
                     </div>
@@ -208,7 +208,7 @@ const Products = () => {
 
                     {/* Other details tab */}
                     <div className="tab-pane card-body border p-6 fade" id="otherdetails" role="tabpanel" aria-labelledby="otherdetails-tab">
-                        <div className="form-group mb-3">
+                        {/* <div className="form-group mb-3">
                             <label htmlFor="selling_price">Selling Price</label>
                             <input onChange={handleInput} value={productsInput.selling_price || ''} type="text" id="selling_price" name="selling_price" className="form-control" />
                             <small className="text-danger">{error.selling_price ? error.selling_price[0] : ''}</small>
@@ -222,7 +222,7 @@ const Products = () => {
                             <label htmlFor="qty">Quantity</label>
                             <input onChange={handleInput} value={productsInput.qty || ''} type="text" id="qty" name="qty" className="form-control" />
                             <small className="text-danger">{error.qty ? error.qty[0] : ''}</small>
-                        </div>
+                        </div> */}
                         <div className="form-group mb-3">
                             <label htmlFor="brand">Brand</label>
                             <input onChange={handleInput} value={productsInput.brand || ''} type="text" id="brand" name="brand" className="form-control" />

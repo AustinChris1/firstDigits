@@ -73,7 +73,7 @@ const ContactUs = () => {
                 </motion.p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-20 max-w-6xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 mb-20 max-w-6xl">
                 <motion.div
                   initial={{ x: -100, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
@@ -101,27 +101,11 @@ const ContactUs = () => {
                   <div>
                     <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Email Us</h2>
                     <p className="text-gray-700 dark:text-gray-400">
-                      <a href="mailto:fdcdevs2024@gmail.com" className="text-blue-800 dark:text-blue-500">noreply@firstdigit.com.ng</a>
+                      <a href="mailto:support@firstdigit.com.ng" className="text-blue-800 dark:text-blue-500">support@firstdigit.com.ng</a>
                     </p>
                   </div>
                 </motion.div>
 
-                <motion.div
-                  initial={{ x: -100, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-lg shadow-lg p-5 text-left flex items-start dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700"
-                >
-                  <Phone className="text-blue-500 w-8 h-8 mr-3 dark:text-blue-400" />
-                  <div>
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Call Us</h2>
-                    <p className="text-gray-700 dark:text-gray-400">
-                      <a href="tel:+2347052500468" className="text-blue-800 dark:text-blue-500">0705 250 0468</a>,
-                      <a href="tel:+2348163378811" className="text-blue-800 dark:text-blue-500"> 0816 337 8811</a>
-                    </p>
-                  </div>
-                </motion.div>
               </div>
 
               {/* Contact Form */}

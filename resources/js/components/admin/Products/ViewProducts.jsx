@@ -64,8 +64,8 @@ const ViewProducts = () => {
                     <th>Category Name</th>
                     <th>Product Name</th>
                     <th>Image</th>
-                    <th>Selling Price</th>
-                    <th>Cost Price</th>
+                    {/* <th>Selling Price</th>
+                    <th>Cost Price</th> */}
                     <th>Status</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -78,8 +78,8 @@ const ViewProducts = () => {
                       <td>{item.category.name}</td>
                       <td>{item.name}</td>
                       <td><img src={`/${item.image}`} width="50" alt={item.name} /></td>
-                      <td>{item.selling_price}</td>
-                      <td>{item.original_price}</td>
+                      {/* <td>{item.selling_price}</td>
+                      <td>{item.original_price}</td> */}
                       <td>{item.status === 0 ? "Active" : "Hidden"}</td>
                       <td>
                         <Link to={`/admin/products/edit/${item.id}`} className="btn btn-primary btn-sm">Edit</Link>

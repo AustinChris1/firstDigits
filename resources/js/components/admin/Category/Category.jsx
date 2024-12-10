@@ -134,8 +134,8 @@ const Category = () => {
                             <label htmlFor="description">Description</label>
                             <textarea id="description" name="description" onChange={handleInput} value={categoryInput.description} className="form-control" />
                         </div>
-                        <div className="form-group mb-3">
-                            <label htmlFor="status">Status</label>
+                        <div className="form-check form-switch mb-3">
+                        <label className="form-check-label" htmlFor="status">Status</label>
                             <input onChange={handleInput} checked={categoryInput.status} type='checkbox' id="status" name="status" className="form-check-input" />
                         </div>
                     </div>

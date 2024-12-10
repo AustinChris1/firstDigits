@@ -14,7 +14,7 @@ const iframeSrc =
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126091.50068803449!2d7.481260032478743!3d9.030942164225989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0b964ec887e5%3A0x12a34843356767e8!2sNimota%20Plaza!5e0!3m2!1sen!2sng!4v1726406738672!5m2!1sen!2sng';
 
 const Iframe = ({ src }) => (
-    <div className="w-5/6 mx-auto p-6 h-64 sm:h-80">
+    <div className="w-5/6 mx-auto pb-6 h-64 sm:h-80">
         <iframe
             src={src}
             width="100%"
@@ -64,7 +64,7 @@ const Footer = () => {
                 variants={fadeIn}
                 className=" py-10 px-6 text-center"
             >
-                <h2 className="text-2xl font-semibold mb-4">Subscribe to Our Newsletter</h2>
+                <h2 className="text-2xl font-semibold mb-4 dark:text-gray-200">Subscribe to Our Newsletter</h2>
                 <p className="text-blue-800 dark:text-gray-200 mb-6">
                     Stay updated with the latest news, offers, and insights from First Digits.
                 </p>
@@ -159,7 +159,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link to="/company/why-choose-us" className="hover:underline">
-                                Why First Digits
+                                Why First Digits?
                             </Link>
                         </li>
                     </ul>

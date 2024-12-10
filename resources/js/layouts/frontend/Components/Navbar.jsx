@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import fdcLogo from '../assets/fdcLogo.png';
 import { User, Earth, X, Menu, ChevronDown, ChevronRight, LogOut, KeySquare } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Load from './Load';
 import DropdownMenu from './Dropdown';
@@ -49,38 +49,40 @@ const Navbar = () => {
     setToggle(false); // Close the mobile menu when navigating
     navigate(path); // Navigate to the clicked route
   };
+    const location = useLocation(); // Get the current location
 
   const logout = (e) => {
     e.preventDefault();
-    axios.get('/sanctum/csrf-cookie').then(() => {
-    axios.post(`/api/logout`).then(res => {
-      if (res.data.status === 200) {
-        localStorage.removeItem("auth_token");
-        localStorage.removeItem("auth_name");
-        localStorage.removeItem("auth_email");
-        localStorage.removeItem("role");
-        toast.success(res.data.message);
-        navigate("/"); // Redirect to home after successful logout
-      } else {
-        localStorage.removeItem("auth_token");
-        localStorage.removeItem("auth_name");
-        localStorage.removeItem("auth_email");
-        localStorage.removeItem("role");
-        toast.success("User logout successful");
-        navigate("/"); // Redirect to home after successful logout
-      }
-    }).catch((err) => {
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("auth_name");
-      localStorage.removeItem("auth_email");
-      localStorage.removeItem("role");
-      toast.success("Logout successful");
-      navigate("/"); // Redirect to home after successful logout
-    });
+    const currentPath = location.pathname; // Extract the current path
   
-  });
+    axios.get('/sanctum/csrf-cookie').then(() => {
+      axios.post(`/api/logout`).then((res) => {
+        if (res.data.status === 200) {
+          localStorage.removeItem("auth_token");
+          localStorage.removeItem("auth_name");
+          localStorage.removeItem("auth_email");
+          localStorage.removeItem("role");
+          toast.success(res.data.message);
+          navigate(currentPath); // Navigate to the current page
+        } else {
+          localStorage.removeItem("auth_token");
+          localStorage.removeItem("auth_name");
+          localStorage.removeItem("auth_email");
+          localStorage.removeItem("role");
+          toast.success("User logout successful");
+          navigate(currentPath); // Navigate to the current page
+        }
+      }).catch((err) => {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("auth_name");
+        localStorage.removeItem("auth_email");
+        localStorage.removeItem("role");
+        toast.success("Logout successful");
+        navigate(currentPath); // Navigate to the current page
+      });
+    });
   };
-
+  
   // Scroll effect to make navbar sticky and resize
   useEffect(() => {
     const handleScroll = () => {
@@ -155,7 +157,7 @@ const Navbar = () => {
   ref={navbarRef}
   className={`navbar fixed z-50 w-full text-slate-900 dark:text-white flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${
     isScrolled
-      ? 'bg-slate-200/95 dark:bg-slate-800/95 py-2 shadow-md'
+      ? 'bg-slate-200/80 dark:bg-slate-800/80 py-2 shadow-md backdrop-blur-md'
       : 'bg-slate-200 dark:bg-slate-800 py-4'
   }`}
 >

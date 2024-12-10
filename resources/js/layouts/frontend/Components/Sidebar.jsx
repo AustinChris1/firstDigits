@@ -1,167 +1,201 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Clock, Share2, ArrowUp, Sun, Moon } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Clock, Share2, ArrowUp, Sun, Moon, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
-    const [history, setHistory] = useState([]);
-    const [showTooltip, setShowTooltip] = useState(false);
-    const location = useLocation(); // Tracks the current route
-    const [darkMode, setDarkMode] = useState(
-        localStorage.getItem("theme") === "dark"
-    );
+  const [showButtons, setShowButtons] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+  const [history, setHistory] = useState([]);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const location = useLocation();
 
-    useEffect(() => {
-        // Apply the initial theme
-        if (darkMode) {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-        }
-    }, [darkMode]);
+  const menuRef = useRef(null);
 
-    const toggleDarkMode = () => {
-        setDarkMode((prev) => {
-            const newMode = !prev;
-            localStorage.setItem("theme", newMode ? "dark" : "light");
-            return newMode;
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const newMode = !prev;
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      return newMode;
+    });
+  };
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title,
+          url: window.location.href,
         });
-    };
+      } catch (error) {
+        console.error("Error sharing page:", error);
+      }
+    } else {
+      console.warn("Share API is not supported on this browser.");
+    }
+  };
 
+  const toggleButtons = () => {
+    setShowButtons((prev) => !prev);
+    setShowTooltip(false); // Ensure tooltip closes when toggling buttons
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target) &&
+      !event.target.closest(".tooltip-container")
+    ) {
+      setShowButtons(false);
+      setShowTooltip(false);
+    }
+  };
 
     // Function to update visited pages in localStorage
     const updateVisitedPages = () => {
-        const pageTitle = document.title;
-        const pageUrl = window.location.href;
+      const pageTitle = document.title;
+      const pageUrl = window.location.href;
 
-        // Fetch existing visited pages or initialize as empty
-        const visitedPages = JSON.parse(localStorage.getItem("visitedPages")) || [];
-        const currentPage = { title: pageTitle, url: pageUrl };
+      const visitedPages = JSON.parse(localStorage.getItem("visitedPages")) || [];
+      const currentPage = { title: pageTitle, url: pageUrl };
+      const domain = window.location.origin;
+      const filteredPages = visitedPages.filter((page) =>
+          page.url.startsWith(domain)
+      );
+      if (!filteredPages.some((page) => page.url === pageUrl)) {
+          filteredPages.push(currentPage);
+          localStorage.setItem("visitedPages", JSON.stringify(filteredPages));
+      }
+      setHistory(filteredPages.slice(-5));
+  };
+  // Update visited pages whenever the route changes
+  useEffect(() => {
+      updateVisitedPages();
+  }, [location]);
 
-        // Ensure only pages from the current domain are included
-        const domain = window.location.origin;
-        const filteredPages = visitedPages.filter((page) =>
-            page.url.startsWith(domain)
-        );
+  const handleRecentlyViewedClick = () => {
+    setShowTooltip((prev) => !prev);
+  };
 
-        // Prevent duplicates for the same page URL
-        if (!filteredPages.some((page) => page.url === pageUrl)) {
-            filteredPages.push(currentPage);
-            localStorage.setItem("visitedPages", JSON.stringify(filteredPages));
-        }
-
-        // Update the history state with the last 5 pages
-        setHistory(filteredPages.slice(-5));
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
 
-    // Update visited pages whenever the route changes
-    useEffect(() => {
-        updateVisitedPages();
-    }, [location]);
+  return (
+    <div className="fixed top-1/3 right-4 z-50" ref={menuRef}>
+      <div className="relative flex items-center justify-center">
+        <button
+          onClick={toggleButtons}
+          className={`bg-gray-200 text-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-transform duration-300 ${
+            showButtons ? "rotate-90" : "rotate-0"
+          }`}
+        >
+          <Menu size={20} />
+        </button>
 
-    const handleRecentlyViewedClick = () => {
-        setShowTooltip((prev) => !prev); // Toggle tooltip visibility on button click
-    };
+        <div
+          className={`absolute w-48 h-48 -top-20 -left-20 flex items-center justify-center transition-all duration-500 ${
+            showButtons
+              ? "scale-100 opacity-100"
+              : "scale-0 opacity-0 pointer-events-none"
+          }`}
+        >
+          <button
+            onClick={toggleDarkMode}
+            className="absolute bg-gray-200 text-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-transform duration-500"
+            style={{
+              transform: showButtons
+                ? "translate(0, -100px)"
+                : "translate(0, 0)",
+            }}
+            title="Toggle Light/Dark Mode"
+          >
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
 
-    const handleScrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+          <button
+            onClick={handleScrollToTop}
+            className="absolute bg-gray-200 text-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-transform duration-500"
+            style={{
+              transform: showButtons
+                ? "translate(-70px, -70px)"
+                : "translate(0, 0)",
+            }}
+            title="Scroll to Top"
+          >
+            <ArrowUp size={20} />
+          </button>
 
-    const handleShare = async () => {
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: document.title,
-                    url: window.location.href,
-                });
-            } catch (error) {
-                console.error("Error sharing page:", error);
-            }
-        } else {
-            console.warn("Share API is not supported on this browser.");
-        }
-    };
+          <button
+            onClick={handleShare}
+            className="absolute bg-gray-200 text-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-transform duration-500"
+            style={{
+              transform: showButtons
+                ? "translate(-100px, 0)"
+                : "translate(0, 0)",
+            }}
+            title="Share Page"
+          >
+            <Share2 size={20} />
+          </button>
 
-    const handleClickOutside = useCallback((event) => {
-        if (
-            showTooltip &&
-            !event.target.closest(".tooltip-container") &&
-            !event.target.closest(".recently-viewed-btn")
-        ) {
-            setShowTooltip(false); // Close the tooltip if clicked outside
-        }
-    }, [showTooltip]);
+          <button
+            onClick={handleRecentlyViewedClick}
+            className="absolute bg-gray-200 text-gray-700 rounded-full p-3 shadow-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-transform duration-500 recently-viewed-btn"
+            style={{
+              transform: showButtons
+                ? "translate(-70px, 70px)"
+                : "translate(0, 0)",
+            }}
+            title="Recently Viewed"
+          >
+            <Clock size={20} />
+          </button>
 
-    useEffect(() => {
-        document.addEventListener("click", handleClickOutside);
-        return () => document.removeEventListener("click", handleClickOutside);
-    }, [handleClickOutside]);
-
-    return (
-        <div className="fixed top-1/3 z-20 right-4 flex flex-col items-center space-y-2">
-            {/* Recently Viewed Button */}
-            <div className="relative">
-                <button
-                    onClick={handleRecentlyViewedClick}
-                    className="recently-viewed-btn bg-gray-200 text-gray-700 rounded-full p-2 shadow hover:bg-gray-300"
-                    title="Recently Viewed"
-                >
-                    <Clock size={20} />
-                </button>
-
-                {/* Tooltip showing recently viewed pages */}
-                {showTooltip && (
-                    <div className="tooltip-container absolute right-full top-1/2 transform translate-x-2 -translate-y-1/2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-300 rounded-md shadow-md p-3 text-sm flex flex-col w-48 z-20">
-                        <p className="font-bold mb-2">Recently Viewed:</p>
-                        <ul className="space-y-1">
-                            {history.length > 0 ? (
-                                [...history]
-                                    .reverse() // Reverse to show the most recent first
-                                    .map((page, index) => (
-                                        <li key={index}>
-                                            <Link
-                                                to={page.url}
-                                                className="text-blue-500 hover:underline dark:text-blue-400"
-                                                title={page.title}
-                                            >
-                                                {page.title}
-                                            </Link>
-                                        </li>
-                                    ))
-                            ) : (
-                                <li className="text-gray-500 dark:text-gray-600">No recently viewed pages.</li>
-                            )}
-                        </ul>
-                    </div>
+          {showTooltip && (
+            <div className="tooltip-container absolute right-full top-1/2 transform translate-x-2 -translate-y-1/2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-300 rounded-md shadow-md p-3 text-sm flex flex-col w-48 z-20">
+              <p className="font-bold mb-2">Recently Viewed:</p>
+              <ul className="space-y-1">
+                {history.length > 0 ? (
+                  history.reverse().map((page, index) => (
+                    <li key={index}>
+                      <Link
+                        to={page.url}
+                        className="text-blue-500 hover:underline dark:text-blue-400"
+                        title={page.title}
+                      >
+                        {page.title}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-gray-500 dark:text-gray-600">
+                    No recently viewed pages.
+                  </li>
                 )}
+              </ul>
             </div>
-
-            {/* Share Button */}
-            <button
-                onClick={handleShare}
-                className="bg-gray-200 text-gray-700 rounded-full p-2 shadow hover:bg-gray-300"
-                title="Share Page"
-            >
-                <Share2 size={20} />
-            </button>
-
-            {/* Scroll to Top Button */}
-            <button
-                onClick={handleScrollToTop}
-                className="bg-gray-200 text-gray-700 rounded-full p-2 shadow hover:bg-gray-300"
-                title="Scroll to Top"
-            >
-                <ArrowUp size={20} />
-            </button>
-            {/* Toggle Dark/Light Mode Button */}
-            <button
-                onClick={toggleDarkMode}
-                className="bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 rounded-full p-2 shadow hover:bg-gray-300 dark:hover:bg-gray-600"
-                title="Toggle Light/Dark Mode"
-            >
-                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;
